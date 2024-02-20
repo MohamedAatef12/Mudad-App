@@ -87,6 +87,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text('Home Screen'),
           actions: [
             InkWell(

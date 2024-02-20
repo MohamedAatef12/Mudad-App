@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
-      initialRoute: '/home',
+      initialRoute: '/login',
       getPages: appRoutes(),
     );
   }
