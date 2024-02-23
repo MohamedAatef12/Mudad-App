@@ -51,11 +51,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// void callbackDispatcher() {
-//   Workmanager().executeTask((task, inputData) {
-//     NotificationApi.sendNotificationAtSpecificTime(TimeOfDay(hour: 1, minute:  55 ));
-//     print("fffffffff");
-//     return Future.value(true); // Return true to reschedule the task
-//   });
-// }
