@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../app_constants/app_colors.dart';
 import '../../../app_constants/app_text_styles.dart';
 import '../../../reusable_widgets/password_textField.dart';
 import '../../../reusable_widgets/phone_textField.dart';
-import '../sign_up/view.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

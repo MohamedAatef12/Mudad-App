@@ -5,10 +5,15 @@ import '../view/home/drawer_pages/orders_page.dart';
 import '../view/home/drawer_pages/policy_page.dart';
 import '../view/home/drawer_pages/settings_page.dart';
 import '../view/home/drawer_pages/vision_page.dart';
-import '../view/home/home_screen.dart';
+import '../view/SplashScreen.dart';
+import '../view/home_screen/HomeScreen.dart';
 import '../view/payment_page.dart';
 
 appRoutes() => [
+      GetPage(
+        name: '/splash',
+        page: () => const SplashScreen(),
+      ),
       GetPage(
         name: '/login',
         page: () => const LoginScreen(),
@@ -19,7 +24,8 @@ appRoutes() => [
       ),
       GetPage(
         name: '/home',
-        page: () => HomeScreen(),
+        page: () => const homepage(),
+        preventDuplicates: true,
       ),
       GetPage(
           name: '/vision',
@@ -43,7 +49,7 @@ appRoutes() => [
           transitionDuration: const Duration(milliseconds: 600)),
       GetPage(
           name: '/payment',
-          page: () => const PaymentPage(),
+          page: () => const PaymentPage(selectedImage: "",),
           transition: Transition.rightToLeft,
           transitionDuration: const Duration(milliseconds: 600)),
     ];

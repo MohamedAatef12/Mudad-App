@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mudad_app/app_constants/app_assets.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
@@ -33,7 +32,7 @@ class PolicyPage extends StatelessWidget {
               ),
               Expanded(
                 child: ListView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   children: const [
                     Text(
                       textDirection: TextDirection.rtl,

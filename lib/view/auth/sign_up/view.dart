@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../app_constants/app_colors.dart';
 import '../../../app_constants/app_text_styles.dart';
 import '../../../reusable_widgets/password_textField.dart';
