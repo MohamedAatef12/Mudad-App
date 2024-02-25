@@ -70,9 +70,11 @@ class _SettingsPageState extends State<SettingsPage> {
                         storage.write("notification",
                             NotificationApi.notificationEnabled);
                         if(storage.read('notification')==true){
-                          NotificationApi.sendNotifications();
+                          NotificationApi.sendNotificationAtSpecificTime( const TimeOfDay(hour: 0, minute:0));
+                          // print("${storage.read('notification' )}     ${NotificationApi.notificationEnabled}");
                         }else {
                           NotificationApi.cancel();
+                          // print("${storage.read('notification' )}     ${NotificationApi.notificationEnabled}");
                         }
                       });
                     },
