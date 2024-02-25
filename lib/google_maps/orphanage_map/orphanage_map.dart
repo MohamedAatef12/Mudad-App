@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -111,7 +112,7 @@ class _OrphanageMapState extends State<OrphanageMap> {
                   left: 0,
                   child: IconButton(
                     highlightColor: Colors.transparent,
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => Get.back(),
                     icon: const Icon(
                       Icons.arrow_back_ios_new,
                       color: Color(0xFF609FD8),

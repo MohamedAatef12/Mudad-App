@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import '../google_maps/home_map/choose_location.dart';
 import '../google_maps/mosque_map/search_map.dart';
 import '../google_maps/orphanage_map/orphanage_map.dart';
-import '../view/home/drawer_pages/orders_page.dart';
-import '../view/home/drawer_pages/policy_page.dart';
-import '../view/home/drawer_pages/settings_page.dart';
-import '../view/home/drawer_pages/vision_page.dart';
-import '../view/home/home_screen.dart';
+import '../view/drawer/drawer_pages/orders_page.dart';
+import '../view/drawer/drawer_pages/policy_page.dart';
+import '../view/drawer/drawer_pages/settings_page.dart';
+import '../view/drawer/drawer_pages/vision_page.dart';
+import '../view/home_screen/HomeScreen.dart';
 import '../view/payment_page.dart';
 
 appRoutes() => [
@@ -15,7 +15,7 @@ appRoutes() => [
       // GetPage(name: '/Splash', page:()=> SplashScreen(),middlewares: )
       GetPage(
         name: '/home',
-        page: () => HomeScreen(),
+        page: () => const HomePage(),
       ),
       GetPage(
           name: '/vision',
@@ -39,7 +39,9 @@ appRoutes() => [
           transitionDuration: const Duration(milliseconds: 600)),
       GetPage(
           name: '/payment',
-          page: () => const PaymentPage(),
+          page: () => const PaymentPage(
+                selectedImage: '',
+              ),
           transition: Transition.rightToLeft,
           transitionDuration: const Duration(milliseconds: 600)),
       GetPage(

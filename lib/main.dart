@@ -6,7 +6,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:mudad_app/view/home/home_screen.dart';
 import 'app_constants/app_routes.dart';
 import 'google_maps/home_map/cubit/cubit.dart';
 
@@ -35,7 +34,6 @@ class MyApp extends StatelessWidget {
         create: (context) => LocationCubit(),
         child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          // home: HomeScreen(),
           initialRoute: '/home',
           getPages: appRoutes(),
         ));

@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart' as gmaps;
 
@@ -80,7 +82,10 @@ class _ChooseLocationState extends State<ChooseLocation> {
                   left: 0,
                   child: IconButton(
                     highlightColor: Colors.transparent,
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () {
+                      overlayEntry.remove();
+                      Get.back();
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios_new,
                       color: Color(0xFF609FD8),
@@ -232,9 +237,13 @@ class _ChooseLocationState extends State<ChooseLocation> {
                         );
                       }
                     },
-                    child: const Text(
+                    child: Text(
                       "اختر الموقع",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: GoogleFonts.lalezar(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w200,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
