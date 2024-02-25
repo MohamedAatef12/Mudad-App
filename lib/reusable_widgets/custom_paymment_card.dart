@@ -10,7 +10,7 @@ void Function()? onTap;
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10,horizontal: 50),
+        margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 50),
         height: height,
         width: width,
         decoration: BoxDecoration(

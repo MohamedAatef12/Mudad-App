@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -45,113 +44,15 @@ class OrdersPage extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: Container(
                         width: double.infinity,
-
                         decoration: const BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15))),
-                        child: ExpansionTile(
-                            leading: const Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: Colors.black87,
-                              size: 40,
-                            ),
-                            trailing: Text(
-                              "عشره كراتين",
-                              style: AppTextStyle.mainBlackFont,
-                            ),
-                            title: const SizedBox(),
-                            children: [
-                              FittedBox(
-                                child: Text(
-                                  textDirection: TextDirection.rtl,
-                                  "مسجد عمر بن الخطاب             🕌"
-                                  " \n مكه المكرمه"
-                                  "\n التكلفه : 200 ريال سعودي",
-                                  style: GoogleFonts.amiriQuran(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.black54),
-                                ),
-                              ),
-                            ]),
-                      ),
-                    ),  Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Container(
-                        width: double.infinity,
+                            borderRadius: BorderRadius.all(Radius.circular(15))
 
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15))),
+                        ),
                         child: ExpansionTile(
-                            leading: const Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: Colors.black87,
-                              size: 40,
-                            ),
-                            trailing: Text(
-                              "عشره كراتين",
-                              style: AppTextStyle.mainBlackFont,
-                            ),
-                            title: const SizedBox(),
-                            children: [
-                              FittedBox(
-                                child: Text(
-                                  textDirection: TextDirection.rtl,
-                                  "مسجد عمر بن الخطاب             🕌"
-                                  " \n مكه المكرمه"
-                                  "\n التكلفه : 200 ريال سعودي",
-                                  style: GoogleFonts.amiriQuran(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.black54),
-                                ),
-                              ),
-                            ]),
-                      ),
-                    ),  Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Container(
-                        width: double.infinity,
-
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15))),
-                        child: ExpansionTile(
-                            leading: const Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: Colors.black87,
-                              size: 40,
-                            ),
-                            trailing: Text(
-                              "عشره كراتين",
-                              style: AppTextStyle.mainBlackFont,
-                            ),
-                            title: const SizedBox(),
-                            children: [
-                              FittedBox(
-                                child: Text(
-                                  textDirection: TextDirection.rtl,
-                                  "مسجد عمر بن الخطاب             🕌"
-                                  " \n مكه المكرمه"
-                                  "\n التكلفه : 200 ريال سعودي",
-                                  style: GoogleFonts.amiriQuran(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.black54),
-                                ),
-                              ),
-                            ]),
-                      ),
-                    ),  Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Container(
-                        width: double.infinity,
-
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15))),
-                        child: ExpansionTile(
+                          childrenPadding: const EdgeInsets.all(8),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),),
                             leading: const Icon(
                               Icons.keyboard_arrow_down_outlined,
                               color: Colors.black87,
@@ -178,6 +79,124 @@ class OrdersPage extends StatelessWidget {
                             ]),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(15))
+
+                        ),
+                        child: ExpansionTile(
+                          childrenPadding: const EdgeInsets.all(8),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),),
+                            leading: const Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Colors.black87,
+                              size: 40,
+                            ),
+                            trailing: Text(
+                              "عشره كراتين",
+                              style: AppTextStyle.mainBlackFont,
+                            ),
+                            title: const SizedBox(),
+                            children: [
+                              FittedBox(
+                                child: Text(
+                                  textDirection: TextDirection.rtl,
+                                  "مسجد عمر بن الخطاب             🕌"
+                                  " \n مكه المكرمه"
+                                  "\n التكلفه : 200 ريال سعودي",
+                                  style: GoogleFonts.amiriQuran(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black54),
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(15))
+
+                        ),
+                        child: ExpansionTile(
+                          childrenPadding: const EdgeInsets.all(8),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),),
+                            leading: const Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Colors.black87,
+                              size: 40,
+                            ),
+                            trailing: Text(
+                              "عشره كراتين",
+                              style: AppTextStyle.mainBlackFont,
+                            ),
+                            title: const SizedBox(),
+                            children: [
+                              FittedBox(
+                                child: Text(
+                                  textDirection: TextDirection.rtl,
+                                  "مسجد عمر بن الخطاب             🕌"
+                                  " \n مكه المكرمه"
+                                  "\n التكلفه : 200 ريال سعودي",
+                                  style: GoogleFonts.amiriQuran(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black54),
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(15))
+
+                        ),
+                        child: ExpansionTile(
+                          childrenPadding: const EdgeInsets.all(8),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),),
+                            leading: const Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Colors.black87,
+                              size: 40,
+                            ),
+                            trailing: Text(
+                              "عشره كراتين",
+                              style: AppTextStyle.mainBlackFont,
+                            ),
+                            title: const SizedBox(),
+                            children: [
+                              FittedBox(
+                                child: Text(
+                                  textDirection: TextDirection.rtl,
+                                  "مسجد عمر بن الخطاب             🕌"
+                                  " \n مكه المكرمه"
+                                  "\n التكلفه : 200 ريال سعودي",
+                                  style: GoogleFonts.amiriQuran(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black54),
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+
                   ],
                 ),
               )

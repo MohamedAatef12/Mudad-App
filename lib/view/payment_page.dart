@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/reusable_widgets/custom_paymment_card.dart';
@@ -6,7 +5,8 @@ import '../app_constants/app_colors.dart';
 import '../app_constants/app_text_styles.dart';
 
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  final String selectedImage;
+  const PaymentPage({required this.selectedImage ,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,8 @@ class PaymentPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+            },
             borderRadius: BorderRadius.circular(10),
             child: Container(
                 height: MediaQuery.of(context).size.height * .07,

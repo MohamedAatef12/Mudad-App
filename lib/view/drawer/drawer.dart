@@ -4,19 +4,12 @@ import 'package:share/share.dart';
 import '../../app_constants/app_assets.dart';
 import '../../reusable_widgets/custom_button.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-
-// DrawerController drawerController = DrawerController(child: Drawer(), alignment: DrawerAlignment.end );
-//
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class HomeDrawer extends StatelessWidget {
+  const HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        endDrawer: Drawer(
+    return Drawer(
           width: MediaQuery.of(context).size.width * .7,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -85,22 +78,14 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        appBar: AppBar(
-          title: const Text('Home Screen'),
-          actions: [
-            InkWell(
-              onTap: () {
-                _scaffoldKey.currentState!.openEndDrawer();
-              },
-              child: Image.asset(AppAssets.menu),
-            )
-          ],
-        ),
-        body: const Center(
-          child: Text('Hello, World!'),
-        ),
-      ),
-    );
+        );
   }
 }
+
+
+
+
+
+
+
+
