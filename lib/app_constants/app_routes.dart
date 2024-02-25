@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:mudad_app/view/auth/login/view.dart';
 import 'package:mudad_app/view/auth/sign_up/view.dart';
-import '../view/home/drawer_pages/orders_page.dart';
-import '../view/home/drawer_pages/policy_page.dart';
-import '../view/home/drawer_pages/settings_page.dart';
-import '../view/home/drawer_pages/vision_page.dart';
+import '../view/drawer/drawer_pages/orders_page.dart';
+import '../view/drawer/drawer_pages/policy_page.dart';
+import '../view/drawer/drawer_pages/settings_page.dart';
+import '../view/drawer/drawer_pages/vision_page.dart';
 import '../view/SplashScreen.dart';
 import '../view/home_screen/HomeScreen.dart';
 import '../view/payment_page.dart';
