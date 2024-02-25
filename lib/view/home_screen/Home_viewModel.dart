@@ -1,7 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mudad_app/google_maps/home_map/choose_location.dart';
+import 'package:mudad_app/google_maps/orphanage_map/orphanage_map.dart';
 
+import '../../google_maps/mosque_map/search_map.dart';
 import 'HomeModels.dart';
 
 class HomeVm {
@@ -51,6 +54,7 @@ class HomeVm {
     selectedButton == titles[1]
         ? selectedButton = ""
         : selectedButton = titles[1];
+    Get.to(() => const SearchMap());
     //
   }
 
@@ -59,6 +63,9 @@ class HomeVm {
     selectedButton == titles[2]
         ? selectedButton = ""
         : selectedButton = titles[2];
+
+    Get.to(() => const ChooseLocation());
+
     //
   }
 
@@ -67,6 +74,7 @@ class HomeVm {
     selectedButton == titles[3]
         ? selectedButton = ""
         : selectedButton = titles[3];
+    Get.to(() => const OrphanageMap());
     //
   }
 }
