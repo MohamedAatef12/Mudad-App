@@ -5,7 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudad_app/services/notification_services.dart';
-import 'package:mudad_app/view/home/drawer_pages/settings_page.dart';
+import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'app_constants/app_routes.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -41,7 +41,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
