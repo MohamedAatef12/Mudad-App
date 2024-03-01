@@ -17,9 +17,9 @@ class DioHelper {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          connectTimeout: Duration(seconds: 10),
-          sendTimeout: Duration(seconds: 3),
-          receiveTimeout: Duration(seconds: 10)),
+          connectTimeout: const Duration(seconds: 10),
+          sendTimeout: const Duration(seconds: 3),
+          receiveTimeout: const Duration(seconds: 10)),
     );
   }
 
