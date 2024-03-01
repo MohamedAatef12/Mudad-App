@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         create: (context) => LocationCubit(),
         child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: '/home',
+          initialRoute: '/splash',
           getPages: appRoutes(),
         ));
   }

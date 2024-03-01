@@ -24,7 +24,7 @@ class NotificationApi {
         AndroidNotificationDetails(
       '0',
       'madad',
-      'madadNotifications',
+
       playSound: true,
       importance: Importance.max,
       priority: Priority.high,
