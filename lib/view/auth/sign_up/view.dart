@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../app_constants/app_colors.dart';
-import '../../../app_constants/app_text_styles.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../reusable_widgets/password_textField.dart';
 import '../../../reusable_widgets/phone_textField.dart';
+import '../core/design/app_button.dart';
+import '../login/view.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -14,7 +15,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final fullNameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -74,10 +75,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 13,
               ),
-              AppInputPassword(
+              AppInputPhone(
                 labelText: "Full Name",
                 paddingBottom: 30,
-                // isPhone: false,
+                isPhone: false,
                 controller: fullNameController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -88,6 +89,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return null;
                 },
               ),
+             /* OtpTextField(
+                numberOfFields: 6,
+                borderColor: const Color(0xFF512DA8),
+                //set to true to show as box or false to show as dash
+                showFieldAsBox: true,
+                //runs when a code is typed in
+                onCodeChanged: (String code) {
+                  //handle validation or checks here
+                },
+                //runs when every textfield is filled
+                onSubmit: (String verificationCode){
+                  showDialog(
+                      context: context,
+                      builder: (context){
+                        return AlertDialog(
+                          title: const Text("Verification Code"),
+                          content: Text('Code entered is $verificationCode'),
+                        );
+                      }
+                  );
+                }, // end onSubmit
+              ), */
               const Text(
                 "Phone",
                 style: TextStyle(
@@ -101,7 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               AppInputPhone(
                 labelText: "Phone",
                 isPhone: true,
-                controller: emailController,
+                controller: phoneController,
                 paddingBottom: 30,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -164,32 +187,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 25,
               ),
-              InkWell(
-                onTap: () {if(formKey.currentState!.validate()){
-                  Get.toNamed("/login");
-                }},
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                    height: MediaQuery.of(context).size.height * .07,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: AppColors.buttonColor,
-                    ),
-                    child: Center(
-                      child: Text("تسجيل الدخول",
-                          style: AppTextStyle.mainFont,
-                          textAlign: TextAlign.center),
-                    )),
+              ElevateButton(
+                text: "Sign Up",
+                onPress: () {
+                  if(formKey.currentState!.validate()){
+
+                  }
+                },
               ),
-              // ElevateButton(
-              //   text: "Sign Up",
-              //   onPress: () {
-              //     if(formKey.currentState!.validate()){
-              //
-              //     }
-              //   },
-              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -205,10 +210,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Get.toNamed("/login");
+                      Get.offAndToNamed("login");
                     },
                     child: const Text(
-                      "SignUp",
+                      "Sign in",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,

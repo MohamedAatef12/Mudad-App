@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../app_constants/app_colors.dart';
-import '../../../app_constants/app_text_styles.dart';
-import '../../../reusable_widgets/password_textField.dart';
 import '../../../reusable_widgets/phone_textField.dart';
+import '../core/design/app_button.dart';
+import '../sign_up/view.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -60,108 +59,63 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 30,
             ),
+            const Text(
+              "Phone",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            const SizedBox(
+              height: 13,
+            ),
             Form(
               key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Phone",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 13,
-                  ),
-                  AppInputPhone(
-                    labelText: "Phone",
-                    isPhone: true,
-                    controller: emailController,
-                    paddingBottom: 30,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "رقم الهاتف مطلوب";
-                      } else if (value.length < 11) {
-                        return "يجب ان يكون رقم الهاتف 11 رقم";
-                      }
-                      return null;
-                    },
-                  ),
-                  const Text(
-                    "Password",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 13,
-                  ),
-                  AppInputPassword(
-                    labelText: "Password",
-                    isPassword: true,
-                    controller: passwordController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "كلمه المرور مطلوبه";
-                      } else if (value.length < 8) {
-                        return "كلمه المرور ضعيفه";
-                      }
-                      return null;
-                    },
-                  ),
-                ],
+              child: AppInputPhone(
+                labelText: "Phone",
+                isPhone: true,
+                controller: phoneController,
+                paddingBottom: 30,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "رقم الهاتف مطلوب";
+                  } else if (value.length < 11) {
+                    return "يجب ان يكون رقم الهاتف 11 رقم";
+                  }
+                  return null;
+                },
               ),
             ),
             const SizedBox(
               height: 16,
             ),
-            // TextButton(
-            //   onPressed: () {},
-            //   child: const Align(
-            //     alignment: Alignment.topRight,
-            //     child: Text(
-            //       "Forget Password!",
-            //     ),
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () {
+                Get.offAndToNamed("forgetPassword");
+              },
+              child: const Text(
+                textAlign: TextAlign.end,
+                "Forget Password!",
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+            ),
             const SizedBox(
               height: 30,
             ),
-            InkWell(
-              onTap: () {if(formKey.currentState!.validate()){
+            ElevateButton(
+              text: "Login",
+              onPress: () {
+                if(formKey.currentState!.validate()){
 
-              }},
-              borderRadius: BorderRadius.circular(10),
-              child: Container(
-                  height: MediaQuery.of(context).size.height * .07,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: AppColors.buttonColor,
-                  ),
-                  child: Center(
-                    child: Text("تسجيل الدخول",
-                        style: AppTextStyle.mainFont,
-                        textAlign: TextAlign.center),
-                  )),
+                }
+              },
             ),
-            // ElevateButton(
-            //   text: "Login",
-            //   onPress: () {
-            //
-            //   },
-            // ),
             const SizedBox(
               height: 40,
             ),
-            // const AppImage2(
-            //   "assets/images/fingerprint.png",
-            //   height: 41,
-            //   width: 37,
-            // ),
+
             const SizedBox(
               height: 35,
             ),
@@ -177,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.toNamed("/signUp");
+                   Get.offAndToNamed("signUp");
                   },
                   child: const Text(
                     "Sign up",

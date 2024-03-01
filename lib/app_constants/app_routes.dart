@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:mudad_app/view/auth/confirm_code/view.dart';
+import 'package:mudad_app/view/auth/forget_password/view.dart';
 import 'package:mudad_app/view/auth/login/view.dart';
 import 'package:mudad_app/view/auth/sign_up/view.dart';
 
@@ -15,7 +17,10 @@ import '../view/payment_page.dart';
 
 appRoutes() => [
       //we need to add splashscreen to the app
-      GetPage(name: '/splash', page:()=> const SplashScreen(), ),
+      GetPage(
+        name: '/splash',
+        page: () => const SplashScreen(),
+      ),
       GetPage(
         name: '/home',
         page: () => const HomePage(),
@@ -55,6 +60,8 @@ appRoutes() => [
       GetPage(name: '/orphanage_map', page: () => const OrphanageMap()),
       GetPage(name: '/signUp', page: () => const SignUpScreen()),
       GetPage(name: '/login', page: () => const LoginScreen()),
-      GetPage(name: '/payment', page: () => const PaymentPage(selectedImage: "")),
-      
+      GetPage(name: '/forgetPassword', page: () => const ForgetPassword()),
+      GetPage(name: '/confirmCode', page: () => const ConfirmCodeView()),
+      GetPage(
+          name: '/payment', page: () => const PaymentPage(selectedImage: "")),
     ];
