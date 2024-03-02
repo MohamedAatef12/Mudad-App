@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../reusable_widgets/phone_textField.dart';
 import '../core/design/app_button.dart';
+import '../core/design/custom_image.dart';
+import '../core/logic/helper_methods.dart';
+import '../forget_password/view.dart';
 import '../sign_up/view.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -91,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Get.offAndToNamed("forgetPassword");
+                toGetNavigate(const ForgetPassword(),);
               },
               child: const Text(
                 textAlign: TextAlign.end,
@@ -115,7 +117,11 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 40,
             ),
-
+            const AppImage2(
+              "assets/images/fingerprint.png",
+              height: 41,
+              width: 37,
+            ),
             const SizedBox(
               height: 35,
             ),
@@ -131,13 +137,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                   Get.offAndToNamed("signUp");
+                    toGetNavigate(const SignUpScreen(),);
                   },
                   child: const Text(
                     "Sign up",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
+                      color: Colors.blue,
                     ),
                   ),
                 ),

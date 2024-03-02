@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../reusable_widgets/password_textField.dart';
 import '../../../reusable_widgets/phone_textField.dart';
 import '../core/design/app_button.dart';
+import '../core/logic/helper_methods.dart';
 import '../login/view.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -89,28 +88,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return null;
                 },
               ),
-             /* OtpTextField(
-                numberOfFields: 6,
-                borderColor: const Color(0xFF512DA8),
-                //set to true to show as box or false to show as dash
-                showFieldAsBox: true,
-                //runs when a code is typed in
-                onCodeChanged: (String code) {
-                  //handle validation or checks here
-                },
-                //runs when every textfield is filled
-                onSubmit: (String verificationCode){
-                  showDialog(
-                      context: context,
-                      builder: (context){
-                        return AlertDialog(
-                          title: const Text("Verification Code"),
-                          content: Text('Code entered is $verificationCode'),
-                        );
-                      }
-                  );
-                }, // end onSubmit
-              ), */
               const Text(
                 "Phone",
                 style: TextStyle(
@@ -210,13 +187,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Get.offAndToNamed("login");
+                      toGetNavigate(const LoginScreen(),);
                     },
                     child: const Text(
                       "Sign in",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
+                        color: Colors.blue,
                       ),
                     ),
                   ),

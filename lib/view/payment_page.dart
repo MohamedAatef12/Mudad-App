@@ -284,16 +284,18 @@ class PaymentPage extends StatelessWidget {
                                   fontSize: 40,
                                   fontWeight: FontWeight.w100,
                                   color: Colors.black),
-                            )
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ],
                 )
-              ]),
-        )
-      ]),
+              ],
+          ),
+        ),
+      ],
+      ),
     );
   }
 }

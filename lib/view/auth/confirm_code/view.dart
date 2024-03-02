@@ -1,8 +1,9 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../core/design/app_button.dart';
+import '../core/logic/helper_methods.dart';
+import '../create_new_password/view.dart';
 
 class ConfirmCodeView extends StatefulWidget {
   const ConfirmCodeView({super.key});
@@ -81,7 +82,7 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
               text: "Verify",
               onPress: () {
                 if (formKey.currentState!.validate()){
-
+                  toGetNavigate(const CreateNewPassword(),);
                 }
               },
             ),
@@ -102,45 +103,45 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             isTimerFinished
                 ? const SizedBox.shrink()
                 : CircularCountDownTimer(
-                    duration: 10,
-                    initialDuration: 0,
-                    width: 66,
-                    height: 70,
-                    ringColor: Colors.blue,
-                    fillColor: const Color(0xffD8D8D8),
-                    strokeWidth: 3,
-                    onComplete: () {
-                      isTimerFinished = true;
-                      setState(() {});
-                    },
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textFormat: CountdownTextFormat.MM_SS,
-                    isReverseAnimation: true,
-                  ),
+              duration: 10,
+              initialDuration: 0,
+              width: 66,
+              height: 70,
+              ringColor: Colors.blue,
+              fillColor: const Color(0xffD8D8D8),
+              strokeWidth: 3,
+              onComplete: () {
+                isTimerFinished = true;
+                setState(() {});
+              },
+              textStyle: const TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+              textFormat: CountdownTextFormat.MM_SS,
+              isReverseAnimation: true,
+            ),
             const SizedBox(
               height: 19,
             ),
             isTimerFinished
                 ? Center(
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        isTimerFinished = false;
-                        setState(() {});
-                      },
-                      child: const Text(
-                        "إعادة الإرسال",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                  )
+              child: OutlinedButton(
+                onPressed: () async {
+                  isTimerFinished = false;
+                  setState(() {});
+                },
+                child: const Text(
+                  "إعادة الإرسال",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            )
                 : const SizedBox.shrink(),
           ],
         ),
