@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 40,
             ),
             const AppImage2(
-              "assets/images/fingerprint.png",
+              "assets/fingerprint.png",
               height: 41,
               width: 37,
             ),

@@ -37,7 +37,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               height: 30,
             ),
             Image.asset(
-              "assets/images/lock.png",
+              "assets/lock.png",
               height: 132,
               width: 132,
             ),
