@@ -30,7 +30,7 @@ class _AppInputState extends State<AppInputPhone> {
         top: widget.paddingTop,
       ),
       child: TextFormField(
-        keyboardType: TextInputType.phone,
+        keyboardType: TextInputType.text,
         controller: widget.controller,
         validator: widget.validator,
         decoration: InputDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mudad_app/app_constants/app_colors.dart';
 
 class ElevateButton extends StatelessWidget {
   final String text;
@@ -10,7 +11,7 @@ class ElevateButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPress,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
+        backgroundColor: AppColors.buttonColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

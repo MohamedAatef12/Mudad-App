@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudad_app/app_constants/app_assets.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
+import 'package:mudad_app/services/localization_service/localization_controller.dart';
 import '../../../services/notification_services.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -57,22 +59,21 @@ class _SettingsPageState extends State<SettingsPage> {
                     height: 40.0,
                     valueFontSize: 15.0,
                     toggleSize: 30.0,
-                    value:
-                    storage.read('notification') ??
+                    value: storage.read('notification') ??
                         NotificationApi.notificationEnabled,
                     borderRadius: 30.0,
                     padding: 5.0,
                     showOnOff: true,
                     onToggle: (val) {
-
                       setState(() {
                         NotificationApi.notificationEnabled = val;
                         storage.write("notification",
                             NotificationApi.notificationEnabled);
-                        if(storage.read('notification')==true){
-                          NotificationApi.sendNotificationAtSpecificTime( const TimeOfDay(hour: 0, minute:0));
+                        if (storage.read('notification') == true) {
+                          NotificationApi.sendNotificationAtSpecificTime(
+                              const TimeOfDay(hour: 0, minute: 0));
                           // print("${storage.read('notification' )}     ${NotificationApi.notificationEnabled}");
-                        }else {
+                        } else {
                           NotificationApi.cancel();
                           // print("${storage.read('notification' )}     ${NotificationApi.notificationEnabled}");
                         }
@@ -81,9 +82,33 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   const Spacer(),
                   Text(
-                    "الاشعارات",
+                    "Notifications".tr,
                     style: AppTextStyle.mainFont,
                   ),
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    height:100,
+                    child: InkWell(
+                      child: Image.asset(
+                          storage.read("language").toString() ==  "en"
+                              ? AppAssets.englishImage
+                              : AppAssets.arabicImage),
+                    onTap: (){
+                        // setState(() {
+                        //   print(storage.read("localization").toString());
+                        // });
+                      String currentLanguage = LocalizationService().getLanguage();
+                      String newLanguage = currentLanguage == 'en_US' ? 'العربيه' : 'English';
+                      LocalizationService().changeLocale(newLanguage);
+
+                    },
+
+                    ),
+                  )
                 ],
               )
             ],

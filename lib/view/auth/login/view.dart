@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mudad_app/app_constants/app_colors.dart';
 import '../../../reusable_widgets/phone_textField.dart';
 import '../core/design/app_button.dart';
 import '../core/design/custom_image.dart';
@@ -28,9 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
             vertical: 20,
           ),
           children: [
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Sign In",
+              'sign_in'.tr,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -93,13 +95,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             GestureDetector(
               onTap: () {
-                toGetNavigate(const ForgetPassword(),);
+                Get.to(const ForgetPassword());
               },
               child: const Text(
                 textAlign: TextAlign.end,
                 "Forget Password!",
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: AppColors.buttonColor
+                  ,
                 ),
               ),
             ),
@@ -110,18 +113,13 @@ class _LoginScreenState extends State<LoginScreen> {
               text: "Login",
               onPress: () {
                 if(formKey.currentState!.validate()){
-
                 }
               },
             ),
             const SizedBox(
               height: 40,
             ),
-            const AppImage2(
-              "assets/images/fingerprint.png",
-              height: 41,
-              width: 37,
-            ),
+
             const SizedBox(
               height: 35,
             ),
@@ -137,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    toGetNavigate(const SignUpScreen(),);
+                    Get.off(const SignUpScreen());
                   },
                   child: const Text(
                     "Sign up",

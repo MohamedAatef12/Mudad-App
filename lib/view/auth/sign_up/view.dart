@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../reusable_widgets/password_textField.dart';
 import '../../../reusable_widgets/phone_textField.dart';
 import '../core/design/app_button.dart';
@@ -187,7 +189,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      toGetNavigate(const LoginScreen(),);
+                      Get.off(const LoginScreen());
                     },
                     child: const Text(
                       "Sign in",

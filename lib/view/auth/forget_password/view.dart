@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../reusable_widgets/phone_textField.dart';
 import '../confirm_code/view.dart';
 import '../core/design/app_button.dart';
@@ -37,7 +38,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               height: 30,
             ),
             Image.asset(
-              "assets/images/lock.png",
+              "assets/lock.png",
               height: 132,
               width: 132,
             ),
@@ -106,7 +107,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               text: "Send",
               onPress: () {
                 if(formKey.currentState!.validate()){
-                  toGetNavigate(const ConfirmCodeView(),);
+                  Get.to(const ConfirmCodeView());
                 }
               },
             ),

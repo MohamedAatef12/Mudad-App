@@ -8,5 +8,7 @@ class AppAssets {
   static const String vision = "assets/drawer_assets/vision.png";
   static const String share = "assets/drawer_assets/share.png";
   static const String backGround = "assets/background.png";
+  static const String arabicImage = "assets/locals/ar.png";
+  static const String englishImage ="assets/locals/en.png";
 
 }
