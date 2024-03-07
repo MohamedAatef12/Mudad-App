@@ -61,7 +61,8 @@ class MyApp extends StatelessWidget {
               ? TextDirection.ltr
               : TextDirection.ltr,
           debugShowCheckedModeBanner: false,
-          initialRoute: '/home',
+          initialRoute: '/splash',
+          //initialRoute: '/home',
           getPages: appRoutes(),
         ));
   }
