@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import '../../../reusable_widgets/phone_textField.dart';
 import '../core/design/app_button.dart';
-import '../core/design/custom_image.dart';
-import '../core/logic/helper_methods.dart';
 import '../forget_password/view.dart';
 import '../sign_up/view.dart';
 
@@ -33,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Text(
               textAlign: TextAlign.center,
               'sign_in'.tr,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),

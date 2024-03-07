@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:mudad_app/BolcOpserver.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
+import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 import 'app_constants/app_routes.dart';
@@ -41,6 +42,9 @@ void main() async {
       BlocProvider(
         create: (context) => ProductsCubit(),
       ),
+      BlocProvider(
+        create: (context) => OrdersCubit(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -61,7 +65,7 @@ class MyApp extends StatelessWidget {
               ? TextDirection.ltr
               : TextDirection.ltr,
           debugShowCheckedModeBanner: false,
-          initialRoute: '/splash',
+          initialRoute: '/home',
           //initialRoute: '/home',
           getPages: appRoutes(),
         ));

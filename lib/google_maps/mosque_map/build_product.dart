@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mudad_app/google_maps/mosque_map/product.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 
-List<String> products=[], productImages=[];
- List <int>productPrice=[] ,orderCounter= [];
+List<String> products = [], productImages = [];
+List<int> productPrice = [], orderCounter = [];
+List<Map<String, dynamic>> selectedOrders = [];
+int totalOrder=0;
+int p1Total = 0,p2Total=0;
 
 class BuildProduct extends StatelessWidget {
-
-  BuildProduct( {super.key});
+  const BuildProduct({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final productCubit = BlocProvider.of<ProductsCubit>(context);
-
 
     return Positioned(
       bottom: 80,
@@ -27,6 +27,7 @@ class BuildProduct extends StatelessWidget {
               products = state.products;
               productImages = state.images;
               orderCounter = state.quantity;
+              selectedOrders = state.orders;
             }
           },
           builder: (context, state) {
@@ -38,13 +39,42 @@ class BuildProduct extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ProductCard(
                     quantityCounter: orderCounter[index],
-                    addition: (){
+                    addition: () {
                       context.read<ProductsCubit>().addProducts(index);
-                      orderCounter[index] = productCubit.addProducts(orderCounter[index]);
+                      orderCounter[index] =
+                          productCubit.addProducts(orderCounter[index]);
+                      selectedOrders[index]["qty"] = orderCounter[index];
+                      if(index == 0 ){
+                        p1Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
+                      }else{
+                        p2Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
+                      }
+
+                      totalOrder = p1Total+p2Total;
+                      print("1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
+
+                      //  total.clear();
+                      // Map<String,dynamic> totalAdded=
+                      //   {
+                      //     "total$index": selectedOrders[index]["qty"]*selectedOrders[index]["price"]
+                      //   };
+                      // total.add(totalAdded);
+                      // print(total);
                     },
-                    remove: (){
+                    remove: () {
                       context.read<ProductsCubit>().removeProducts(index);
-                      orderCounter[index] = productCubit.removeProducts(orderCounter[index]);
+                      orderCounter[index] =
+                          productCubit.removeProducts(orderCounter[index]);
+                      selectedOrders[index]["qty"] = orderCounter[index];
+                      if(index == 0 ){
+                        p1Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
+                      }else{
+                        p2Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
+                      }
+
+                      totalOrder = p1Total+p2Total;
+                      print("1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
+                      // total.add( selectedOrders[index]["qty"]*selectedOrders[index]["price"]);
                     },
                     imagePath: 'assets/images/3.png',
                     productName: products[index],
@@ -56,7 +86,6 @@ class BuildProduct extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 22),
                 scrollDirection: Axis.horizontal,
                 reverse: true,
-
               ),
             );
           },

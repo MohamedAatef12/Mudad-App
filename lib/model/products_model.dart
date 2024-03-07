@@ -6,22 +6,22 @@ class ProductsModel {
 
   ProductsModel.fromJson(Map<String, dynamic> json) {
     headers =
-    json['headers'] != null ? new Headers.fromJson(json['headers']) : null;
+    json['headers'] != null ? Headers.fromJson(json['headers']) : null;
     if (json['body'] != null) {
       body = <Body>[];
       json['body'].forEach((v) {
-        body!.add(new Body.fromJson(v));
+        body!.add(Body.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.headers != null) {
-      data['headers'] = this.headers!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (headers != null) {
+      data['headers'] = headers!.toJson();
     }
-    if (this.body != null) {
-      data['body'] = this.body!.map((v) => v.toJson()).toList();
+    if (body != null) {
+      data['body'] = body!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -39,9 +39,9 @@ class Headers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
     return data;
   }
 }
@@ -66,13 +66,13 @@ class Body {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['title'] = this.title;
-    data['imageUrl'] = this.imageUrl;
-    data['price'] = this.price;
-    data['qty'] = this.qty;
-    data['__v'] = this.iV;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['title'] = title;
+    data['imageUrl'] = imageUrl;
+    data['price'] = price;
+    data['qty'] = qty;
+    data['__v'] = iV;
     return data;
   }
 }

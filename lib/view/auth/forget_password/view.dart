@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../../reusable_widgets/phone_textField.dart';
 import '../confirm_code/view.dart';
 import '../core/design/app_button.dart';
-import '../core/logic/helper_methods.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});

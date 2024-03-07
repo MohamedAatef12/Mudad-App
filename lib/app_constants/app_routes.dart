@@ -23,7 +23,7 @@ appRoutes() => [
       ),
       GetPage(
         name: '/home',
-        page: () =>  HomePage(),
+        page: () =>  const HomePage(),
       ),
       GetPage(
           name: '/vision',

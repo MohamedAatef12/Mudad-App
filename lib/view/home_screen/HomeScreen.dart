@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:mudad_app/google_maps/loading.dart';
 import 'package:mudad_app/google_maps/orphanage_map/orphanage_map.dart';
 import 'package:mudad_app/view/drawer/drawer.dart';
-import 'package:mudad_app/view/payment_page.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
-import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
-import 'package:share/share.dart';
 import '../../app_constants/app_assets.dart';
 import '../../app_constants/app_colors.dart';
 import '../../app_constants/app_text_styles.dart';
@@ -15,7 +11,7 @@ import '../../google_maps/home_map/choose_location.dart';
 import '../../google_maps/mosque_map/search_map.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();

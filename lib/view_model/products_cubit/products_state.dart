@@ -10,8 +10,9 @@ class ProductsSuccess extends ProductsState {
   List<String> images = [];
   List<int> prices = [];
   List<int> quantity = [];
+  List<Map<String,dynamic>> orders=[];
 
-  ProductsSuccess(this.products, this.images, this.prices, this.quantity);
+  ProductsSuccess(this.products, this.images, this.prices, this.quantity,this.orders);
 }
 
 class ProductsLoading extends ProductsState {}

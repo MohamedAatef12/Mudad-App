@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:mudad_app/model/products_model.dart';
@@ -19,7 +18,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   List<String> images = [];
   List<int> quantity=[];
   List<int> quantityCounter=[];
-
+  List<Map<String,dynamic>> ordersInitialization=[];
 
   loadProducts() {
     emit(ProductsLoading());
@@ -30,19 +29,32 @@ class ProductsCubit extends Cubit<ProductsState> {
         products.clear();
         price.clear();
         images.clear();
-
+        ordersInitialization.clear();
         for (var element in productsModel.body!) {
           products.add(element.title.toString());
           price.add(element.price!.toInt());
           images.add(element.imageUrl.toString());
           quantity.add(element.qty!.toInt());
+          Map<String,dynamic> orders=
+            {
+              "id": "185",
+              "title":element.title.toString(),
+              "price" :element.price!.toInt(),
+              "qty":element.qty!.toInt()
+            };
+          ordersInitialization.add(orders);
         }
-        emit(ProductsSuccess(products,images,price,quantity));
-        print(products);
+
+        emit(ProductsSuccess(products,images,price,quantity,ordersInitialization));
+        print("-------------------------------------------------------------------------------------------");
+        print(ordersInitialization);
+        print(ordersInitialization[1]["qty"].toString());
+
       }else {
         emit(ProductsFailure());
       }
     });
+
   }
 
    int addProducts(int qty){

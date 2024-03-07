@@ -253,8 +253,12 @@ class _SearchMapState extends State<SearchMap> {
                   ],
                 ),
               ),
-               BuildProduct(),
-              const BuildChooseButton()
+               const BuildProduct(),
+               BuildChooseButton("location", totalOrder,
+
+                   selectedOrders,
+
+               )
             ],
           ),
           floatingActionButton: Stack(

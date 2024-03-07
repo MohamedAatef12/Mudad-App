@@ -27,18 +27,18 @@ class DioHelper {
       {required String endPoint,
         Map<String, dynamic>? data,
         String? token}) async {
-    dio!.options.headers = {
+    dio.options.headers = {
       'Content-Type': "application/json",
       'Authorization': "Bearer ${EndPoint.userToken}"
     };
-    return await dio!.post(endPoint, data: data);
+    return await dio.post(endPoint, data: data);
   }
 
   static Future<Response> getData(
       {required String endPoint,
         String? token,
         Map<String, dynamic>? header}) async {
-    dio!.options.headers = header ??
+    dio.options.headers = header ??
         {
           'Content-Type': 'application/json',
           // 'Authorization': "Bearer ${EndPoint.userToken}",
@@ -50,11 +50,11 @@ class DioHelper {
       {required String endPoint,
         Map<String, dynamic>? data,
         String? token}) async {
-    dio!.options.headers = {
+    dio.options.headers = {
       'Content-Type': "application/json",
       'Authorization': "Bearer ${EndPoint.userToken}"
     };
-    return await dio!.put(endPoint, data: data);
+    return await dio.put(endPoint, data: data);
   }
 
 
