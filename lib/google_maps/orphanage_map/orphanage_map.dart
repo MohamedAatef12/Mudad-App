@@ -260,7 +260,7 @@ class _OrphanageMapState extends State<OrphanageMap> {
                     ],
                   ),
                 ),
-                const BuildProduct(),
+                 BuildProduct(),
                 const BuildChooseButton()
               ],
             ),

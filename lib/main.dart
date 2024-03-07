@@ -5,8 +5,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:mudad_app/BolcOpserver.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
+import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
+import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 import 'app_constants/app_routes.dart';
 import 'google_maps/home_map/cubit/cubit.dart';
 
@@ -29,11 +32,23 @@ void main() async {
       statusBarColor: Color(0xff92C0FC),
     ),
   );
-  runApp(const MyApp());
+  Bloc.observer = MyBlocObserver();
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => ServicesCubit(),
+      ),
+      BlocProvider(
+        create: (context) => ProductsCubit(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LocationCubit>(

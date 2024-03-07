@@ -1,18 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
+  ProductCard({
     Key? key,
     required this.imagePath,
     required this.productName,
     required this.productDetails,
     required this.price,
+    required this.quantityCounter,
+    required this.addition,
+    required this.remove,
   }) : super(key: key);
 
   final String imagePath;
   final String productName;
   final String productDetails;
-  final int price;
+  final int price,quantityCounter;
+  void Function()? addition, remove;
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +54,23 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
-            FittedBox(
-              child: Text(
-                productDetails,
-                style: const TextStyle(
-                  color: Colors.blue,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+            Flexible(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(quantityCounter.toString()),
+                IconButton(
+                  onPressed: addition,
+                  icon: const Icon(Icons.add),
+                  color: Colors.green,
                 ),
-              ),
-            ),
+                IconButton(
+                  onPressed: remove,
+                  icon: const Icon(Icons.remove),
+                  color: Colors.red,
+                ),
+              ],
+            )),
             const SizedBox(
               height: 13,
             ),

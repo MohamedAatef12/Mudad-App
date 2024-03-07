@@ -253,7 +253,7 @@ class _SearchMapState extends State<SearchMap> {
                   ],
                 ),
               ),
-              const BuildProduct(),
+               BuildProduct(),
               const BuildChooseButton()
             ],
           ),

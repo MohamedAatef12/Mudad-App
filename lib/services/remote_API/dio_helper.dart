@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'end_points.dart';
 
 class DioHelper {
-  static Dio? dio;
-  static String baseUrl = 'https://project2.amit-learning.com/api/';
+  static Dio dio = Dio();
+  static String baseUrl = 'http://10.0.2.2:8080/api/v1/';
 
   static void init() {
     dio = Dio(
@@ -41,9 +41,9 @@ class DioHelper {
     dio!.options.headers = header ??
         {
           'Content-Type': 'application/json',
-          'Authorization': "Bearer ${EndPoint.userToken}",
+          // 'Authorization': "Bearer ${EndPoint.userToken}",
         };
-    return await dio!.get(endPoint);
+    return await dio.get(endPoint);
   }
 
   static Future<Response> putData(

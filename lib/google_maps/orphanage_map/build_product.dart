@@ -16,8 +16,13 @@ class BuildOrphanageProduct extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 22),
           scrollDirection: Axis.horizontal,
           reverse: true,
-          children: const [
+          children:  [
             ProductCard(
+              remove: (){},
+              addition: () {
+
+              },
+              quantityCounter: 0,
               imagePath: 'assets/images/3.png',
               productName: 'ثلاجة مياه',
               productDetails: 'ضمان لمدة سنتين',
@@ -25,6 +30,11 @@ class BuildOrphanageProduct extends StatelessWidget {
             ),
             SizedBox(width: 20),
             ProductCard(
+              remove: (){},
+              addition: () {
+
+              },
+              quantityCounter: 0,
               imagePath: 'assets/images/2.png',
               productName: 'كراتين',
               productDetails: 'عبوة 20 × مل 330',
@@ -32,6 +42,11 @@ class BuildOrphanageProduct extends StatelessWidget {
             ),
             SizedBox(width: 20),
             ProductCard(
+              remove: (){},
+              addition: () {
+
+              },
+              quantityCounter: 0,
               imagePath: 'assets/images/2.png',
               productName: 'كراتين',
               productDetails: 'عبوة 20 × مل 330',

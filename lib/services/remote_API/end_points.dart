@@ -1,6 +1,9 @@
 class EndPoint{
   // static const String loginUrl = "auth/login";
   static String userToken = "loginToken";
+  static String services = "services";
+static String products = "products";
+
   // static int id = LoginCubit.loginId;
   // static String  name = "";
   // static String registerUrl = "auth/register";

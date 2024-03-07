@@ -1,44 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mudad_app/google_maps/mosque_map/product.dart';
+import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
+
+List<String> products=[], productImages=[];
+ List <int>productPrice=[] ,orderCounter= [];
 
 class BuildProduct extends StatelessWidget {
-  const BuildProduct({super.key});
+
+  BuildProduct( {super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final productCubit = BlocProvider.of<ProductsCubit>(context);
+
+
     return Positioned(
       bottom: 80,
-      child: SizedBox(
-        height: 200,
-        width: MediaQuery.of(context).size.width,
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 22),
-          scrollDirection: Axis.horizontal,
-          reverse: true,
-          children: const [
-            ProductCard(
-              imagePath: 'assets/images/3.png',
-              productName: 'ثلاجة مياه',
-              productDetails: 'ضمان لمدة سنتين',
-              price: 2500,
-            ),
-            SizedBox(width: 20),
-            ProductCard(
-              imagePath: 'assets/images/2.png',
-              productName: 'كراتين',
-              productDetails: 'عبوة 20 × مل 330',
-              price: 100,
-            ),
-            SizedBox(width: 20),
-            ProductCard(
-              imagePath: 'assets/images/2.png',
-              productName: 'كراتين',
-              productDetails: 'عبوة 20 × مل 330',
-              price: 100,
-            ),
-            // Add more ProductCard widgets as needed
-          ],
+      child: BlocProvider(
+        create: (context) => ProductsCubit()..loadProducts(),
+        child: BlocConsumer<ProductsCubit, ProductsState>(
+          listener: (context, state) {
+            if (state is ProductsSuccess) {
+              productPrice = state.prices;
+              products = state.products;
+              productImages = state.images;
+              orderCounter = state.quantity;
+            }
+          },
+          builder: (context, state) {
+            return SizedBox(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                    quantityCounter: orderCounter[index],
+                    addition: (){
+                      context.read<ProductsCubit>().addProducts(index);
+                      orderCounter[index] = productCubit.addProducts(orderCounter[index]);
+                    },
+                    remove: (){
+                      context.read<ProductsCubit>().removeProducts(index);
+                      orderCounter[index] = productCubit.removeProducts(orderCounter[index]);
+                    },
+                    imagePath: 'assets/images/3.png',
+                    productName: products[index],
+                    productDetails: 'ضمان لمدة سنتين',
+                    price: productPrice[index],
+                  );
+                },
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                scrollDirection: Axis.horizontal,
+                reverse: true,
+
+              ),
+            );
+          },
         ),
       ),
     );
