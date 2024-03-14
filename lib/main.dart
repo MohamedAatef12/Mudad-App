@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
               ? TextDirection.ltr
               : TextDirection.ltr,
           debugShowCheckedModeBanner: false,
-          initialRoute: '/home',
+          initialRoute: '/login',
           //initialRoute: '/home',
           getPages: appRoutes(),
         ));
