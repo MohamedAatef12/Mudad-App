@@ -25,10 +25,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             vertical: 20,
           ),
           children: [
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Forgot Password",
-              style: TextStyle(
+              "forgot_password".tr,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -44,10 +44,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             const SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Enter the Email Address \nto reset your password",
-              style: TextStyle(
+              "email_address_reset_password".tr,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
@@ -55,10 +55,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             const SizedBox(
               height: 12,
             ),
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "We will send you a code to reset \nyour password",
-              style: TextStyle(
+              "send_code_reset_password".tr,
+              style: const TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff58595B),
@@ -72,9 +72,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Phone",
-                    style: TextStyle(
+                  Text(
+                    "phone".tr,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
@@ -83,15 +83,15 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     height: 13,
                   ),
                   AppInputPhone(
-                    labelText: "Phone",
+                    labelText: "phone".tr,
                     isPhone: true,
                     controller: phoneController,
                     paddingBottom: 30,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "رقم الهاتف مطلوب";
+                        return "phone_required".tr;
                       } else if (value.length < 11) {
-                        return "يجب ان يكون رقم الهاتف 11 رقم";
+                        return "phone_length".tr;
                       }
                       return null;
                     },
@@ -103,7 +103,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               height: 22,
             ),
             ElevateButton(
-              text: "Send",
+              text: "send".tr,
               onPress: () {
                 if(formKey.currentState!.validate()){
                   Get.to(const ConfirmCodeView());

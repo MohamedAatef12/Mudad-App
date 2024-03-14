@@ -39,10 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 30,
             ),
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Welcome Back",
-              style: TextStyle(
+              "welcome_back".tr,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
@@ -50,10 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 9,
             ),
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Please Sign in to access to your account",
-              style: TextStyle(
+              "sign_in_description".tr,
+              style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
@@ -61,9 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 30,
             ),
-            const Text(
-              "Phone",
-              style: TextStyle(
+            Text(
+              "phone".tr,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
@@ -74,15 +74,15 @@ class _LoginScreenState extends State<LoginScreen> {
             Form(
               key: formKey,
               child: AppInputPhone(
-                labelText: "Phone",
+                labelText: "phone".tr,
                 isPhone: true,
                 controller: phoneController,
                 paddingBottom: 30,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "رقم الهاتف مطلوب";
+                    return "phone_required".tr;
                   } else if (value.length < 11) {
-                    return "يجب ان يكون رقم الهاتف 11 رقم";
+                    return "phone_length".tr;
                   }
                   return null;
                 },
@@ -95,10 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () {
                 Get.to(const ForgetPassword());
               },
-              child: const Text(
+              child: Text(
                 textAlign: TextAlign.end,
-                "Forget Password!",
-                style: TextStyle(
+                "forget_password".tr,
+                style: const TextStyle(
                   color: AppColors.buttonColor
                   ,
                 ),
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30,
             ),
             ElevateButton(
-              text: "Login",
+              text: "login".tr,
               onPress: () {
                 if(formKey.currentState!.validate()){
                 }
@@ -124,9 +124,9 @@ class _LoginScreenState extends State<LoginScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Don't have account?",
-                  style: TextStyle(
+                Text(
+                  "no_account".tr,
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -135,9 +135,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Get.off(const SignUpScreen());
                   },
-                  child: const Text(
-                    "Sign up",
-                    style: TextStyle(
+                  child: Text(
+                    "Sign_up".tr,
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.blue,

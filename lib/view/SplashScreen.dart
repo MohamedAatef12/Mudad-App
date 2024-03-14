@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(
       const Duration(seconds: 3),
-      () => Get.offNamed("/login"),
+      () => Get.offNamed("Login".tr),
     );
     super.initState();
   }
@@ -46,8 +46,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text("زكاتك تنقذ حياة",
-                    style: TextStyle(
+                Text(
+                    "text1".tr,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 40,
                       fontWeight: FontWeight.bold,

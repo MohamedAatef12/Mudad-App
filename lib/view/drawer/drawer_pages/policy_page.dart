@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mudad_app/app_constants/app_assets.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
 
@@ -33,28 +34,11 @@ class PolicyPage extends StatelessWidget {
               Expanded(
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
-                  children: const [
+                  children: [
                     Text(
                       textDirection: TextDirection.rtl,
-                      "نحن في تطبيق مدد نولي أهمية كبيرة لخصوصية مستخدمينا."
-                          " نحن ملتزمون بحماية بياناتك الشخصية"
-                          " ونعمل جاهدين على ضمان سرية وأمان المعلومات التي تقدمها لنا."
-                         "\n"
-                          "\nجمع البيانات: نقوم بجمع بيانات الاتصال الضرورية فقط، مثل الاسم وعنوان"
-                          " البريد الإلكتروني، لتسهيل عملية التبرع بالماء."
-                          "\n"
-                          "\nاستخدام البيانات: نحن نستخدم البيانات التي نجمعها فقط لأغراض محددة مثل معالجة"
-                          " التبرعات والتواصل مع المستخدمين بشأن الحملات الخيرية المستقبلية."
-                          "\n"
-                          "\nمشاركة البيانات: لا نقوم"
-                          " بمشاركة معلومات المستخدمين مع أي جهة خارجية دون موافقتهم الصريحة."
-                          "\n"
-                          "\nأمان البيانات: نحن نتخذ التدابير الأمنية اللازمة لحماية بيانات "
-                          "المستخدمين من الوصول غير المصرح به أو الاستخدام غير المسموح به."
-                          "\n"
-                          "\nحقوق الوصول والتصحيح: نحن نتيح للمستخدمين "
-                          "الوصول إلى بياناتهم الشخصية وتحديثها أو حذفها حسب الحاجة.",
-                      style: TextStyle(
+                      "Policy".tr,
+                      style: const TextStyle(
                         fontSize: 20,
                       ),
                     ),

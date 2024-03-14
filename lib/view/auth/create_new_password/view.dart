@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../reusable_widgets/password_textField.dart';
 import '../core/design/app_button.dart';
 
@@ -24,10 +25,10 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             vertical: 50,
           ),
           children: [
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Create a new password",
-              style: TextStyle(
+              "new_password".tr,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -35,10 +36,10 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             const SizedBox(
               height: 7,
             ),
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Lorem ipsum dolor sit amet, consetetur \n sadipscing elitr, sed diam nonumy eirmod \ntempor invidunt ut.",
-              style: TextStyle(
+              "lorem_ipsum".tr,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
@@ -51,9 +52,9 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Password",
-                    style: TextStyle(
+                  Text(
+                    "password".tr,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
@@ -62,22 +63,22 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     height: 13,
                   ),
                   AppInputPassword(
-                    labelText: "Password",
+                    labelText: "password".tr,
                     isPassword: true,
                     controller: passwordController,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "كلمه المرور مطلوبه";
+                        return "password_required".tr;
                       } else if (value.length < 8) {
-                        return "كلمه المرور ضعيفه";
+                        return "password_weak".tr;
                       }
                       return null;
                     },
                     paddingBottom: 30,
                   ),
-                  const Text(
-                    "Confirm Password",
-                    style: TextStyle(
+                  Text(
+                    "confirm_password".tr,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
@@ -86,16 +87,16 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     height: 13,
                   ),
                   AppInputPassword(
-                    labelText: "Confirm Password",
+                    labelText: "confirm_password".tr,
                     isPassword: true,
                     controller: confirmPasswordController,
                     validator: (value) {
                       if(value.toString().isEmpty)
                       {
-                        return "تاكيد كلمه المرور مطلوبه";
+                        return "confirm_password_is_required".tr;
                       } else if (value !=passwordController.text)
                       {
-                        return "كلمه المرور غير متطابقه";
+                        return "password_does_not_match".tr;
                       }
                       return null;
                     },
@@ -107,7 +108,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
               height: 44,
             ),
             ElevateButton(
-              text: "Verify",
+              text: "verify".tr,
               onPress: () {
                 if(formKey.currentState!.validate()){
 

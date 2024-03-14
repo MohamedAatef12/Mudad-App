@@ -31,10 +31,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               vertical: 20,
             ),
             children: [
-              const Text(
+              Text(
                 textAlign: TextAlign.center,
-                "Sign Up",
-                style: TextStyle(
+                "sign_up".tr,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -42,10 +42,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
+              Text(
                 textAlign: TextAlign.center,
-                "Create Account",
-                style: TextStyle(
+                "create_account".tr,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
                 ),
@@ -53,10 +53,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 9,
               ),
-              const Text(
+              Text(
                 textAlign: TextAlign.center,
-                "Please Sign up to access to your account",
-                style: TextStyle(
+                "sign_in_description".tr,
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -64,9 +64,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                "Full Name",
-                style: TextStyle(
+              Text(
+                "full_name".tr,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
@@ -75,22 +75,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 13,
               ),
               AppInputPhone(
-                labelText: "Full Name",
+                labelText: "full_name".tr,
                 paddingBottom: 30,
                 isPhone: false,
                 controller: fullNameController,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "برجاء ادخال اسمك";
+                    return "enter_your_name".tr;
                   } else if (value.length > 30) {
-                    return "يرجي كتابه اسمك ثلاثي";
+                    return "write_your_full_name".tr;
                   }
                   return null;
                 },
               ),
-              const Text(
-                "Phone",
-                style: TextStyle(
+              Text(
+                "phone".tr,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
@@ -99,22 +99,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 13,
               ),
               AppInputPhone(
-                labelText: "Phone",
+                labelText: "phone".tr,
                 isPhone: true,
                 controller: phoneController,
                 paddingBottom: 30,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "رقم الهاتف مطلوب";
+                    return "phone_required".tr;
                   } else if (value.length < 11) {
-                    return "يجب ان يكون رقم الهاتف 11 رقم";
+                    return "phone_length".tr;
                   }
                   return null;
                 },
               ),
-              const Text(
-                "Password",
-                style: TextStyle(
+              Text(
+                "password".tr,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
@@ -123,22 +123,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 13,
               ),
               AppInputPassword(
-                labelText: "Password",
+                labelText: "password".tr,
                 isPassword: true,
                 controller: passwordController,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "كلمه المرور مطلوبه";
+                    return "password_required".tr;
                   } else if (value.length < 8) {
-                    return "كلمه المرور ضعيفه";
+                    return "password_weak".tr;
                   }
                   return null;
                 },
                 paddingBottom: 30,
               ),
-              const Text(
-                "Confirm Password",
-                style: TextStyle(
+              Text(
+                "confirm_password".tr,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
@@ -147,16 +147,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 13,
               ),
               AppInputPassword(
-                labelText: "Confirm Password",
+                labelText: "confirm_password".tr,
                 isPassword: true,
                 controller: confirmPasswordController,
                 validator: (value) {
                   if(value.toString().isEmpty)
                   {
-                    return "تاكيد كلمه المرور مطلوبه";
+                    return "confirm_password_is_required".tr;
                   } else if (value !=passwordController.text)
                   {
-                    return "كلمه المرور غير متطابقه";
+                    return "password_does_not_match".tr;
                   }
                   return null;
                 },
@@ -165,7 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 25,
               ),
               ElevateButton(
-                text: "Sign Up",
+                text: "sign_up".tr,
                 onPress: () {
                   if(formKey.currentState!.validate()){
 
@@ -178,9 +178,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Already have account?",
-                    style: TextStyle(
+                  Text(
+                    "already_have_account".tr,
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
@@ -189,9 +189,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onPressed: () {
                       Get.off(const LoginScreen());
                     },
-                    child: const Text(
-                      "Sign in",
-                      style: TextStyle(
+                    child: Text(
+                      "sign_in".tr,
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                         color: Colors.blue,

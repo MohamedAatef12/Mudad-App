@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../core/design/app_button.dart';
 import '../core/logic/helper_methods.dart';
@@ -27,10 +28,10 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             vertical: 70,
           ),
           children: [
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Verification Code",
-              style: TextStyle(
+              "verification_code".tr,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -38,10 +39,10 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             const SizedBox(
               height: 12,
             ),
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Lorem ipsum dolor sit amet, consetetur\n sadipscing elitr, sed diam nonumy eirmod\n tempor invidunt ut.",
-              style: TextStyle(
+              "lorem_ipsum".tr,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
@@ -56,9 +57,9 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                 length: 5,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "يرجي ادخال الكود";
+                    return "code_required".tr;
                   } else if (value.length < 5) {
-                    return "يجب ان يكون الكود 5 ارقم";
+                    return "code_length".tr;
                   }
                   return null;
                 },
@@ -79,7 +80,7 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
               height: 60,
             ),
             ElevateButton(
-              text: "Verify",
+              text: "verify".tr,
               onPress: () {
                 if (formKey.currentState!.validate()){
                   toGetNavigate(const CreateNewPassword(),);
@@ -89,10 +90,10 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             const SizedBox(
               height: 57,
             ),
-            const Text(
-              "لم تستلم الكود ؟\nيمكنك إعادة إرسال الكود بعد",
+            Text(
+              "text7".tr,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w300,
               ),
@@ -132,9 +133,9 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                   isTimerFinished = false;
                   setState(() {});
                 },
-                child: const Text(
-                  "إعادة الإرسال",
-                  style: TextStyle(
+                child: Text(
+                  "resend_code".tr,
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,

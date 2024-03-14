@@ -28,47 +28,50 @@ class HomeDrawer extends StatelessWidget {
                                   AppAssets.drawerBackGround,
                                   width: double.infinity,
                                   fit: BoxFit.fill,
-                                ))),
+                                ),
+                            ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Image.asset(
                             AppAssets.appLogo,
                           ),
                         ),
-                      ]),
+                      ],
+                      ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * .09),
-                      CustomButton("سجل الطلبات", () {
-                        Get.toNamed("/orders");
+                      CustomButton("order_history".tr, () {
+                        Get.toNamed("orders".tr);
                       }, AppAssets.orders),
-                      CustomButton("رؤيتنا", () {
-                        Get.toNamed("/vision");
+                      CustomButton("our_vision".tr, () {
+                        Get.toNamed("vision".tr);
                       }, AppAssets.vision),
-                      CustomButton("سياسات الخصوصية", () {
-                        Get.toNamed("/policy");
+                      CustomButton("privacy_policy".tr, () {
+                        Get.toNamed("policy".tr);
                       }, AppAssets.policy),
-                      CustomButton("الإعدادات", () {
-                        Get.toNamed("/settings");
+                      CustomButton("settings".tr, () {
+                        Get.toNamed("setting".tr);
                       }, AppAssets.settings),
-                      CustomButton("شارك التطبيق", () {
-                        Share.share('Check out this awesome app',
-                            subject: 'Check out this app!');
+                      CustomButton("shared_project".tr, () {
+                        Share.share('Check out app'.tr,
+                            subject: 'Check app'.tr);
                       }, AppAssets.share),
                       // const Spacer(),
-                      const Text("V 3.17.11"),
+                      Text("version".tr),
                       const SizedBox(height: 20)
                     ]),
                     Positioned(
                       top: MediaQuery.of(context).size.height * .2,
-                      child: const Column(
+                      child: Column(
                         children: [
-                          CircleAvatar(
+                          const CircleAvatar(
                               radius: 70,
                               backgroundImage: NetworkImage(
                                   "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/640px-Flag_of_Palestine.svg.png")),
                           Text(
-                            "Name",
-                            style: TextStyle(fontSize: 20),
+                            "name".tr,
+                            style: const TextStyle(fontSize: 20),
                           )
                         ],
                       ),

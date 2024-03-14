@@ -39,11 +39,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   FittedBox(
                       child: Text(
                     textDirection: TextDirection.rtl,
-                    "{الَّذِينَ يُنفِقُونَ أَمْوَالَهُم بِاللَّيْلِ وَالنَّهَار"
-                    "ِ \nسِرًّا وَعَلَانِيَةً فَلَهُمْ أَجْرُهُمْ عِندَ رَبِّهِم"
-                    "ْ \nوَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونََ}",
+                        "{الَّذِينَ يُنفِقُونَ أَمْوَالَهُم بِاللَّيْلِ وَالنَّهَار"
+                            "ِ \nسِرًّا وَعَلَانِيَةً فَلَهُمْ أَجْرُهُمْ عِندَ رَبِّهِم"
+                            "ْ \nوَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونََ}",
                     style: AppTextStyle.quranFont,
-                  )),
+                  ),
+                  ),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height * .1),
@@ -59,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     height: 40.0,
                     valueFontSize: 15.0,
                     toggleSize: 30.0,
-                    value: storage.read('notification') ??
+                    value: storage.read('notification'.tr) ??
                         NotificationApi.notificationEnabled,
                     borderRadius: 30.0,
                     padding: 5.0,
@@ -67,9 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     onToggle: (val) {
                       setState(() {
                         NotificationApi.notificationEnabled = val;
-                        storage.write("notification",
+                        storage.write("notification".tr,
                             NotificationApi.notificationEnabled);
-                        if (storage.read('notification') == true) {
+                        if (storage.read('notification'.tr) == true) {
                           NotificationApi.sendNotificationAtSpecificTime(
                               const TimeOfDay(hour: 0, minute: 0));
                           // print("${storage.read('notification' )}     ${NotificationApi.notificationEnabled}");

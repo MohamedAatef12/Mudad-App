@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/reusable_widgets/custom_paymment_card.dart';
 import '../app_constants/app_colors.dart';
@@ -31,7 +32,8 @@ class PaymentPage extends StatelessWidget {
                   color: AppColors.buttonColor,
                 ),
                 child: Center(
-                  child: Text("اختر طريقه الدفع",
+                  child: Text(
+                      "text2".tr,
                       style: AppTextStyle.mainFont,
                       textAlign: TextAlign.center),
                 )),
@@ -48,9 +50,9 @@ class PaymentPage extends StatelessWidget {
             const SizedBox(
               width: 2,
             ),
-            const Text(
-              "جميع المعلومات الخاصة بحاسبك آمنه",
-              style: TextStyle(
+            Text(
+              "text3".tr,
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w400,
               ),
@@ -67,10 +69,10 @@ class PaymentPage extends StatelessWidget {
             width: 110,
           ),
         ),
-        const Center(
+        Center(
           child: Text(
-            "باي بال",
-            style: TextStyle(
+            "paypal".tr,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w400,
             ),
@@ -132,10 +134,10 @@ class PaymentPage extends StatelessWidget {
             ],
           ),
         ),
-        const Center(
+        Center(
           child: Text(
-            "تحويل بنكي",
-            style: TextStyle(
+            "Bank_Transfer".tr,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w400,
             ),
@@ -152,10 +154,10 @@ class PaymentPage extends StatelessWidget {
             ),
           ),
         ),
-        const Center(
+        Center(
           child: Text(
-            "أبل باي",
-            style: TextStyle(
+            "apple_pay".tr,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w400,
             ),
@@ -173,9 +175,9 @@ class PaymentPage extends StatelessWidget {
                 "assets/payment_assets/gift-svgrepo-com 1.png",
                 fit: BoxFit.fitHeight,
               ),
-              const Text(
-                "بطاقات هدايا",
-                style: TextStyle(
+              Text(
+                "gift_cards".tr,
+                style: const TextStyle(
                   fontSize: 30,
                 ),
               ),
@@ -194,9 +196,9 @@ class PaymentPage extends StatelessWidget {
                 "assets/payment_assets/voucher-coupon-svgrepo-com 1.png",
                 fit: BoxFit.fitHeight,
               ),
-              const Text(
-                "بطاقات الخصم",
-                style: TextStyle(
+              Text(
+                "debit_cards".tr,
+                style: const TextStyle(
                   fontSize: 30,
                 ),
               ),
@@ -218,7 +220,7 @@ class PaymentPage extends StatelessWidget {
                   ),
                   child: Center(
                       child: Text(
-                    "مراجعه طلبك",
+                    "Review_your_request".tr,
                     style:GoogleFonts.lalezar(
                         fontSize: 20,
                         fontWeight: FontWeight.w100,
@@ -238,7 +240,8 @@ class PaymentPage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("عدد",
+                          Text(
+                          "number".tr,
                               style: GoogleFonts.lalezar(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w100,
@@ -246,7 +249,8 @@ class PaymentPage extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text("10 كرتونه ",
+                          Text(
+                          "ten_cartons".tr,
                               style: GoogleFonts.lalezar(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w100,
@@ -279,7 +283,7 @@ class PaymentPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "عبوه330مx20 ",
+                              "text4".tr,
                               style: GoogleFonts.lalezar(
                                   fontSize: 40,
                                   fontWeight: FontWeight.w100,

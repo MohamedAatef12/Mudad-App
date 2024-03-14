@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                   if (selectedImage.value == "") {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
-                        "يرجي اختيار خدمه",
+                        "text6",
                         textDirection: TextDirection.rtl,
                       ),
                     ));
@@ -92,7 +92,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Text("اختيار الخدمه",
+                      child: Text(
+                      "text5".tr,
                           style: AppTextStyle.mainFont,
                           textAlign: TextAlign.center),
                     )),
