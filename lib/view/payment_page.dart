@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/reusable_widgets/custom_paymment_card.dart';
 import 'package:mudad_app/services/payment_service/payment_controller.dart';
 import '../app_constants/app_colors.dart';
