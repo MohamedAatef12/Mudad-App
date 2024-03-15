@@ -53,13 +53,6 @@ class BuildProduct extends StatelessWidget {
                       totalOrder = p1Total+p2Total;
                       print("1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
 
-                      //  total.clear();
-                      // Map<String,dynamic> totalAdded=
-                      //   {
-                      //     "total$index": selectedOrders[index]["qty"]*selectedOrders[index]["price"]
-                      //   };
-                      // total.add(totalAdded);
-                      // print(total);
                     },
                     remove: () {
                       context.read<ProductsCubit>().removeProducts(index);
@@ -76,7 +69,7 @@ class BuildProduct extends StatelessWidget {
                       print("1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
                       // total.add( selectedOrders[index]["qty"]*selectedOrders[index]["price"]);
                     },
-                    imagePath: 'assets/images/3.png',
+                    imagePath: productImages[index],
                     productName: products[index],
                     productDetails: 'ضمان لمدة سنتين',
                     price: productPrice[index],

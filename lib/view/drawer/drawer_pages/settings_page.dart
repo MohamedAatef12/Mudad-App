@@ -85,8 +85,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     "Notifications".tr,
                     style: AppTextStyle.mainFont,
                   ),
+
                 ],
               ),
+
               Row(
                 children: [
                   SizedBox(

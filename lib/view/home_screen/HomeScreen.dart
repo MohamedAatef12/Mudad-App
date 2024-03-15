@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                               Flexible(
                                 child: GestureDetector(
                                   onTap: () {
-                                    selectedImage.value = images[index];
+                                    selectedImage.value = returnedImages[index];
                                     selectedPage = navigationPages[index];
                                   },
                                   child: Obx(() {
@@ -141,8 +141,8 @@ class _HomePageState extends State<HomePage> {
                                           width: 2.0,
                                         ),
                                       ),
-                                      child: Image.asset(
-                                        images[index],
+                                      child: Image.network(
+                                        returnedImages[index],
                                         fit: BoxFit.contain,
                                       ),
                                     );
