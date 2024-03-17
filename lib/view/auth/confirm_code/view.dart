@@ -1,21 +1,38 @@
+import 'dart:developer';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
 import '../core/design/app_button.dart';
 import '../core/logic/helper_methods.dart';
-import '../create_new_password/view.dart';
 
 class ConfirmCodeView extends StatefulWidget {
-  const ConfirmCodeView({super.key});
+  const ConfirmCodeView({
+    super.key,
+    this.phone,
+  });
+  final String? phone;
 
   @override
   State<ConfirmCodeView> createState() => _ConfirmCodeViewState();
 }
 
+final codeController = TextEditingController();
+
 class _ConfirmCodeViewState extends State<ConfirmCodeView> {
   final formKey = GlobalKey<FormState>();
-  final codeController = TextEditingController();
   bool isTimerFinished = false;
+  Duration duration = const Duration(seconds: 30);
+
+  @override
+  void initState() {
+    otpAuth(
+      phone: widget.phone!,
+      duration: duration,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +55,11 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             const SizedBox(
               height: 12,
             ),
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Lorem ipsum dolor sit amet, consetetur\n sadipscing elitr, sed diam nonumy eirmod\n tempor invidunt ut.",
-              style: TextStyle(
+              textDirection: TextDirection.ltr,
+              'سيتم ارسال كود التحقق الي رقم الهاتف ${widget.phone}',
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
@@ -53,12 +71,12 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
               key: formKey,
               child: PinCodeTextField(
                 appContext: context,
-                length: 5,
+                length: 6,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "يرجي ادخال الكود";
                   } else if (value.length < 5) {
-                    return "يجب ان يكون الكود 5 ارقم";
+                    return "يجب ان يكون الكود 6 ارقم";
                   }
                   return null;
                 },
@@ -81,8 +99,8 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             ElevateButton(
               text: "Verify",
               onPress: () {
-                if (formKey.currentState!.validate()){
-                  toGetNavigate(const CreateNewPassword(),);
+                if (formKey.currentState!.validate()) {
+                  sentCode();
                 }
               },
             ),
@@ -103,45 +121,50 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             isTimerFinished
                 ? const SizedBox.shrink()
                 : CircularCountDownTimer(
-              duration: 10,
-              initialDuration: 0,
-              width: 66,
-              height: 70,
-              ringColor: Colors.blue,
-              fillColor: const Color(0xffD8D8D8),
-              strokeWidth: 3,
-              onComplete: () {
-                isTimerFinished = true;
-                setState(() {});
-              },
-              textStyle: const TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-              textFormat: CountdownTextFormat.MM_SS,
-              isReverseAnimation: true,
-            ),
+                    duration: duration.inSeconds,
+                    initialDuration: 0,
+                    width: 66,
+                    height: 70,
+                    ringColor: Colors.blue,
+                    fillColor: const Color(0xffD8D8D8),
+                    strokeWidth: 3,
+                    onComplete: () {
+                      isTimerFinished = true;
+                      setState(() {});
+                    },
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textFormat: CountdownTextFormat.MM_SS,
+                    isReverseAnimation: true,
+                  ),
             const SizedBox(
               height: 19,
             ),
             isTimerFinished
                 ? Center(
-              child: OutlinedButton(
-                onPressed: () async {
-                  isTimerFinished = false;
-                  setState(() {});
-                },
-                child: const Text(
-                  "إعادة الإرسال",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-            )
+                    child: OutlinedButton(
+                      onPressed: () {
+                        isTimerFinished = false;
+                        otpAuth(
+                          phone: widget.phone!,
+                          duration: duration,
+                        );
+                        log('resend code');
+                        setState(() {});
+                      },
+                      child: const Text(
+                        "إعادة الإرسال",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  )
                 : const SizedBox.shrink(),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,11 +14,15 @@ import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 
 import 'app_constants/app_routes.dart';
+import 'firebase_options.dart';
 import 'google_maps/home_map/cubit/cubit.dart';
 
 void main() async {
   GeocodingPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   const AndroidInitializationSettings initializationSettingsAndroid =
@@ -57,18 +62,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LocationCubit>(
-        create: (context) => LocationCubit(),
-        child: GetMaterialApp(
-          translations: LocalizationService(),
-          locale: LocalizationService.local,
-          fallbackLocale: LocalizationService.fallbackLocale,
-          textDirection: storage.read("language") == 'ar'
-              ? TextDirection.ltr
-              : TextDirection.ltr,
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/signUp',
-          //initialRoute: '/home',
-          getPages: appRoutes(),
-        ));
+      create: (context) => LocationCubit(),
+      child: GetMaterialApp(
+        translations: LocalizationService(),
+        locale: LocalizationService.local,
+        fallbackLocale: LocalizationService.fallbackLocale,
+        textDirection: storage.read("language") == 'ar'
+            ? TextDirection.ltr
+            : TextDirection.ltr,
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/splash',
+        //initialRoute: '/home',
+        getPages: appRoutes(),
+      ),
+    );
   }
 }

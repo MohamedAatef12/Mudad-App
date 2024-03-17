@@ -7,6 +7,9 @@ class AppInputPhone extends StatefulWidget {
   final bool isPhone;
   final FormFieldValidator<String?>? validator;
   final TextInputType? textInputType;
+  final Widget? prefix;
+  final TextInputAction? textInputAction;
+
   const AppInputPhone({
     super.key,
     this.validator,
@@ -16,6 +19,8 @@ class AppInputPhone extends StatefulWidget {
     this.paddingBottom = 16,
     this.paddingTop = 0,
     required this.isPhone,
+    this.prefix,
+    this.textInputAction,
   });
 
   @override
@@ -32,7 +37,7 @@ class _AppInputState extends State<AppInputPhone> {
       ),
       child: TextFormField(
         keyboardType: widget.textInputType ?? TextInputType.text,
-        textInputAction: TextInputAction.next,
+        textInputAction: widget.textInputAction,
         controller: widget.controller,
         validator: widget.validator,
         decoration: InputDecoration(
@@ -52,6 +57,12 @@ class _AppInputState extends State<AppInputPhone> {
             ),
           ),
           hintText: widget.labelText,
+          prefix: widget.prefix,
+          prefixStyle: const TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
           suffixIcon: widget.isPhone
               ? const Icon(
                   Icons.phone,
