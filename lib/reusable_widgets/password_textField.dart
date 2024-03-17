@@ -6,16 +6,20 @@ class AppInputPassword extends StatefulWidget {
   final double paddingBottom, paddingTop;
   final bool isPassword;
   final FormFieldValidator<String?>? validator;
+  final TextInputType? textInputType;
+  final TextInputAction? textInputAction;
 
-  const AppInputPassword(
-      {super.key,
-        this.validator,
-        this.controller,
-        required this.labelText,
-        this.paddingBottom = 16,
-        this.paddingTop = 0,
-        this.isPassword = false,
-      });
+  const AppInputPassword({
+    super.key,
+    this.validator,
+    this.controller,
+    required this.labelText,
+    this.paddingBottom = 16,
+    this.paddingTop = 0,
+    this.isPassword = false,
+    this.textInputAction,
+    this.textInputType,
+  });
 
   @override
   State<AppInputPassword> createState() => _AppInputState();
@@ -27,15 +31,15 @@ class _AppInputState extends State<AppInputPassword> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-      EdgeInsets.only
-        (bottom: widget.paddingBottom,
+      padding: EdgeInsets.only(
+        bottom: widget.paddingBottom,
         top: widget.paddingTop,
       ),
       child: TextFormField(
         keyboardType: TextInputType.visiblePassword,
         controller: widget.controller,
         validator: widget.validator,
+        textInputAction: widget.textInputAction,
         obscureText: isPasswordHidden && widget.isPassword,
         decoration: InputDecoration(
           border: const OutlineInputBorder(
@@ -56,15 +60,15 @@ class _AppInputState extends State<AppInputPassword> {
           hintText: widget.labelText,
           suffixIcon: widget.isPassword
               ? IconButton(
-            icon: Icon(isPasswordHidden
-                ? Icons.visibility_off
-                : Icons.visibility,color: const Color(0xffCCCCCC),
-            ),
-            onPressed: () {
-              isPasswordHidden = !isPasswordHidden;
-              setState(() {});
-            },
-          )
+                  icon: Icon(
+                    isPasswordHidden ? Icons.visibility_off : Icons.visibility,
+                    color: const Color(0xffCCCCCC),
+                  ),
+                  onPressed: () {
+                    isPasswordHidden = !isPasswordHidden;
+                    setState(() {});
+                  },
+                )
               : null,
         ),
       ),

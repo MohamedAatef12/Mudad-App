@@ -1,4 +1,11 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mudad_app/view/home_screen/HomeScreen.dart';
+
+import '../../confirm_code/view.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -39,10 +46,66 @@ void showMessage(String message, {MessageType type = MessageType.fail}) {
         backgroundColor: type == MessageType.fail
             ? Colors.red
             : type == MessageType.warning
-            ? Colors.yellow
-            : Colors.green,
+                ? Colors.yellow
+                : Colors.green,
       ),
     );
     debugPrint(message);
+  }
+}
+
+FirebaseAuth auth = FirebaseAuth.instance;
+String? verifyId;
+void otpAuth({required String phone, duration}) async {
+  log(phone);
+  await FirebaseAuth.instance.verifyPhoneNumber(
+    phoneNumber: phone,
+    timeout: duration,
+    verificationCompleted: (PhoneAuthCredential credential) {
+      auth.signInWithCredential(credential).then((value) {
+        if (value.user != null) {
+          Get.to(() => const HomePage());
+        }
+      });
+    },
+    verificationFailed: (FirebaseAuthException e) {
+      if (e.code == 'invalid-phone-number') {
+        log('The provided phone number is not valid.');
+        Get.showSnackbar(
+          const GetSnackBar(
+            message: 'The provided phone number is not valid.',
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    },
+    codeSent: (String verificationId, int? resendToken) async {
+      verifyId = verificationId;
+    },
+    codeAutoRetrievalTimeout: (String verificationId) {
+      verifyId = verificationId;
+    },
+  );
+}
+
+sentCode() async {
+  log(codeController.text);
+  try {
+    String smsCode = codeController.text;
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verifyId!, smsCode: smsCode);
+    await auth.signInWithCredential(credential).then((value) {
+      if (value.user != null) {
+        Get.to(() => const HomePage());
+      }
+    });
+  } catch (e) {
+    log(e.toString());
+    Get.showSnackbar(
+      GetSnackBar(
+        message: e.toString(),
+        duration: const Duration(seconds: 3),
+      ),
+    );
   }
 }
