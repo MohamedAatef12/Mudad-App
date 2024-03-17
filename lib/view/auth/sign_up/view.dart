@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../reusable_widgets/password_textField.dart';
+
 import '../../../reusable_widgets/phone_textField.dart';
 import '../core/design/app_button.dart';
 import '../login/view.dart';
@@ -64,30 +64,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                "Full Name",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const SizedBox(
-                height: 13,
-              ),
-              AppInputPhone(
-                labelText: "Full Name",
-                paddingBottom: 30,
-                isPhone: false,
-                controller: fullNameController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "برجاء ادخال اسمك";
-                  } else if (value.length > 30) {
-                    return "يرجي كتابه اسمك ثلاثي";
-                  }
-                  return null;
-                },
-              ),
+              // const Text(
+              //   "Full Name",
+              //   style: TextStyle(
+              //     fontSize: 14,
+              //     fontWeight: FontWeight.w400,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 13,
+              // ),
+              // AppInputPhone(
+              //   labelText: "Full Name",
+              //   paddingBottom: 30,
+              //   isPhone: false,
+              //   controller: fullNameController,
+              //   validator: (value) {
+              //     if (value!.isEmpty) {
+              //       return "برجاء ادخال اسمك";
+              //     } else if (value.length > 30) {
+              //       return "يرجي كتابه اسمك ثلاثي";
+              //     }
+              //     return null;
+              //   },
+              // ),
               const Text(
                 "Phone",
                 style: TextStyle(
@@ -102,6 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 labelText: "Phone",
                 isPhone: true,
                 controller: phoneController,
+                textInputType: TextInputType.phone,
                 paddingBottom: 30,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -112,63 +113,61 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return null;
                 },
               ),
-              const Text(
-                "Password",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const SizedBox(
-                height: 13,
-              ),
-              AppInputPassword(
-                labelText: "Password",
-                isPassword: true,
-                controller: passwordController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "كلمه المرور مطلوبه";
-                  } else if (value.length < 8) {
-                    return "كلمه المرور ضعيفه";
-                  }
-                  return null;
-                },
-                paddingBottom: 30,
-              ),
-              const Text(
-                "Confirm Password",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const SizedBox(
-                height: 13,
-              ),
-              AppInputPassword(
-                labelText: "Confirm Password",
-                isPassword: true,
-                controller: confirmPasswordController,
-                validator: (value) {
-                  if(value.toString().isEmpty)
-                  {
-                    return "تاكيد كلمه المرور مطلوبه";
-                  } else if (value !=passwordController.text)
-                  {
-                    return "كلمه المرور غير متطابقه";
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 25,
-              ),
+              // const Text(
+              //   "Password",
+              //   style: TextStyle(
+              //     fontSize: 14,
+              //     fontWeight: FontWeight.w400,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 13,
+              // ),
+              // AppInputPassword(
+              //   labelText: "Password",
+              //   isPassword: true,
+              //   controller: passwordController,
+              //   validator: (value) {
+              //     if (value!.isEmpty) {
+              //       return "كلمه المرور مطلوبه";
+              //     } else if (value.length < 8) {
+              //       return "كلمه المرور ضعيفه";
+              //     }
+              //     return null;
+              //   },
+              //   paddingBottom: 30,
+              // ),
+              // const Text(
+              //   "Confirm Password",
+              //   style: TextStyle(
+              //     fontSize: 14,
+              //     fontWeight: FontWeight.w400,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 13,
+              // ),
+              // AppInputPassword(
+              //   labelText: "Confirm Password",
+              //   isPassword: true,
+              //   controller: confirmPasswordController,
+              //   validator: (value) {
+              //     if (value.toString().isEmpty) {
+              //       return "تاكيد كلمه المرور مطلوبه";
+              //     } else if (value != passwordController.text) {
+              //       return "كلمه المرور غير متطابقه";
+              //     }
+              //     return null;
+              //   },
+              // ),
+              // const SizedBox(
+              //   height: 25,
+              // ),
               ElevateButton(
                 text: "Sign Up",
                 onPress: () {
-                  if(formKey.currentState!.validate()){
-
+                  if (formKey.currentState!.validate()) {
+                    Get.off(const LoginScreen());
                   }
                 },
               ),

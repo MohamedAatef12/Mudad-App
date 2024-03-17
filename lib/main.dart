@@ -11,10 +11,9 @@ import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
+
 import 'app_constants/app_routes.dart';
 import 'google_maps/home_map/cubit/cubit.dart';
-
-
 
 void main() async {
   GeocodingPlatform.instance;
@@ -67,7 +66,7 @@ class MyApp extends StatelessWidget {
               ? TextDirection.ltr
               : TextDirection.ltr,
           debugShowCheckedModeBanner: false,
-          initialRoute: '/payment',
+          initialRoute: '/signUp',
           //initialRoute: '/home',
           getPages: appRoutes(),
         ));

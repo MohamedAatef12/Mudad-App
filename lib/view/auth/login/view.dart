@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
+
 import '../../../reusable_widgets/phone_textField.dart';
 import '../core/design/app_button.dart';
 import '../forget_password/view.dart';
@@ -77,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: "Phone",
                 isPhone: true,
                 controller: phoneController,
+                textInputType: TextInputType.phone,
                 paddingBottom: 30,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -99,8 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textAlign: TextAlign.end,
                 "Forget Password!",
                 style: TextStyle(
-                  color: AppColors.buttonColor
-                  ,
+                  color: AppColors.buttonColor,
                 ),
               ),
             ),
@@ -110,16 +111,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevateButton(
               text: "Login",
               onPress: () {
-                if(formKey.currentState!.validate()){
-                }
+                if (formKey.currentState!.validate()) {}
               },
             ),
             const SizedBox(
-              height: 40,
-            ),
-
-            const SizedBox(
-              height: 35,
+              height: 75,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

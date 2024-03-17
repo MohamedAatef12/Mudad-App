@@ -6,11 +6,12 @@ class AppInputPhone extends StatefulWidget {
   final double paddingBottom, paddingTop;
   final bool isPhone;
   final FormFieldValidator<String?>? validator;
-
+  final TextInputType? textInputType;
   const AppInputPhone({
     super.key,
     this.validator,
     this.controller,
+    this.textInputType,
     required this.labelText,
     this.paddingBottom = 16,
     this.paddingTop = 0,
@@ -30,7 +31,8 @@ class _AppInputState extends State<AppInputPhone> {
         top: widget.paddingTop,
       ),
       child: TextFormField(
-        keyboardType: TextInputType.text,
+        keyboardType: widget.textInputType ?? TextInputType.text,
+        textInputAction: TextInputAction.next,
         controller: widget.controller,
         validator: widget.validator,
         decoration: InputDecoration(
@@ -52,13 +54,13 @@ class _AppInputState extends State<AppInputPhone> {
           hintText: widget.labelText,
           suffixIcon: widget.isPhone
               ? const Icon(
-            Icons.phone,
-            color: Color(0xffCCCCCC),
-          )
+                  Icons.phone,
+                  color: Color(0xffCCCCCC),
+                )
               : const Icon(
-            Icons.person,
-            color: Color(0xffCCCCCC),
-          ),
+                  Icons.person,
+                  color: Color(0xffCCCCCC),
+                ),
         ),
       ),
     );

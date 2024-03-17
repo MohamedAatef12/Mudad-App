@@ -53,6 +53,8 @@ dependencies:
   circular_countdown_timer: ^0.2.3
   http: ^0.13.4
   flutter_paytabs_bridge: ^2.6.8
+  firebase_auth: ^4.17.9
+  firebase_core: ^2.27.1
 
   #  android_alarm_manager_plus: ^3.0.4
 #  workmanager: ^0.5.2
