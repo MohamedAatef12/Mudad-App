@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:mudad_app/google_maps/home_map/cubit/states.dart';
@@ -143,8 +144,8 @@ class LocationCubit extends Cubit<LocationState> {
       } else {
         // Tapped location is outside the polygon
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('الموقع خارج النطاق المسموح به'),
+          SnackBar(
+            content: Text('The site is outside the permitted scope'.tr),
           ),
         );
       }

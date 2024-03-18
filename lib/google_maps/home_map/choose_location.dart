@@ -37,8 +37,8 @@ class _ChooseLocationState extends State<ChooseLocation> {
         if (state is LocationSavedState) {
           // Display a snackbar when the location is saved
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('تم حفظ الموقع بنجاح'),
+            SnackBar(
+              content: Text('The Location has been saved successfully'.tr),
             ),
           );
         }
@@ -150,7 +150,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
                                 textAlign: TextAlign.right,
                                 textCapitalization: TextCapitalization.words,
                                 decoration: InputDecoration(
-                                  hintText: 'ابحث عن منزل',
+                                  hintText: 'Find a home'.tr,
                                   border: InputBorder.none,
                                   suffixIcon: IconButton(
                                     highlightColor: Colors.transparent,
@@ -220,8 +220,8 @@ class _ChooseLocationState extends State<ChooseLocation> {
                         tappedLocation,
                       );
 
-                      print("Tapped Location: $tappedLocation");
-                      print("Is inside polygon: $isInsidePolygon");
+                      log("Tapped Location: $tappedLocation");
+                      log("Is inside polygon: $isInsidePolygon");
 
                       if (isInsidePolygon) {
                         // The tapped location is inside the polygon
@@ -231,14 +231,15 @@ class _ChooseLocationState extends State<ChooseLocation> {
                       } else {
                         // The tapped location is outside the polygon
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('الموقع خارج النطاق المسموح به'),
+                          SnackBar(
+                            content: Text(
+                                'The site is outside the permitted scope'.tr),
                           ),
                         );
                       }
                     },
                     child: Text(
-                      "اختر الموقع",
+                      "Choose location".tr,
                       style: GoogleFonts.lalezar(
                         fontSize: 18,
                         fontWeight: FontWeight.w200,
@@ -407,9 +408,10 @@ class _ChooseLocationState extends State<ChooseLocation> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                const Text(
-                  "الموقع",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Text(
+                  "Location".tr,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -456,8 +458,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
                     locationCubit.saveCurrentLocation(
                         context); // Pass the correct context
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('تم حفظ الموقع بنجاح'),
+                      SnackBar(
+                        content:
+                            Text('The Location has been saved successfully'.tr),
                       ),
                     );
                     Navigator.pop(context);
@@ -468,9 +471,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
-                    "حفظ الموقع",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  child: Text(
+                    'Save Location'.tr,
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
               ],
@@ -479,7 +482,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
         },
       );
     } catch (e) {
-      print("Error getting location name: $e");
+      log("Error getting location name: $e");
     }
   }
 

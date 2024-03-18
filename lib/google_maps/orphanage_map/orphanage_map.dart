@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 
@@ -52,336 +53,335 @@ class _OrphanageMapState extends State<OrphanageMap> {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: SizedBox()
+    return const SafeArea(child: SizedBox()
 
-      // ModalProgressHUD(
-      //   inAsyncCall: isLoading,
-      //   opacity: 0.5,
-      //   progressIndicator: const SpinKitFadingCircle(
-      //     color: Color(0xFF609FD8),
-      //     size: 50.0,
-      //   ),
-      //   child: Scaffold(
-      //     resizeToAvoidBottomInset: false,
-      //     body: ModalProgressHUD(
-      //       inAsyncCall: isLoading,
-      //       opacity: 0.5,
-      //       progressIndicator: const SpinKitFadingCircle(
-      //         color: Color(0xFF609FD8),
-      //         size: 50.0,
-      //       ),
-      //       child: Stack(
-      //         children: [
-      //           GoogleMap(
-      //             onMapCreated: (GoogleMapController c) {
-      //               controller = c;
-      //             },
-      //             initialCameraPosition: const CameraPosition(
-      //               target: LatLng(25, 45),
-      //               zoom: 5,
-      //             ),
-      //             markers: Set<Marker>.from(_markers),
-      //             cameraTargetBounds: CameraTargetBounds(
-      //               LatLngBounds(
-      //                 southwest:
-      //                     const LatLng(17.607613374386183, 37.98344273015662),
-      //                 northeast:
-      //                     const LatLng(32.1048459480552, 51.0802984261652),
-      //               ),
-      //             ),
-      //             zoomControlsEnabled: false, // Disable default zoom controls
-      //             myLocationButtonEnabled:
-      //                 false, // Disable default location button
-      //             zoomGesturesEnabled: true,
-      //             onTap: (LatLng latLng) {
-      //               // Dismiss the keyboard and clear search results on map tap
-      //               if (_searchResults.isNotEmpty) {
-      //                 clearSearchResults();
-      //                 FocusScope.of(context).unfocus();
-      //               } else {
-      //                 FocusScope.of(context).unfocus();
-      //               }
-      //             },
-      //           ),
-      //           Positioned(
-      //             top: MediaQuery.of(context).size.height / 40,
-      //             left: 0,
-      //             child: IconButton(
-      //               highlightColor: Colors.transparent,
-      //               onPressed: () => Get.back(),
-      //               icon: const Icon(
-      //                 Icons.arrow_back_ios_new,
-      //                 color: Color(0xFF609FD8),
-      //                 size: 40,
-      //               ),
-      //             ),
-      //           ),
-      //           const BuildLocationsOrphanageButtons(),
-      //           if (selectedOrphanage.isNotEmpty)
-      //             Positioned(
-      //               top: MediaQuery.of(context).size.height / 10,
-      //               right: MediaQuery.of(context).size.width / 5,
-      //               left: MediaQuery.of(context).size.width / 5,
-      //               child: Container(
-      //                 padding: const EdgeInsets.symmetric(
-      //                     vertical: 2, horizontal: 16.0),
-      //                 decoration: BoxDecoration(
-      //                   color: Colors.white,
-      //                   borderRadius: BorderRadius.circular(8.0),
-      //                 ),
-      //                 child: Row(
-      //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //                   children: [
-      //                     ElevatedButton(
-      //                       style: ButtonStyle(
-      //                         shape: MaterialStateProperty.all(
-      //                           RoundedRectangleBorder(
-      //                             borderRadius: BorderRadius.circular(8.0),
-      //                           ),
-      //                         ),
-      //                       ),
-      //                       onPressed: () {
-      //                         showListOrphanageDialog();
-      //                       },
-      //                       child: const Text('عرض'),
-      //                     ),
-      //                     Text(
-      //                         'دور الايتام المختارة: ${selectedOrphanage.length}'),
-      //                   ],
-      //                 ),
-      //               ),
-      //             ),
-      //           Positioned(
-      //             top: 15,
-      //             right: 5,
-      //             left: 55,
-      //             child: Column(
-      //               children: [
-      //                 Container(
-      //                   decoration: BoxDecoration(
-      //                     color: const Color(0xFFE2E1E1),
-      //                     borderRadius: BorderRadius.circular(20),
-      //                   ),
-      //                   child: Row(
-      //                     children: [
-      //                       const SizedBox(
-      //                         width: 10,
-      //                       ),
-      //                       GestureDetector(
-      //                         onTap: () {
-      //                           if (_searchResults.isNotEmpty) {
-      //                             moveCameraToOrphanagePlace(
-      //                                 _searchResults.first.placeId!);
-      //                           } else {
-      //                             moveCameraToPlaceFromText();
-      //                           }
-      //                           FocusScope.of(context).unfocus();
-      //                         },
-      //                         child: Container(
-      //                           height: 45,
-      //                           width: 45,
-      //                           decoration: BoxDecoration(
-      //                             color: const Color(0xFF609FD8),
-      //                             borderRadius: BorderRadius.circular(15),
-      //                           ),
-      //                           child: const Icon(
-      //                             Icons.search,
-      //                             color: Colors.white,
-      //                             size: 30.0,
-      //                           ),
-      //                         ),
-      //                       ),
-      //                       Container(
-      //                         decoration: BoxDecoration(
-      //                           color: Colors.white,
-      //                           borderRadius: BorderRadius.circular(15),
-      //                         ),
-      //                         margin: const EdgeInsets.all(10),
-      //                         width: MediaQuery.of(context).size.width / 1.5,
-      //                         child: TextFormField(
-      //                           controller: searchController,
-      //                           onChanged: (query) {
-      //                             performAutocompleteOrphanageSearch(query);
-      //                           },
-      //                           textDirection: TextDirection.rtl,
-      //                           textAlign: TextAlign.right,
-      //                           textCapitalization: TextCapitalization.words,
-      //                           decoration: InputDecoration(
-      //                             hintText: 'ابحث عن دور الايتام',
-      //                             border: InputBorder.none,
-      //                             suffixIcon: IconButton(
-      //                               highlightColor: Colors.transparent,
-      //                               icon: const Icon(Icons.clear),
-      //                               onPressed: () {
-      //                                 searchController.clear();
-      //                                 clearSearchResults();
-      //                               },
-      //                             ),
-      //                           ),
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 const SizedBox(height: 10),
-      //                 Container(
-      //                   height: _searchResults.length * 60.0,
-      //                   decoration: BoxDecoration(
-      //                     color: Colors.white,
-      //                     borderRadius: BorderRadius.circular(8.0),
-      //                   ),
-      //                   child: ListView.builder(
-      //                     itemCount: _searchResults.length,
-      //                     itemBuilder: (context, index) {
-      //                       return ListTile(
-      //                         title: Text(_searchResults[index].description!),
-      //                         onTap: () {
-      //                           getOrphanagePlaceDetails(
-      //                               _searchResults[index].placeId!);
-      //                           moveCameraToOrphanagePlace(
-      //                               _searchResults[index].placeId!);
-      //                           setState(
-      //                             () {
-      //                               searchController.text =
-      //                                   _searchResults[index].description!;
-      //                               clearSearchResults();
-      //                               FocusScope.of(context).unfocus();
-      //                             },
-      //                           );
-      //                         },
-      //                       );
-      //                     },
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //            BuildProduct(),
-      //           const BuildChooseButton()
-      //         ],
-      //       ),
-      //     ),
-      //     floatingActionButton: Stack(
-      //       children: [
-      //         Positioned(
-      //           bottom: 355,
-      //           right: 0,
-      //           child: Container(
-      //             width: 30,
-      //             height: 30,
-      //             decoration: BoxDecoration(
-      //               color: Colors.white,
-      //               borderRadius: BorderRadius.circular(8.0),
-      //               boxShadow: const [
-      //                 BoxShadow(
-      //                   color: Colors.grey,
-      //                   blurRadius: 10,
-      //                   spreadRadius: 0,
-      //                   offset: Offset(1, 1),
-      //                 ),
-      //               ],
-      //             ),
-      //             child: FloatingActionButton(
-      //               shape: RoundedRectangleBorder(
-      //                 borderRadius: BorderRadius.circular(8.0),
-      //               ),
-      //               mini: true,
-      //               elevation: 0,
-      //               backgroundColor: Colors.white,
-      //               onPressed: () {
-      //                 controller.animateCamera(
-      //                   CameraUpdate.newLatLng(
-      //                     const LatLng(25, 45),
-      //                   ),
-      //                 );
-      //               },
-      //               child: const Icon(
-      //                 Icons.gps_fixed,
-      //                 color: Colors.black,
-      //                 size: 20,
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //         Positioned(
-      //           bottom: 280,
-      //           right: 0,
-      //           child: Container(
-      //             width: 30,
-      //             decoration: BoxDecoration(
-      //               color: Colors.white,
-      //               borderRadius: BorderRadius.circular(8.0),
-      //               boxShadow: const [
-      //                 BoxShadow(
-      //                   color: Colors.grey,
-      //                   blurRadius: 10,
-      //                   spreadRadius: 0,
-      //                   offset: Offset(1, 1),
-      //                 ),
-      //               ],
-      //             ),
-      //             child: Column(
-      //               children: [
-      //                 SizedBox(
-      //                   height: 30,
-      //                   child: FloatingActionButton(
-      //                     shape: RoundedRectangleBorder(
-      //                       borderRadius: BorderRadius.circular(8.0),
-      //                     ),
-      //                     elevation: 0,
-      //                     backgroundColor: Colors.white,
-      //                     mini: true,
-      //                     onPressed: () {
-      //                       controller.animateCamera(
-      //                         CameraUpdate.zoomIn(),
-      //                       );
-      //                     },
-      //                     child: const Icon(
-      //                       Icons.add,
-      //                       color: Colors.black,
-      //                       size: 20,
-      //                     ),
-      //                   ),
-      //                 ),
-      //                 const SizedBox(
-      //                   width: 20,
-      //                   height: 10,
-      //                   child: Divider(
-      //                     color: Colors.black,
-      //                     height: 0,
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   height: 30,
-      //                   child: FloatingActionButton(
-      //                     shape: RoundedRectangleBorder(
-      //                       borderRadius: BorderRadius.circular(8.0),
-      //                     ),
-      //                     elevation: 0,
-      //                     mini: true,
-      //                     backgroundColor: Colors.white,
-      //                     onPressed: () {
-      //                       controller.animateCamera(
-      //                         CameraUpdate.zoomOut(),
-      //                       );
-      //                     },
-      //                     child: const Icon(
-      //                       Icons.remove,
-      //                       color: Colors.black,
-      //                       size: 20,
-      //                     ),
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-    );
+        // ModalProgressHUD(
+        //   inAsyncCall: isLoading,
+        //   opacity: 0.5,
+        //   progressIndicator: const SpinKitFadingCircle(
+        //     color: Color(0xFF609FD8),
+        //     size: 50.0,
+        //   ),
+        //   child: Scaffold(
+        //     resizeToAvoidBottomInset: false,
+        //     body: ModalProgressHUD(
+        //       inAsyncCall: isLoading,
+        //       opacity: 0.5,
+        //       progressIndicator: const SpinKitFadingCircle(
+        //         color: Color(0xFF609FD8),
+        //         size: 50.0,
+        //       ),
+        //       child: Stack(
+        //         children: [
+        //           GoogleMap(
+        //             onMapCreated: (GoogleMapController c) {
+        //               controller = c;
+        //             },
+        //             initialCameraPosition: const CameraPosition(
+        //               target: LatLng(25, 45),
+        //               zoom: 5,
+        //             ),
+        //             markers: Set<Marker>.from(_markers),
+        //             cameraTargetBounds: CameraTargetBounds(
+        //               LatLngBounds(
+        //                 southwest:
+        //                     const LatLng(17.607613374386183, 37.98344273015662),
+        //                 northeast:
+        //                     const LatLng(32.1048459480552, 51.0802984261652),
+        //               ),
+        //             ),
+        //             zoomControlsEnabled: false, // Disable default zoom controls
+        //             myLocationButtonEnabled:
+        //                 false, // Disable default location button
+        //             zoomGesturesEnabled: true,
+        //             onTap: (LatLng latLng) {
+        //               // Dismiss the keyboard and clear search results on map tap
+        //               if (_searchResults.isNotEmpty) {
+        //                 clearSearchResults();
+        //                 FocusScope.of(context).unfocus();
+        //               } else {
+        //                 FocusScope.of(context).unfocus();
+        //               }
+        //             },
+        //           ),
+        //           Positioned(
+        //             top: MediaQuery.of(context).size.height / 40,
+        //             left: 0,
+        //             child: IconButton(
+        //               highlightColor: Colors.transparent,
+        //               onPressed: () => Get.back(),
+        //               icon: const Icon(
+        //                 Icons.arrow_back_ios_new,
+        //                 color: Color(0xFF609FD8),
+        //                 size: 40,
+        //               ),
+        //             ),
+        //           ),
+        //           const BuildLocationsOrphanageButtons(),
+        //           if (selectedOrphanage.isNotEmpty)
+        //             Positioned(
+        //               top: MediaQuery.of(context).size.height / 10,
+        //               right: MediaQuery.of(context).size.width / 5,
+        //               left: MediaQuery.of(context).size.width / 5,
+        //               child: Container(
+        //                 padding: const EdgeInsets.symmetric(
+        //                     vertical: 2, horizontal: 16.0),
+        //                 decoration: BoxDecoration(
+        //                   color: Colors.white,
+        //                   borderRadius: BorderRadius.circular(8.0),
+        //                 ),
+        //                 child: Row(
+        //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                   children: [
+        //                     ElevatedButton(
+        //                       style: ButtonStyle(
+        //                         shape: MaterialStateProperty.all(
+        //                           RoundedRectangleBorder(
+        //                             borderRadius: BorderRadius.circular(8.0),
+        //                           ),
+        //                         ),
+        //                       ),
+        //                       onPressed: () {
+        //                         showListOrphanageDialog();
+        //                       },
+        //                       child: const Text('عرض'),
+        //                     ),
+        //                     Text(
+        //                         'دور الايتام المختارة: ${selectedOrphanage.length}'),
+        //                   ],
+        //                 ),
+        //               ),
+        //             ),
+        //           Positioned(
+        //             top: 15,
+        //             right: 5,
+        //             left: 55,
+        //             child: Column(
+        //               children: [
+        //                 Container(
+        //                   decoration: BoxDecoration(
+        //                     color: const Color(0xFFE2E1E1),
+        //                     borderRadius: BorderRadius.circular(20),
+        //                   ),
+        //                   child: Row(
+        //                     children: [
+        //                       const SizedBox(
+        //                         width: 10,
+        //                       ),
+        //                       GestureDetector(
+        //                         onTap: () {
+        //                           if (_searchResults.isNotEmpty) {
+        //                             moveCameraToOrphanagePlace(
+        //                                 _searchResults.first.placeId!);
+        //                           } else {
+        //                             moveCameraToPlaceFromText();
+        //                           }
+        //                           FocusScope.of(context).unfocus();
+        //                         },
+        //                         child: Container(
+        //                           height: 45,
+        //                           width: 45,
+        //                           decoration: BoxDecoration(
+        //                             color: const Color(0xFF609FD8),
+        //                             borderRadius: BorderRadius.circular(15),
+        //                           ),
+        //                           child: const Icon(
+        //                             Icons.search,
+        //                             color: Colors.white,
+        //                             size: 30.0,
+        //                           ),
+        //                         ),
+        //                       ),
+        //                       Container(
+        //                         decoration: BoxDecoration(
+        //                           color: Colors.white,
+        //                           borderRadius: BorderRadius.circular(15),
+        //                         ),
+        //                         margin: const EdgeInsets.all(10),
+        //                         width: MediaQuery.of(context).size.width / 1.5,
+        //                         child: TextFormField(
+        //                           controller: searchController,
+        //                           onChanged: (query) {
+        //                             performAutocompleteOrphanageSearch(query);
+        //                           },
+        //                           textDirection: TextDirection.rtl,
+        //                           textAlign: TextAlign.right,
+        //                           textCapitalization: TextCapitalization.words,
+        //                           decoration: InputDecoration(
+        //                             hintText: 'ابحث عن دور الايتام',
+        //                             border: InputBorder.none,
+        //                             suffixIcon: IconButton(
+        //                               highlightColor: Colors.transparent,
+        //                               icon: const Icon(Icons.clear),
+        //                               onPressed: () {
+        //                                 searchController.clear();
+        //                                 clearSearchResults();
+        //                               },
+        //                             ),
+        //                           ),
+        //                         ),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //                 const SizedBox(height: 10),
+        //                 Container(
+        //                   height: _searchResults.length * 60.0,
+        //                   decoration: BoxDecoration(
+        //                     color: Colors.white,
+        //                     borderRadius: BorderRadius.circular(8.0),
+        //                   ),
+        //                   child: ListView.builder(
+        //                     itemCount: _searchResults.length,
+        //                     itemBuilder: (context, index) {
+        //                       return ListTile(
+        //                         title: Text(_searchResults[index].description!),
+        //                         onTap: () {
+        //                           getOrphanagePlaceDetails(
+        //                               _searchResults[index].placeId!);
+        //                           moveCameraToOrphanagePlace(
+        //                               _searchResults[index].placeId!);
+        //                           setState(
+        //                             () {
+        //                               searchController.text =
+        //                                   _searchResults[index].description!;
+        //                               clearSearchResults();
+        //                               FocusScope.of(context).unfocus();
+        //                             },
+        //                           );
+        //                         },
+        //                       );
+        //                     },
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //            BuildProduct(),
+        //           const BuildChooseButton()
+        //         ],
+        //       ),
+        //     ),
+        //     floatingActionButton: Stack(
+        //       children: [
+        //         Positioned(
+        //           bottom: 355,
+        //           right: 0,
+        //           child: Container(
+        //             width: 30,
+        //             height: 30,
+        //             decoration: BoxDecoration(
+        //               color: Colors.white,
+        //               borderRadius: BorderRadius.circular(8.0),
+        //               boxShadow: const [
+        //                 BoxShadow(
+        //                   color: Colors.grey,
+        //                   blurRadius: 10,
+        //                   spreadRadius: 0,
+        //                   offset: Offset(1, 1),
+        //                 ),
+        //               ],
+        //             ),
+        //             child: FloatingActionButton(
+        //               shape: RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.circular(8.0),
+        //               ),
+        //               mini: true,
+        //               elevation: 0,
+        //               backgroundColor: Colors.white,
+        //               onPressed: () {
+        //                 controller.animateCamera(
+        //                   CameraUpdate.newLatLng(
+        //                     const LatLng(25, 45),
+        //                   ),
+        //                 );
+        //               },
+        //               child: const Icon(
+        //                 Icons.gps_fixed,
+        //                 color: Colors.black,
+        //                 size: 20,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //         Positioned(
+        //           bottom: 280,
+        //           right: 0,
+        //           child: Container(
+        //             width: 30,
+        //             decoration: BoxDecoration(
+        //               color: Colors.white,
+        //               borderRadius: BorderRadius.circular(8.0),
+        //               boxShadow: const [
+        //                 BoxShadow(
+        //                   color: Colors.grey,
+        //                   blurRadius: 10,
+        //                   spreadRadius: 0,
+        //                   offset: Offset(1, 1),
+        //                 ),
+        //               ],
+        //             ),
+        //             child: Column(
+        //               children: [
+        //                 SizedBox(
+        //                   height: 30,
+        //                   child: FloatingActionButton(
+        //                     shape: RoundedRectangleBorder(
+        //                       borderRadius: BorderRadius.circular(8.0),
+        //                     ),
+        //                     elevation: 0,
+        //                     backgroundColor: Colors.white,
+        //                     mini: true,
+        //                     onPressed: () {
+        //                       controller.animateCamera(
+        //                         CameraUpdate.zoomIn(),
+        //                       );
+        //                     },
+        //                     child: const Icon(
+        //                       Icons.add,
+        //                       color: Colors.black,
+        //                       size: 20,
+        //                     ),
+        //                   ),
+        //                 ),
+        //                 const SizedBox(
+        //                   width: 20,
+        //                   height: 10,
+        //                   child: Divider(
+        //                     color: Colors.black,
+        //                     height: 0,
+        //                   ),
+        //                 ),
+        //                 SizedBox(
+        //                   height: 30,
+        //                   child: FloatingActionButton(
+        //                     shape: RoundedRectangleBorder(
+        //                       borderRadius: BorderRadius.circular(8.0),
+        //                     ),
+        //                     elevation: 0,
+        //                     mini: true,
+        //                     backgroundColor: Colors.white,
+        //                     onPressed: () {
+        //                       controller.animateCamera(
+        //                         CameraUpdate.zoomOut(),
+        //                       );
+        //                     },
+        //                     child: const Icon(
+        //                       Icons.remove,
+        //                       color: Colors.black,
+        //                       size: 20,
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        );
   }
 
   // DIALOGS
@@ -393,8 +393,8 @@ class _OrphanageMapState extends State<OrphanageMap> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          title: const Text(
-            'دور الايتام المختارة',
+          title: Text(
+            'Selected orphanages'.tr,
             textDirection: TextDirection.rtl,
           ),
           content: StatefulBuilder(
@@ -438,7 +438,7 @@ class _OrphanageMapState extends State<OrphanageMap> {
                 Navigator.of(context).pop();
                 FocusScope.of(context).unfocus();
               },
-              child: const Text('إلغاء'),
+              child: Text('Cancel'.tr),
             ),
           ],
         );
@@ -465,7 +465,7 @@ class _OrphanageMapState extends State<OrphanageMap> {
                 Navigator.of(context).pop();
                 FocusScope.of(context).unfocus();
               },
-              child: const Text('اضف الدار الى القائمة'),
+              child: Text('Add the orphanages to the list'.tr),
             ),
             TextButton(
               onPressed: () {
@@ -487,9 +487,9 @@ class _OrphanageMapState extends State<OrphanageMap> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('المسجد موجود في القائمة بالفعل'),
-          duration: Duration(seconds: 2),
+        SnackBar(
+          content: Text('The orphanage is already on the list'.tr),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

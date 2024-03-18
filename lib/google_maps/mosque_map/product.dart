@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
-  ProductCard({
+  const ProductCard({
     Key? key,
     required this.imagePath,
     required this.productName,
@@ -15,8 +16,8 @@ class ProductCard extends StatelessWidget {
   final String imagePath;
   final String productName;
   final String productDetails;
-  final int price,quantityCounter;
-  void Function()? addition, remove;
+  final int price, quantityCounter;
+  final void Function()? addition, remove;
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +98,9 @@ class ProductCard extends StatelessWidget {
                 child: Center(
                   child: Row(
                     children: [
-                      const Text(
-                        "   ريال ",
-                        style: TextStyle(
+                      Text(
+                        "   riyal ".tr,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,

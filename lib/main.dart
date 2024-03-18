@@ -8,7 +8,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudad_app/BolcOpserver.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
-import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
@@ -67,12 +66,12 @@ class MyApp extends StatelessWidget {
         translations: LocalizationService(),
         locale: LocalizationService.local,
         fallbackLocale: LocalizationService.fallbackLocale,
-        textDirection: storage.read("language") == 'ar'
-            ? TextDirection.ltr
-            : TextDirection.ltr,
+        // textDirection: storage.read("language") == 'ar'
+        //     ? TextDirection.ltr
+        //     : TextDirection.ltr,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/splash',
-        //initialRoute: '/home',
+        // initialRoute: '/splash',
+        initialRoute: '/home',
         getPages: appRoutes(),
       ),
     );

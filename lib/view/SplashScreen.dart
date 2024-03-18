@@ -25,9 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
         height: double.infinity,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
-            color: Color.fromARGB(172, 138, 213, 248),
-            image: DecorationImage(
-                image: AssetImage("assets/background.png"), fit: BoxFit.fill)),
+          color: Color.fromARGB(172, 138, 213, 248),
+          image: DecorationImage(
+              image: AssetImage("assets/background.png"), fit: BoxFit.fill),
+        ),
         child: Align(
           alignment: const Alignment(0, -0.1),
           child: SizedBox(
@@ -46,18 +47,20 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text("زكاتك تنقذ حياة",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                            color: Colors.black38,
-                            offset: Offset(0, 6),
-                            blurRadius: 10),
-                      ],
-                    )),
+                Text(
+                  "Your zakat saves a life".tr,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                          color: Colors.black38,
+                          offset: Offset(0, 6),
+                          blurRadius: 10),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

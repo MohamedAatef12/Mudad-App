@@ -1,24 +1,24 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 
 import 'build_product.dart';
 
 class BuildChooseButton extends StatelessWidget {
-  BuildChooseButton(
-      this.location,  this.total, this.orders,
-      {super.key});
+  const BuildChooseButton(this.location, this.total, this.orders, {super.key});
 
-  String location;
-  int total;
-  List<Map<String,dynamic>> orders;
+  final String location;
+  final int total;
+  final List<Map<String, dynamic>> orders;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => OrdersCubit(),
       child: BlocConsumer<OrdersCubit, OrdersState>(
-        listener: (context, state) {
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Positioned(
             bottom: 20,
@@ -40,14 +40,12 @@ class BuildChooseButton extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  OrdersCubit().submitOrder(location, totalOrder,
-                  orders
-                  );
-                  print(totalOrder);
+                  OrdersCubit().submitOrder(location, totalOrder, orders);
+                  log(totalOrder.toString());
                 },
-                child: const Text(
-                  "اخـتـيـار",
-                  style: TextStyle(
+                child: Text(
+                  "Choose".tr,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold),

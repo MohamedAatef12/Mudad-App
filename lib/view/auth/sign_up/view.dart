@@ -36,10 +36,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 vertical: 20,
               ),
               children: [
-                const Text(
+                Text(
                   textAlign: TextAlign.center,
-                  "Sign Up",
-                  style: TextStyle(
+                  "Sign up".tr,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -47,10 +47,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                const Text(
+                Text(
                   textAlign: TextAlign.center,
-                  "Create Account",
-                  style: TextStyle(
+                  "Create Account".tr,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
@@ -58,10 +58,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 9,
                 ),
-                const Text(
+                Text(
                   textAlign: TextAlign.center,
-                  "Please Sign up to access to your account",
-                  style: TextStyle(
+                  "Please Sign up to access to your account".tr,
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),

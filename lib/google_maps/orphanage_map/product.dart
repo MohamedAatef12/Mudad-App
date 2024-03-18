@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -86,9 +87,9 @@ class ProductCard extends StatelessWidget {
                 child: Center(
                   child: Row(
                     children: [
-                      const Text(
-                        "   ريال ",
-                        style: TextStyle(
+                      Text(
+                        "   riyal ".tr,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,

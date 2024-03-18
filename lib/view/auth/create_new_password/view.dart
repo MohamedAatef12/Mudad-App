@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../reusable_widgets/password_textField.dart';
 import '../core/design/app_button.dart';
 
@@ -37,7 +38,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             ),
             const Text(
               textAlign: TextAlign.center,
-              "Lorem ipsum dolor sit amet, consetetur \n sadipscing elitr, sed diam nonumy eirmod \ntempor invidunt ut.",
+              "Your new password must be different from previous used passwords",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -90,11 +91,9 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     isPassword: true,
                     controller: confirmPasswordController,
                     validator: (value) {
-                      if(value.toString().isEmpty)
-                      {
+                      if (value.toString().isEmpty) {
                         return "تاكيد كلمه المرور مطلوبه";
-                      } else if (value !=passwordController.text)
-                      {
+                      } else if (value != passwordController.text) {
                         return "كلمه المرور غير متطابقه";
                       }
                       return null;
@@ -109,9 +108,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             ElevateButton(
               text: "Verify",
               onPress: () {
-                if(formKey.currentState!.validate()){
-
-                }
+                if (formKey.currentState!.validate()) {}
               },
             ),
           ],

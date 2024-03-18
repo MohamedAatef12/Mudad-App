@@ -31,7 +31,7 @@ class BuildLocationsOrphanageButtons extends StatelessWidget {
                 moveCameraToOrphanagePlace("Makkah");
               },
               imagePath: "assets/images/11.png",
-              placeName: "دور\nمــكــة",
+              placeName: "Mecca\nOrphanages",
               coordinates: const LatLng(21.423888489772935, 39.82624903841808),
               labelFontSize: 18,
               iconWidth: 34.4,
@@ -48,7 +48,7 @@ class BuildLocationsOrphanageButtons extends StatelessWidget {
                 moveCameraToOrphanagePlace("Madinah");
               },
               imagePath: "assets/images/11.png",
-              placeName: " دور\n المدينة",
+              placeName: "AL Madinah\nOrphanages",
               coordinates: const LatLng(24.467663304009072, 39.61106777648205),
               labelFontSize: 17,
               iconWidth: 33,
@@ -65,7 +65,7 @@ class BuildLocationsOrphanageButtons extends StatelessWidget {
                 moveCameraToOrphanagePlace("Jeddah");
               },
               imagePath: "assets/images/11.png",
-              placeName: "دور\n  جــدة",
+              placeName: "Jeddah\nOrphanages",
               coordinates: const LatLng(21.52774807596778, 39.16439325129956),
               labelFontSize: 17,
               iconWidth: 33,
