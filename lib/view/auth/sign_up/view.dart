@@ -46,10 +46,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     textAlign: TextAlign.center,
-                    "Sign Up",
-                    style: TextStyle(
+                    "sign_up".tr,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -57,10 +57,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  const Text(
+                  Text(
                     textAlign: TextAlign.center,
-                    "Create Account",
-                    style: TextStyle(
+                    "create_account".tr,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
@@ -68,10 +68,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 9,
                   ),
-                  const Text(
+                  Text(
                     textAlign: TextAlign.center,
-                    "Please Sign up to access to your account",
-                    style: TextStyle(
+                    "signUp_description".tr,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -82,13 +82,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "برجاء ادخال اسمك";
-                        } else if (value.length > 30) {
-                          return "يرجي كتابه اسمك ثلاثي";
+                          return "empty_name_val".tr;
                         }
                         return null;
                       },
-                      hintText: "Name",
+                      hintText: "name".tr,
                       textInputAction: TextInputAction.next,
                       controller: fullNameController,
                       keyboardType: TextInputType.text,
@@ -99,17 +97,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your email address.';
+                          return 'empty_email_val'.tr;
                         }
                         // Regular expression to check if the email format is valid
                         final RegExp emailRegex =
                             RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                         if (!emailRegex.hasMatch(value)) {
-                          return 'Please enter a valid email address.';
+                          return 'wrong_email_val'.tr;
                         }
                         return null; // Return null if the email is valid
                       },
-                      hintText: "Email",
+                      hintText: "email".tr,
                       textInputAction: TextInputAction.next,
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -118,19 +116,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 13,
                   ),
                   InternationalPhoneNumberInput(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "برجاء ادخال رقم الهاتف";
-                      }
-                      return null;
-                    },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "empty_phone_val".tr;
+                        }
+                        return null;
+                      },
                       inputDecoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                               width: 1, color: AppColors.buttonColor),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        hintText: "Phone Number",
+                        hintText: "phone".tr,
                         focusColor: AppColors.buttonColor,
                         fillColor: AppColors.buttonColor,
                         hoverColor: AppColors.buttonColor,
@@ -156,13 +154,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "كلمه المرور مطلوبه";
+                        return "empty_password_val".tr;
                       } else if (value.length < 8) {
-                        return "كلمه المرور ضعيفه";
+                        return "weak_password_val".tr;
                       }
                       return null;
                     },
-                    hintText: "Password",
+                    hintText: "password".tr,
                     controller: passwordController,
                     keyboardType: TextInputType.text,
                     obSecured: passwordHidden,
@@ -186,13 +184,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                     validator: (value) {
                       if (value.toString().isEmpty) {
-                        return "تاكيد كلمه المرور مطلوبه";
+                        return "empty_password_confirmation_val".tr;
                       } else if (value != passwordController.text) {
-                        return "كلمه المرور غير متطابقه";
+                        return "password_didnt_match_val".tr;
                       }
                       return null;
                     },
-                    hintText: "Confirm password",
+                    hintText: "password_confirmation".tr,
                     controller: confirmPasswordController,
                     keyboardType: TextInputType.text,
                     obSecured: confirmationHidden,
@@ -216,45 +214,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is RegisterErrorState) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
-                            "برجاء ادخال الحساب ورقم المرور بشكل صحيح",
+                            "auth_failed".tr,
                             textDirection: TextDirection.rtl,
                           ),
                         ));
                       }
+                      if (state is RegisterSuccessState){
+                        Get.offNamed("home");
+                      }
                     },
                     builder: (context, state) {
                       if (state is RegisterLoadingState) {
-                        print("loadinggggggggggggggggggg");
                         return const Center(child: CircularProgressIndicator());
                       } else {
                         return ElevateButton(
-                          text: "Sign up",
+                          text: "sign_up".tr,
                           onPress: () {
                             if (formKey.currentState!.validate()) {
-                            authCubit.register(
-                                fullNameController.text,
-                                emailController.text,
-                                _phoneNumber.toString(),
-                                passwordController.text).then((value) => Get.offNamed("home"));
+                              authCubit
+                                  .register(
+                                      fullNameController.text,
+                                      emailController.text,
+                                      _phoneNumber.toString(),
+                                      passwordController.text);
                             }
                           },
                         );
                       }
                     },
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Already have account?",
-                        style: TextStyle(
+                      Text(
+                        "already_have_account".tr,
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                         ),
@@ -263,9 +262,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onPressed: () {
                           Get.off(const LoginScreen());
                         },
-                        child: const Text(
-                          "Sign in",
-                          style: TextStyle(
+                        child: Text(
+                          "sign_in".tr,
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
                             color: Colors.blue,

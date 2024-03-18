@@ -16,8 +16,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController(text: "eea@gmail.com");
-  final passwordController = TextEditingController(text: "abc-1234");
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   bool isHidden = true;
 
   @override
@@ -48,10 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                const Text(
+                Text(
                   textAlign: TextAlign.center,
-                  "Welcome Back",
-                  style: TextStyle(
+                  "welcome_back".tr,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
@@ -59,10 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 9,
                 ),
-                const Text(
+                 Text(
                   textAlign: TextAlign.center,
-                  "Please Sign in to access to your account",
-                  style: TextStyle(
+                  "sign_in_description".tr,
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
@@ -80,17 +80,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       DefaultFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please enter your email address.';
+                              return 'empty_email_val'.tr;
                             }
                             // Regular expression to check if the email format is valid
                             final RegExp emailRegex =
                                 RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                             if (!emailRegex.hasMatch(value)) {
-                              return 'Please enter a valid email address.';
+                              return 'wrong_email_val'.tr;
                             }
                             return null; // Return null if the email is valid
                           },
-                          hintText: "Email",
+                          hintText: "email".tr,
                           textInputAction: TextInputAction.next,
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -101,13 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       DefaultFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "كلمه المرور مطلوبه";
+                            return "empty_password_val".tr;
                           } else if (value.length < 8) {
-                            return "كلمه المرور ضعيفه";
+                            return "weak_password_val".tr;
                           }
                           return null;
                         },
-                        hintText: "Password",
+                        hintText: "password".tr,
                         controller: passwordController,
                         keyboardType: TextInputType.text,
                         obSecured: isHidden,
@@ -134,26 +134,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is LoginErrorState) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
                         content: Text(
-                          "برجاء ادخال الحساب ورقم المرور بشكل صحيح",
-                          textDirection: TextDirection.rtl,
+                          "auth_failed".tr,
+
                         ),
                       ));
+                    }
+                    if (state is LoginSuccessState){
+                      Get.offNamed("home");
                     }
                   },
                   builder: (context, state) {
                     if (state is LoginLoadingState) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
-
                       return ElevateButton(
-                        text: "Login",
+                        text: "login".tr,
                         onPress: () {
                           if (formKey.currentState!.validate()) {
-                          authCubit.login(emailController.text,
-                                passwordController.text).then((value) => Get.offNamed("home"));
+                            authCubit
+                                .login(emailController.text,
+                                    passwordController.text);
+
                           }
                         },
                       );
@@ -166,9 +169,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Don't have account?",
-                      style: TextStyle(
+                     Text(
+                      "no_account".tr,
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                       ),
@@ -177,9 +180,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         Get.off(const SignUpScreen());
                       },
-                      child: const Text(
-                        "Sign up",
-                        style: TextStyle(
+                      child:  Text(
+                        "sign_up".tr,
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: Colors.blue,

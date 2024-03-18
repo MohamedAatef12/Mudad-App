@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,18 +47,23 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text("زكاتك تنقذ حياة",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                            color: Colors.black38,
-                            offset: Offset(0, 6),
-                            blurRadius: 10),
-                      ],
-                    )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FittedBox(
+                    child: Text("splash_txt".tr,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                                color: Colors.black38,
+                                offset: Offset(0, 6),
+                                blurRadius: 10),
+                          ],
+                        )),
+                  ),
+                ),
               ],
             ),
           ),
