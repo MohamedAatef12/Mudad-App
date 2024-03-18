@@ -116,10 +116,10 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(20),
                         itemCount: returnedServices.length,
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 70.0,
-                                childAspectRatio: .8),
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 70.0,
+                            childAspectRatio: .8),
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
@@ -129,13 +129,14 @@ class _HomePageState extends State<HomePage> {
                                     selectedImage.value = returnedImages[index];
                                     selectedPage = navigationPages[index];
                                   },
+
                                   child: Obx(() {
                                     return Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: selectedImage.value ==
-                                                  images[index]
+                                              returnedImages[index]
                                               ? AppColors.buttonColor
                                               : Colors.transparent,
                                           width: 2.0,
@@ -167,23 +168,9 @@ class _HomePageState extends State<HomePage> {
             )
           ])
 
-          // },
+        // },
 
-          ),
+      ),
     );
   }
 }
-
-//Expanded(
-//                             child: ListView.builder(
-//                                 itemCount: servicesCubit.services.length,
-//                                 shrinkWrap: true,
-//                                 itemBuilder: (context, index) {
-//                                   return Text(
-//                                     servicesCubit.services[index],
-//                                     style: const TextStyle(
-//                                         color: AppColors.buttonColor,
-//                                         fontSize: 17,
-//                                         fontWeight: FontWeight.w900),
-//                                   );
-//                                 }));

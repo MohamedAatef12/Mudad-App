@@ -7,8 +7,10 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mudad_app/BolcOpserver.dart';
+import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
+import 'package:mudad_app/view_model/auth_cubit/auth_cubit.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
@@ -51,6 +53,9 @@ void main() async {
       BlocProvider(
         create: (context) => OrdersCubit(),
       ),
+      BlocProvider(
+        create: (context) => AuthCubit(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -64,6 +69,24 @@ class MyApp extends StatelessWidget {
     return BlocProvider<LocationCubit>(
       create: (context) => LocationCubit(),
       child: GetMaterialApp(
+        color: AppColors.buttonColor,
+        // theme: ThemeData(
+        //     primarySwatch: const MaterialColor(
+        //       0xff609fd8,
+        //       <int, Color>{
+        //         50: Color(0xff609fd8),
+        //         100: Color(0xff609fd8),
+        //         200: Color(0xff609fd8),
+        //         300: Color(0xff609fd8),
+        //         400: Color(0xff609fd8),
+        //         500: Color(0xff609fd8),
+        //         600: Color(0xff609fd8),
+        //         700: Color(0xff609fd8),
+        //         800: Color(0xff609fd8),
+        //         900: Color(0xff609fd8),
+        //       },
+        //     ),
+        //     primaryColor: AppColors.buttonColor,),
         translations: LocalizationService(),
         locale: LocalizationService.local,
         fallbackLocale: LocalizationService.fallbackLocale,
@@ -71,7 +94,7 @@ class MyApp extends StatelessWidget {
             ? TextDirection.ltr
             : TextDirection.ltr,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/splash',
+        initialRoute: '/signUp',
         //initialRoute: '/home',
         getPages: appRoutes(),
       ),
