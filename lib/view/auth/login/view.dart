@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/reusable_widgets/text_field.dart';
 import 'package:mudad_app/view_model/auth_cubit/auth_cubit.dart';
 
-import '../../../reusable_widgets/phone_textField.dart';
-import '../confirm_code/view.dart';
 import '../core/design/app_button.dart';
-import '../forget_password/view.dart';
 import '../sign_up/view.dart';
 
 class LoginScreen extends StatefulWidget {

@@ -6,17 +6,17 @@ class RegisterModel {
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
     headers =
-    json['headers'] != null ? new Headers.fromJson(json['headers']) : null;
-    body = json['body'] != null ? new Body.fromJson(json['body']) : null;
+    json['headers'] != null ? Headers.fromJson(json['headers']) : null;
+    body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.headers != null) {
-      data['headers'] = this.headers!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (headers != null) {
+      data['headers'] = headers!.toJson();
     }
-    if (this.body != null) {
-      data['body'] = this.body!.toJson();
+    if (body != null) {
+      data['body'] = body!.toJson();
     }
     return data;
   }
@@ -34,9 +34,9 @@ class Headers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
     return data;
   }
 }
@@ -51,8 +51,8 @@ class Body {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
     return data;
   }
 }
