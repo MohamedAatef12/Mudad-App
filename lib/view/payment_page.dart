@@ -1,14 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mudad_app/google_maps/mosque_map/build_product.dart';
 import 'package:mudad_app/reusable_widgets/custom_paymment_card.dart';
 import 'package:mudad_app/services/payment_service/payment_controller.dart';
+import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 
 import '../app_constants/app_colors.dart';
 import '../app_constants/app_text_styles.dart';
 
 class PaymentPage extends StatelessWidget {
-  final String selectedImage;
-  const PaymentPage({required this.selectedImage, Key? key}) : super(key: key);
+  // final String selectedImage;
+  const PaymentPage({ Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,7 @@ class PaymentPage extends StatelessWidget {
             width: double.infinity,
             fit: BoxFit.fill,
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10),
             child: InkWell(
@@ -42,14 +46,36 @@ class PaymentPage extends StatelessWidget {
                   )),
             ),
           ),
+        Container(
+          height: 300,
+          width: double.infinity,
+          child: Column(children: [Text('Location'),Text(totalOrder.toString()),
+          Row(
+            children: [
+              Text(products.first),
+              Image.network(productImages.first,height: 70,),
+              Text(orderCounter.first.toString()),
+
+              Text(productPrice.first.toString()+"X"+orderCounter.first.toString()+"=" +p1Total.toString())
+            ],
+          ),
+
+
+            Row(
+            children: [
+              Text(products.last),
+              Image.network(productImages.last,height: 70,),
+              Text(orderCounter.last.toString()),
+              
+              Text(productPrice.last.toString()+"X"+orderCounter.last.toString()+"=" +p2Total.toString())
+            ],
+          )
+          ],),
+        ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/payment_assets/lock-svgrepo-com 1.png",
-                height: 15,
-                width: 15,
-              ),
+             const Icon(Icons.lock),
               const SizedBox(
                 width: 2,
               ),
@@ -81,6 +107,7 @@ class PaymentPage extends StatelessWidget {
           //     ),
           //   ),
           // ),
+
           PaymentCard(
             width: 110,
             height: 150,

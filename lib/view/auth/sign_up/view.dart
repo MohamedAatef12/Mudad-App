@@ -35,7 +35,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Form(
             key: formKey,
@@ -44,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 horizontal: 16,
                 vertical: 20,
               ),
-              child: Column(
+              child: ListView(
                 children: [
                   Text(
                     textAlign: TextAlign.center,
@@ -274,7 +273,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ],
+
               ),
+
             ),
           ),
         ),

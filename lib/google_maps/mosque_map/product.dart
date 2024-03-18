@@ -58,12 +58,12 @@ class ProductCard extends StatelessWidget {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(quantityCounter.toString()),
                 IconButton(
                   onPressed: addition,
                   icon: const Icon(Icons.add),
                   color: Colors.green,
                 ),
+                Text(quantityCounter.toString()),
                 IconButton(
                   onPressed: remove,
                   icon: const Icon(Icons.remove),

@@ -47,9 +47,7 @@ appRoutes() => [
           transitionDuration: const Duration(milliseconds: 600)),
       GetPage(
           name: '/payment',
-          page: () => const PaymentPage(
-                selectedImage: '',
-              ),
+          page: () => const PaymentPage(),
           transition: Transition.rightToLeft,
           transitionDuration: const Duration(milliseconds: 600)),
       GetPage(
@@ -62,6 +60,5 @@ appRoutes() => [
       GetPage(name: '/login', page: () => const LoginScreen()),
       GetPage(name: '/forgetPassword', page: () => const ForgetPassword()),
       GetPage(name: '/confirmCode', page: () => const ConfirmCodeView()),
-      GetPage(
-          name: '/payment', page: () => const PaymentPage(selectedImage: "")),
+
     ];

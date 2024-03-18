@@ -75,33 +75,33 @@ class _SearchMapState extends State<SearchMap> {
           resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
-              GoogleMap(
-                initialCameraPosition: initialCameraPosition,
-                onMapCreated: (GoogleMapController controller) {
-                  googleMapController = controller;
-                },
-                cameraTargetBounds: CameraTargetBounds(
-                  LatLngBounds(
-                    southwest:
-                        const LatLng(17.607613374386183, 37.98344273015662),
-                    northeast: const LatLng(32.1048459480552, 51.0802984261652),
-                  ),
-                ),
-                zoomControlsEnabled: false, // Disable default zoom controls
-                myLocationButtonEnabled:
-                    false, // Disable default location button
-                zoomGesturesEnabled: true,
-                onTap: (LatLng latLng) {
-                  // Dismiss the keyboard and clear search results on map tap
-                  if (_searchResults.isNotEmpty) {
-                    clearSearchResults();
-                    FocusScope.of(context).unfocus();
-                  } else {
-                    FocusScope.of(context).unfocus();
-                  }
-                },
-                markers: Set<Marker>.of(_markers),
-              ),
+              // GoogleMap(
+              //   initialCameraPosition: initialCameraPosition,
+              //   onMapCreated: (GoogleMapController controller) {
+              //     googleMapController = controller;
+              //   },
+              //   cameraTargetBounds: CameraTargetBounds(
+              //     LatLngBounds(
+              //       southwest:
+              //           const LatLng(17.607613374386183, 37.98344273015662),
+              //       northeast: const LatLng(32.1048459480552, 51.0802984261652),
+              //     ),
+              //   ),
+              //   zoomControlsEnabled: false, // Disable default zoom controls
+              //   myLocationButtonEnabled:
+              //       false, // Disable default location button
+              //   zoomGesturesEnabled: true,
+              //   onTap: (LatLng latLng) {
+              //     // Dismiss the keyboard and clear search results on map tap
+              //     if (_searchResults.isNotEmpty) {
+              //       clearSearchResults();
+              //       FocusScope.of(context).unfocus();
+              //     } else {
+              //       FocusScope.of(context).unfocus();
+              //     }
+              //   },
+              //   markers: Set<Marker>.of(_markers),
+              // ),
               Positioned(
                 top: MediaQuery.of(context).size.height / 40,
                 left: 0,

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:mudad_app/app_constants/app_assets.dart';
+import 'package:mudad_app/app_constants/app_colors.dart';
+import 'package:mudad_app/app_constants/app_text_styles.dart';
+import 'package:mudad_app/google_maps/home_map/choose_location.dart';
+import 'package:mudad_app/google_maps/mosque_map/search_map.dart';
 import 'package:mudad_app/google_maps/orphanage_map/orphanage_map.dart';
+import 'package:mudad_app/services/localization_service/localization_controller.dart';
 import 'package:mudad_app/view/drawer/drawer.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 
-import '../../app_constants/app_assets.dart';
-import '../../app_constants/app_colors.dart';
-import '../../app_constants/app_text_styles.dart';
-import '../../google_maps/home_map/choose_location.dart';
-import '../../google_maps/mosque_map/search_map.dart';
-import '../../services/localization_service/localization_controller.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                     return Expanded(
                       child: GridView.builder(
                         padding: const EdgeInsets.all(20),
-                        itemCount: returnedServices.length,
+                        itemCount: returnedImages.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -155,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                                               BorderRadius.circular(20),
                                           border: Border.all(
                                             color: selectedImage.value ==
-                                                    images[index]
+                                                returnedImages[index]
                                                 ? AppColors.buttonColor
                                                 : Colors.transparent,
                                             width: 2.0,
