@@ -6,17 +6,17 @@ class LoginModel {
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     headers =
-    json['headers'] != null ? new Headers.fromJson(json['headers']) : null;
-    body = json['body'] != null ? new Body.fromJson(json['body']) : null;
+    json['headers'] != null ? Headers.fromJson(json['headers']) : null;
+    body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.headers != null) {
-      data['headers'] = this.headers!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (headers != null) {
+      data['headers'] = headers!.toJson();
     }
-    if (this.body != null) {
-      data['body'] = this.body!.toJson();
+    if (body != null) {
+      data['body'] = body!.toJson();
     }
     return data;
   }
@@ -34,9 +34,9 @@ class Headers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
     return data;
   }
 }
@@ -50,22 +50,22 @@ class Body {
   Body({this.a, this.isNew, this.dDoc, this.token});
 
   Body.fromJson(Map<String, dynamic> json) {
-    a = json['a'] != null ? new A.fromJson(json['a']) : null;
+    a = json['a'] != null ? A.fromJson(json['a']) : null;
     isNew = json['$isNew'];
-    dDoc = json['_doc'] != null ? new Doc.fromJson(json['_doc']) : null;
+    dDoc = json['_doc'] != null ? Doc.fromJson(json['_doc']) : null;
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.a != null) {
-      data['a'] = this.a!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (a != null) {
+      data['a'] = a!.toJson();
     }
-    data['$isNew'] = this.isNew;
-    if (this.dDoc != null) {
-      data['_doc'] = this.dDoc!.toJson();
+    data['$isNew'] = isNew;
+    if (dDoc != null) {
+      data['_doc'] = dDoc!.toJson();
     }
-    data['token'] = this.token;
+    data['token'] = token;
     return data;
   }
 }
@@ -78,17 +78,17 @@ class A {
 
   A.fromJson(Map<String, dynamic> json) {
     activePaths = json['activePaths'] != null
-        ? new ActivePaths.fromJson(json['activePaths'])
+        ? ActivePaths.fromJson(json['activePaths'])
         : null;
     skipId = json['skipId'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.activePaths != null) {
-      data['activePaths'] = this.activePaths!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (activePaths != null) {
+      data['activePaths'] = activePaths!.toJson();
     }
-    data['skipId'] = this.skipId;
+    data['skipId'] = skipId;
     return data;
   }
 }
@@ -100,18 +100,18 @@ class ActivePaths {
   ActivePaths({this.paths, this.states});
 
   ActivePaths.fromJson(Map<String, dynamic> json) {
-    paths = json['paths'] != null ? new Paths.fromJson(json['paths']) : null;
+    paths = json['paths'] != null ? Paths.fromJson(json['paths']) : null;
     states =
-    json['states'] != null ? new States.fromJson(json['states']) : null;
+    json['states'] != null ? States.fromJson(json['states']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.paths != null) {
-      data['paths'] = this.paths!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (paths != null) {
+      data['paths'] = paths!.toJson();
     }
-    if (this.states != null) {
-      data['states'] = this.states!.toJson();
+    if (states != null) {
+      data['states'] = states!.toJson();
     }
     return data;
   }
@@ -143,13 +143,13 @@ class Paths {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['phoneNumber'] = this.phoneNumber;
-    data['password'] = this.password;
-    data['email'] = this.email;
-    data['name'] = this.name;
-    data['_id'] = this.sId;
-    data['__v'] = this.sV;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['phoneNumber'] = phoneNumber;
+    data['password'] = password;
+    data['email'] = email;
+    data['name'] = name;
+    data['_id'] = sId;
+    data['__v'] = sV;
     return data;
   }
 }
@@ -161,18 +161,18 @@ class States {
   States({this.init, this.modify});
 
   States.fromJson(Map<String, dynamic> json) {
-    init = json['init'] != null ? new Init.fromJson(json['init']) : null;
+    init = json['init'] != null ? Init.fromJson(json['init']) : null;
     modify =
-    json['modify'] != null ? new Modify.fromJson(json['modify']) : null;
+    json['modify'] != null ? Modify.fromJson(json['modify']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.init != null) {
-      data['init'] = this.init!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (init != null) {
+      data['init'] = init!.toJson();
     }
-    if (this.modify != null) {
-      data['modify'] = this.modify!.toJson();
+    if (modify != null) {
+      data['modify'] = modify!.toJson();
     }
     return data;
   }
@@ -196,12 +196,12 @@ class Init {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.bId;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['phoneNumber'] = this.phoneNumber;
-    data['__v'] = this.bV;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = bId;
+    data['name'] = name;
+    data['email'] = email;
+    data['phoneNumber'] = phoneNumber;
+    data['__v'] = bV;
     return data;
   }
 }
@@ -216,8 +216,8 @@ class Modify {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['password'] = this.password;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['password'] = password;
     return data;
   }
 }
@@ -240,12 +240,12 @@ class Doc {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['phoneNumber'] = this.phoneNumber;
-    data['v'] = this.v;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['name'] = name;
+    data['email'] = email;
+    data['phoneNumber'] = phoneNumber;
+    data['v'] = v;
     return data;
   }
 }

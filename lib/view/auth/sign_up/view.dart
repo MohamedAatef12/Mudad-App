@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../app_constants/app_colors.dart';
-import '../../../reusable_widgets/password_textField.dart';
-import '../../../reusable_widgets/phone_textField.dart';
 import '../../../reusable_widgets/text_field.dart';
 import '../../../view_model/auth_cubit/auth_cubit.dart';
 import '../core/design/app_button.dart';
@@ -124,6 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (value!.isEmpty) {
                         return "برجاء ادخال رقم الهاتف";
                       }
+                      return null;
                     },
                       inputDecoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
