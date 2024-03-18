@@ -6,7 +6,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../../../app_constants/app_colors.dart';
 import '../../../reusable_widgets/text_field.dart';
 import '../../../view_model/auth_cubit/auth_cubit.dart';
-import '../core/design/app_button.dart';
+
 import '../login/view.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -34,9 +34,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        body: SafeArea(
-          child: Form(
+      child: SafeArea(
+        child: Scaffold(
+          body: Form(
             key: formKey,
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -220,7 +220,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ));
                       }
-                      if (state is RegisterSuccessState){
+                      if (state is RegisterSuccessState) {
                         Get.offNamed("home");
                       }
                     },
@@ -228,19 +228,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (state is RegisterLoadingState) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
-                        return ElevateButton(
-                          text: "sign_up".tr,
-                          onPress: () {
-                            if (formKey.currentState!.validate()) {
-                              authCubit
-                                  .register(
-                                      fullNameController.text,
-                                      emailController.text,
-                                      _phoneNumber.toString(),
-                                      passwordController.text);
-                            }
-                          },
-                        );
+                        return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              backgroundColor: const Color(0xff609FD8),
+                              fixedSize: const Size.fromHeight(60),
+                            ),
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                authCubit.register(
+                                    fullNameController.text,
+                                    emailController.text,
+                                    _phoneNumber.toString(),
+                                    passwordController.text);
+                              }
+                            },
+                            child: Text(
+                              "sign_up".tr,
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ));
+        
+
                       }
                     },
                   ),
@@ -273,9 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ],
-
               ),
-
             ),
           ),
         ),

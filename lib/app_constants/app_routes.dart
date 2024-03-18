@@ -58,7 +58,7 @@ appRoutes() => [
       GetPage(name: '/orphanage_map', page: () => const OrphanageMap()),
       GetPage(name: '/signUp', page: () => const SignUpScreen()),
       GetPage(name: '/login', page: () => const LoginScreen()),
-      GetPage(name: '/forgetPassword', page: () => const ForgetPassword()),
+      // GetPage(name: '/forgetPassword', page: () => const ForgetPassword()),
       GetPage(name: '/confirmCode', page: () => const ConfirmCodeView()),
 
     ];
