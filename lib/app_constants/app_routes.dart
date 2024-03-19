@@ -58,5 +58,5 @@ appRoutes() => [
       GetPage(name: '/signUp', page: () => const SignUpScreen()),
       GetPage(name: '/login', page: () => const LoginScreen()),
       // GetPage(name: '/forgetPassword', page: () => const ForgetPassword()),
-      GetPage(name: '/confirmCode', page: () => const ConfirmCodeView()),
+      // GetPage(name: '/confirmCode', page: () => const ConfirmCodeView()),
     ];

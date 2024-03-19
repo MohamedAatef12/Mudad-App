@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         color: AppColors.buttonColor,
         translations: LocalizationService(),
         // locale: const Locale('ar', 'EG'),
-        locale: const Locale('en', 'US'),
+        locale: LocalizationService.local,
         theme: ThemeData(
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: AppColors.buttonColor,

@@ -15,6 +15,13 @@ class LocalizationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          "language":"Language",
+          "sale_value":"Sale value",
+          "what_is_code":"What is Mudad code?",
+          "code_info":"You need to share this code with your friends "
+              "and anyone uses this code will get a 10% sale on his donation "
+              "\nuse it now!",
+          "Your_code:":"Your code is:",
           // AUTH
           "sign in": "Sign In",
           "welcome back": "Welcome Back 👋",
@@ -198,6 +205,14 @@ class LocalizationService extends Translations {
               'Madad seeks to provide a safe and effective experience for users. The user is required to read these terms and conditions carefully and fully understand them before using the application.\n',
         },
         'ar': {
+          "language":"اللغه",
+          "sale_value":"قيمه الخصم",
+          "what_is_code":"ما هو كود مدد؟",
+          "code_info":"انت بحاجه لمشاركه هذا الكود مع اصدقائك "
+              "وكل من يستخدم هذا الكود سوف يحصل على خصم على قيمه تبرعه"
+              "\nاستخدمه الان!",
+          "Your_code:":"الكود الخاص بك هو:",
+
           // SIGN IN
           "sign in": "تسجيل الدخول",
           "welcome back": "مرحبا بك 👋",
@@ -392,3 +407,4 @@ class LocalizationService extends Translations {
     return storage.read('language') ?? 'en';
   }
 }
+// 3f522f0c-a476-42f6-98ec-b1d70d687e47

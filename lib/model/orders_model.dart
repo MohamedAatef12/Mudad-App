@@ -6,17 +6,17 @@ class OrdersModel {
 
   OrdersModel.fromJson(Map<String, dynamic> json) {
     headers =
-    json['headers'] != null ? Headers.fromJson(json['headers']) : null;
-    body = json['body'] != null ? Body.fromJson(json['body']) : null;
+    json['headers'] != null ? new Headers.fromJson(json['headers']) : null;
+    body = json['body'] != null ? new Body.fromJson(json['body']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (headers != null) {
-      data['headers'] = headers!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.headers != null) {
+      data['headers'] = this.headers!.toJson();
     }
-    if (body != null) {
-      data['body'] = body!.toJson();
+    if (this.body != null) {
+      data['body'] = this.body!.toJson();
     }
     return data;
   }
@@ -34,27 +34,35 @@ class Headers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['message'] = message;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['success'] = this.success;
+    data['message'] = this.message;
     return data;
   }
 }
 
 class Body {
+  String? createdAt;
   List<Products>? products;
   String? location;
   int? total;
   String? sId;
   int? iV;
 
-  Body({this.products, this.location, this.total, this.sId, this.iV});
+  Body(
+      {this.createdAt,
+        this.products,
+        this.location,
+        this.total,
+        this.sId,
+        this.iV});
 
   Body.fromJson(Map<String, dynamic> json) {
+    createdAt = json['createdAt'];
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
-        products!.add(Products.fromJson(v));
+        products!.add(new Products.fromJson(v));
       });
     }
     location = json['location'];
@@ -64,14 +72,15 @@ class Body {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (products != null) {
-      data['products'] = products!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['createdAt'] = this.createdAt;
+    if (this.products != null) {
+      data['products'] = this.products!.map((v) => v.toJson()).toList();
     }
-    data['location'] = location;
-    data['total'] = total;
-    data['_id'] = sId;
-    data['__v'] = iV;
+    data['location'] = this.location;
+    data['total'] = this.total;
+    data['_id'] = this.sId;
+    data['__v'] = this.iV;
     return data;
   }
 }
@@ -92,11 +101,11 @@ class Products {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['price'] = price;
-    data['qty'] = qty;
-    data['_id'] = sId;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['price'] = this.price;
+    data['qty'] = this.qty;
+    data['_id'] = this.sId;
     return data;
   }
 }

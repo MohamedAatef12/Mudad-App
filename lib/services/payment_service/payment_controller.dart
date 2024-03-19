@@ -6,13 +6,14 @@ import 'package:flutter_paytabs_bridge/PaymentSdkLocale.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:mudad_app/google_maps/mosque_map/build_product.dart';
+import 'package:mudad_app/services/remote_API/user_data.dart';
 
 class PaymentController{
   PaymentSdkConfigurationDetails generateConfig() {
-    var billingDetails = BillingDetails("Test", "test@gmail.com",
-        "+01067863914", "Cairo", "eg", "dubai", "dubai", "12345");
-    var shippingDetails = ShippingDetails("Test", "test@gmail.com",
-        "+01067863914", "Cairo", "eg", "dubai", "dubai", "12345");
+    var billingDetails = BillingDetails(User.name.toString(), User.email.toString(),
+        User.phone.toString(), "", "", "", "", "");
+    var shippingDetails = ShippingDetails(User.name.toString(), User.email.toString(),
+        User.phone.toString(), "", "", "", "", "");
     List<PaymentSdkAPms> apms = [];
     apms.add(PaymentSdkAPms.AMAN);
     final configuration = PaymentSdkConfigurationDetails(
