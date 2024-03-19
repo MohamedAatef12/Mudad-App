@@ -15,6 +15,7 @@ class LocalizationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+
           "language":"Language",
           "sale_value":"Sale value",
           "what_is_code":"What is Mudad code?",
@@ -22,6 +23,7 @@ class LocalizationService extends Translations {
               "and anyone uses this code will get a 10% sale on his donation "
               "\nuse it now!",
           "Your_code:":"Your code is:",
+          "sign_out":"SignOut",
           // AUTH
           "sign in": "Sign In",
           "welcome back": "Welcome Back 👋",
@@ -69,12 +71,14 @@ class LocalizationService extends Translations {
           'Review your order': 'Review your order',
           'Debit cards': 'Debit cards',
           'Gift cards': 'Gift cards',
-          'Choose the payment method': 'Choose the payment method',
+          'Choose the payment method': 'Choose payment method',
           'All information about your computer is safe':
               'All information about your computer is safe',
           'PayPal': 'PayPal',
           'Visa/MasterCard': 'Visa/MasterCard',
           'Send': 'Send',
+          'vouchers':"Vouchers",
+          "Enter_Mudad_code": "Enter Mudad code here!",
 
           'Share the app': 'Share the app',
           'Settings': 'Settings',
@@ -212,7 +216,7 @@ class LocalizationService extends Translations {
               "وكل من يستخدم هذا الكود سوف يحصل على خصم على قيمه تبرعه"
               "\nاستخدمه الان!",
           "Your_code:":"الكود الخاص بك هو:",
-
+          "sign_out":"تسجيل الخروج",
           // SIGN IN
           "sign in": "تسجيل الدخول",
           "welcome back": "مرحبا بك 👋",
@@ -261,7 +265,8 @@ class LocalizationService extends Translations {
               'جميع المعلومات الخاصة بحاسبك آمنه',
           'PayPal': 'باي بال',
           'Visa/MasterCard': 'بطاقة فيزا/ماستر كارد',
-
+          'vouchers':"بطاقات الخصم",
+          "Enter_Mudad_code": "ادخل كود مدد هنا!",
           'Send': 'إرسال',
           'Share the app': 'شارك التطبيق',
           'Settings': 'الإعدادات',
