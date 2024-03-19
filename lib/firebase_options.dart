@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCkQD-TvmzvCsx7Lcf6sxDNivAYKD_Iz-0',
-    appId: '1:556936817748:web:7638a508409372551091c1',
-    messagingSenderId: '556936817748',
-    projectId: 'mudad-app-414614',
-    authDomain: 'mudad-app-414614.firebaseapp.com',
-    storageBucket: 'mudad-app-414614.appspot.com',
-    measurementId: 'G-Q7B57NJ6S0',
+    apiKey: 'AIzaSyD_IxhXqXyv1lirtOUYBmXhHBdABQTyG1w',
+    appId: '1:483072843151:web:6623a07d042ad45f363ffa',
+    messagingSenderId: '483072843151',
+    projectId: 'test-dd4b2',
+    authDomain: 'test-dd4b2.firebaseapp.com',
+    storageBucket: 'test-dd4b2.appspot.com',
+    measurementId: 'G-TLF7WW6J3V',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBO_F1l9eFo8qJKC5AgixgLuTJOyxo8ehA',
-    appId: '1:556936817748:android:b055be0d172966cd1091c1',
-    messagingSenderId: '556936817748',
-    projectId: 'mudad-app-414614',
-    storageBucket: 'mudad-app-414614.appspot.com',
+    apiKey: 'AIzaSyBij_K2QBUanCUdUpNoXlbn8nNiDpxHNO0',
+    appId: '1:483072843151:android:0ae915da40bd3a46363ffa',
+    messagingSenderId: '483072843151',
+    projectId: 'test-dd4b2',
+    storageBucket: 'test-dd4b2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBUC9PuSoMI-Jmi3Izr098Yce-uAsS-GqA',
-    appId: '1:556936817748:ios:08ab8fc4b4236adc1091c1',
-    messagingSenderId: '556936817748',
-    projectId: 'mudad-app-414614',
-    storageBucket: 'mudad-app-414614.appspot.com',
+    apiKey: 'AIzaSyDrTD8EGKBqx2r_sW0AUr69PNrUXLZR_SU',
+    appId: '1:483072843151:ios:0de6d7d447cdb6cc363ffa',
+    messagingSenderId: '483072843151',
+    projectId: 'test-dd4b2',
+    storageBucket: 'test-dd4b2.appspot.com',
     iosBundleId: 'com.example.mudadApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBUC9PuSoMI-Jmi3Izr098Yce-uAsS-GqA',
-    appId: '1:556936817748:ios:f976c3ec763814ce1091c1',
-    messagingSenderId: '556936817748',
-    projectId: 'mudad-app-414614',
-    storageBucket: 'mudad-app-414614.appspot.com',
+    apiKey: 'AIzaSyDrTD8EGKBqx2r_sW0AUr69PNrUXLZR_SU',
+    appId: '1:483072843151:ios:0ec3e40fa868acf4363ffa',
+    messagingSenderId: '483072843151',
+    projectId: 'test-dd4b2',
+    storageBucket: 'test-dd4b2.appspot.com',
     iosBundleId: 'com.example.mudadApp.RunnerTests',
   );
 }

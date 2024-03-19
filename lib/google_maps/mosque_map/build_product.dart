@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:mudad_app/google_maps/mosque_map/product.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 
 List<String> products = [], productImages = [];
 List<int> productPrice = [], orderCounter = [];
 List<Map<String, dynamic>> selectedOrders = [];
-int totalOrder=0;
-int p1Total = 0,p2Total=0;
+int totalOrder = 0;
+int p1Total = 0, p2Total = 0;
 
 class BuildProduct extends StatelessWidget {
   const BuildProduct({super.key});
@@ -44,34 +45,39 @@ class BuildProduct extends StatelessWidget {
                       orderCounter[index] =
                           productCubit.addProducts(orderCounter[index]);
                       selectedOrders[index]["qty"] = orderCounter[index];
-                      if(index == 0 ){
-                        p1Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
-                      }else{
-                        p2Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
+                      if (index == 0) {
+                        p1Total = selectedOrders[index]["qty"] *
+                            selectedOrders[index]["price"];
+                      } else {
+                        p2Total = selectedOrders[index]["qty"] *
+                            selectedOrders[index]["price"];
                       }
 
-                      totalOrder = p1Total+p2Total;
-                      print("1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
-
+                      totalOrder = p1Total + p2Total;
+                      print(
+                          "1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
                     },
                     remove: () {
                       context.read<ProductsCubit>().removeProducts(index);
                       orderCounter[index] =
                           productCubit.removeProducts(orderCounter[index]);
                       selectedOrders[index]["qty"] = orderCounter[index];
-                      if(index == 0 ){
-                        p1Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
-                      }else{
-                        p2Total =selectedOrders[index]["qty"]*selectedOrders[index]["price"];
+                      if (index == 0) {
+                        p1Total = selectedOrders[index]["qty"] *
+                            selectedOrders[index]["price"];
+                      } else {
+                        p2Total = selectedOrders[index]["qty"] *
+                            selectedOrders[index]["price"];
                       }
 
-                      totalOrder = p1Total+p2Total;
-                      print("1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
+                      totalOrder = p1Total + p2Total;
+                      print(
+                          "1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
                       // total.add( selectedOrders[index]["qty"]*selectedOrders[index]["price"]);
                     },
                     imagePath: productImages[index],
                     productName: products[index],
-                    productDetails: 'ضمان لمدة سنتين',
+                    productDetails: 'Two-year warranty'.tr,
                     price: productPrice[index],
                   );
                 },

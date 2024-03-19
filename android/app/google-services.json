@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "556936817748",
-    "project_id": "mudad-app-414614",
-    "storage_bucket": "mudad-app-414614.appspot.com"
+    "project_number": "483072843151",
+    "project_id": "test-dd4b2",
+    "storage_bucket": "test-dd4b2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:556936817748:android:b055be0d172966cd1091c1",
+        "mobilesdk_app_id": "1:483072843151:android:0ae915da40bd3a46363ffa",
         "android_client_info": {
           "package_name": "com.example.mudad_app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBO_F1l9eFo8qJKC5AgixgLuTJOyxo8ehA"
+          "current_key": "AIzaSyBij_K2QBUanCUdUpNoXlbn8nNiDpxHNO0"
         }
       ],
       "services": {

@@ -75,33 +75,33 @@ class _SearchMapState extends State<SearchMap> {
           resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
-              GoogleMap(
-                initialCameraPosition: initialCameraPosition,
-                onMapCreated: (GoogleMapController controller) {
-                  googleMapController = controller;
-                },
-                cameraTargetBounds: CameraTargetBounds(
-                  LatLngBounds(
-                    southwest:
-                        const LatLng(17.607613374386183, 37.98344273015662),
-                    northeast: const LatLng(32.1048459480552, 51.0802984261652),
-                  ),
-                ),
-                zoomControlsEnabled: false, // Disable default zoom controls
-                myLocationButtonEnabled:
-                    false, // Disable default location button
-                zoomGesturesEnabled: true,
-                onTap: (LatLng latLng) {
-                  // Dismiss the keyboard and clear search results on map tap
-                  if (_searchResults.isNotEmpty) {
-                    clearSearchResults();
-                    FocusScope.of(context).unfocus();
-                  } else {
-                    FocusScope.of(context).unfocus();
-                  }
-                },
-                markers: Set<Marker>.of(_markers),
-              ),
+              // GoogleMap(
+              //   initialCameraPosition: initialCameraPosition,
+              //   onMapCreated: (GoogleMapController controller) {
+              //     googleMapController = controller;
+              //   },
+              //   cameraTargetBounds: CameraTargetBounds(
+              //     LatLngBounds(
+              //       southwest:
+              //           const LatLng(17.607613374386183, 37.98344273015662),
+              //       northeast: const LatLng(32.1048459480552, 51.0802984261652),
+              //     ),
+              //   ),
+              //   zoomControlsEnabled: false, // Disable default zoom controls
+              //   myLocationButtonEnabled:
+              //       false, // Disable default location button
+              //   zoomGesturesEnabled: true,
+              //   onTap: (LatLng latLng) {
+              //     // Dismiss the keyboard and clear search results on map tap
+              //     if (_searchResults.isNotEmpty) {
+              //       clearSearchResults();
+              //       FocusScope.of(context).unfocus();
+              //     } else {
+              //       FocusScope.of(context).unfocus();
+              //     }
+              //   },
+              //   markers: Set<Marker>.of(_markers),
+              // ),
               Positioned(
                 top: MediaQuery.of(context).size.height / 40,
                 left: 0,
@@ -142,9 +142,9 @@ class _SearchMapState extends State<SearchMap> {
                           onPressed: () {
                             showListDialog();
                           },
-                          child: const Text('عرض'),
+                          child: Text('Show'.tr),
                         ),
-                        Text('المساجد المختارة: ${selectedMosques.length}'),
+                        Text('Selected mosques: ${selectedMosques.length}'.tr),
                       ],
                     ),
                   ),
@@ -202,11 +202,9 @@ class _SearchMapState extends State<SearchMap> {
                               onChanged: (query) {
                                 performAutocompleteSearch(query);
                               },
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.right,
                               textCapitalization: TextCapitalization.words,
                               decoration: InputDecoration(
-                                hintText: 'ابحث عن مكان او مسجد',
+                                hintText: 'Search for a place or mosque'.tr,
                                 border: InputBorder.none,
                                 suffixIcon: IconButton(
                                   highlightColor: Colors.transparent,
@@ -253,12 +251,12 @@ class _SearchMapState extends State<SearchMap> {
                   ],
                 ),
               ),
-               const BuildProduct(),
-               BuildChooseButton("location", totalOrder,
-
-                   selectedOrders,
-
-               )
+              const BuildProduct(),
+              BuildChooseButton(
+                "location",
+                totalOrder,
+                selectedOrders,
+              )
             ],
           ),
           floatingActionButton: Stack(
@@ -392,8 +390,8 @@ class _SearchMapState extends State<SearchMap> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          title: const Text(
-            'المساجد المختارة',
+          title: Text(
+            'Selected mosques'.tr,
             textDirection: TextDirection.rtl,
           ),
           content: StatefulBuilder(
@@ -435,7 +433,7 @@ class _SearchMapState extends State<SearchMap> {
                 Navigator.of(context).pop();
                 FocusScope.of(context).unfocus();
               },
-              child: const Text('إلغاء'),
+              child: Text('Cancel'.tr),
             ),
           ],
         );
@@ -462,14 +460,14 @@ class _SearchMapState extends State<SearchMap> {
                 Navigator.of(context).pop();
                 FocusScope.of(context).unfocus();
               },
-              child: const Text('اضف المسجد الى القائمة'),
+              child: Text('Add the mosque to the list'.tr),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 FocusScope.of(context).unfocus();
               },
-              child: const Text('إلغاء'),
+              child: Text('Cancel'.tr),
             ),
           ],
         );
@@ -484,9 +482,9 @@ class _SearchMapState extends State<SearchMap> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('المسجد موجود في القائمة بالفعل'),
-          duration: Duration(seconds: 2),
+        SnackBar(
+          content: Text('The mosque is already on the list'.tr),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

@@ -5,6 +5,7 @@ import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkLocale.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
+import 'package:mudad_app/google_maps/mosque_map/build_product.dart';
 
 class PaymentController{
   PaymentSdkConfigurationDetails generateConfig() {
@@ -23,7 +24,7 @@ class PaymentController{
         cartDescription: "Flowers",
         merchantName: "مؤسسة مدد الفتح التجارية",
         screentTitle: "Pay with Card",
-        amount: 1.0,
+        amount: totalOrder.toDouble(),
         showBillingInfo: true,
         forceShippingInfo: false,
         currencyCode: "SAR",

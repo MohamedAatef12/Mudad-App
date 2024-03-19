@@ -4,7 +4,7 @@ import 'end_points.dart';
 
 class DioHelper {
   static Dio dio = Dio();
-  static String baseUrl = 'http://85.31.239.223:8080/api/v1/';
+  static String baseUrl = 'http://10.0.2.2:8080/api/v1/';
 
   static void init() {
     dio = Dio(
@@ -25,8 +25,8 @@ class DioHelper {
 
   static Future<Response> postData(
       {required String endPoint,
-        Map<String, dynamic>? data,
-        String? token}) async {
+      Map<String, dynamic>? data,
+      String? token}) async {
     dio.options.headers = {
       'Content-Type': "application/json",
       'Authorization': "Bearer ${EndPoint.userToken}"
@@ -36,8 +36,8 @@ class DioHelper {
 
   static Future<Response> getData(
       {required String endPoint,
-        String? token,
-        Map<String, dynamic>? header}) async {
+      String? token,
+      Map<String, dynamic>? header}) async {
     dio.options.headers = header ??
         {
           'Content-Type': 'application/json',
@@ -48,18 +48,12 @@ class DioHelper {
 
   static Future<Response> putData(
       {required String endPoint,
-        Map<String, dynamic>? data,
-        String? token}) async {
+      Map<String, dynamic>? data,
+      String? token}) async {
     dio.options.headers = {
       'Content-Type': "application/json",
       'Authorization': "Bearer ${EndPoint.userToken}"
     };
     return await dio.put(endPoint, data: data);
   }
-
-
-
-
-
-
 }

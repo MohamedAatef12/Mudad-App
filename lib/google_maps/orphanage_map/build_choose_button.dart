@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BuildChooseOrphanageButton extends StatelessWidget {
   const BuildChooseOrphanageButton({super.key});
@@ -24,9 +25,9 @@ class BuildChooseOrphanageButton extends StatelessWidget {
             ),
           ),
           onPressed: () {},
-          child: const Text(
-            "اخـتـيـار",
-            style: TextStyle(
+          child: Text(
+            "Choose".tr,
+            style: const TextStyle(
                 color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
