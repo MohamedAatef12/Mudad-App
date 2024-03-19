@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:mudad_app/view/auth/confirm_code/view.dart';
 
 import '../../../app_constants/app_colors.dart';
 import '../../../reusable_widgets/text_field.dart';
 import '../../../view_model/auth_cubit/auth_cubit.dart';
-
 import '../login/view.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -47,9 +51,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   Text(
                     textAlign: TextAlign.center,
-                    "sign_up".tr,
+                    "sign up".tr,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 22,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -58,9 +62,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    "create_account".tr,
+                    "Create Account".tr,
                     style: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -69,9 +73,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    "signUp_description".tr,
+                    "Sign up description".tr,
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -81,11 +85,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "empty_name_val".tr;
+                          return "name required".tr;
                         }
                         return null;
                       },
                       hintText: "name".tr,
+                      prefixIcon: Icon(
+                        Icons.person_outline,
+                        size: 26,
+                        color: Colors.grey.shade600,
+                      ),
                       textInputAction: TextInputAction.next,
                       controller: fullNameController,
                       keyboardType: TextInputType.text,
@@ -96,17 +105,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'empty_email_val'.tr;
+                          return 'email required'.tr;
                         }
                         // Regular expression to check if the email format is valid
                         final RegExp emailRegex =
                             RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                         if (!emailRegex.hasMatch(value)) {
-                          return 'wrong_email_val'.tr;
+                          return 'email invalid'.tr;
                         }
                         return null; // Return null if the email is valid
                       },
                       hintText: "email".tr,
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        size: 26,
+                        color: Colors.grey.shade600,
+                      ),
                       textInputAction: TextInputAction.next,
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -117,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   InternationalPhoneNumberInput(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "empty_phone_val".tr;
+                          return "phone required".tr;
                         }
                         return null;
                       },
@@ -128,6 +142,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         hintText: "phone".tr,
+                        prefixIcon: Icon(
+                          Icons.phone_outlined,
+                          size: 26,
+                          color: Colors.grey.shade600,
+                        ),
                         focusColor: AppColors.buttonColor,
                         fillColor: AppColors.buttonColor,
                         hoverColor: AppColors.buttonColor,
@@ -138,14 +157,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       onInputChanged: (PhoneNumber number) {
-                        print(number.phoneNumber);
+                        log(number.phoneNumber.toString());
                         _phoneNumber = number.phoneNumber!;
-                        print(_phoneNumber);
+                        log(_phoneNumber);
                       },
                       selectorConfig: const SelectorConfig(
                         selectorType: PhoneInputSelectorType.DIALOG,
                       ),
-                      initialValue: PhoneNumber(isoCode: 'SA'),
                       textFieldController: phoneController),
                   const SizedBox(
                     height: 13,
@@ -153,17 +171,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "empty_password_val".tr;
+                        return "password required".tr;
                       } else if (value.length < 8) {
-                        return "weak_password_val".tr;
+                        return "password weak".tr;
                       }
                       return null;
                     },
                     hintText: "password".tr,
+                    prefixIcon: Icon(
+                      Icons.lock_outline,
+                      size: 26,
+                      color: Colors.grey.shade600,
+                    ),
                     controller: passwordController,
                     keyboardType: TextInputType.text,
                     obSecured: passwordHidden,
                     suffixIcon: IconButton(
+                      highlightColor: Colors.transparent,
                       icon: passwordHidden == true
                           ? const Icon(Icons.visibility_off)
                           : const Icon(Icons.visibility),
@@ -183,17 +207,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DefaultFormField(
                     validator: (value) {
                       if (value.toString().isEmpty) {
-                        return "empty_password_confirmation_val".tr;
+                        return "Confirm password required".tr;
                       } else if (value != passwordController.text) {
-                        return "password_didnt_match_val".tr;
+                        return "Password does not match".tr;
                       }
                       return null;
                     },
-                    hintText: "password_confirmation".tr,
+                    hintText: "Confirm Password".tr,
+                    prefixIcon: Icon(
+                      Icons.lock_outline,
+                      size: 26,
+                      color: Colors.grey.shade600,
+                    ),
                     controller: confirmPasswordController,
                     keyboardType: TextInputType.text,
                     obSecured: confirmationHidden,
                     suffixIcon: IconButton(
+                      highlightColor: Colors.transparent,
                       icon: confirmationHidden == true
                           ? const Icon(Icons.visibility_off)
                           : const Icon(Icons.visibility),
@@ -215,7 +245,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (state is RegisterErrorState) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
-                            "auth_failed".tr,
+                            "sign up failed".tr,
                             textDirection: TextDirection.rtl,
                           ),
                         ));
@@ -225,36 +255,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                     },
                     builder: (context, state) {
-                      if (state is RegisterLoadingState) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else {
-                        return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
+                      return Center(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.07,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: ModalProgressHUD(
+                              inAsyncCall: state is RegisterLoadingState,
+                              color: Colors.black,
+                              opacity: 0.6,
+                              progressIndicator:
+                                  const SpinKitFadingCircle(color: Colors.blue),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    splashFactory: NoSplash.splashFactory,
+                                    backgroundColor: const Color(0xff609FD8),
+                                    fixedSize: Size(
+                                      MediaQuery.of(context).size.width * 0.7,
+                                      MediaQuery.of(context).size.height * 0.07,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      authCubit
+                                          .register(
+                                              fullNameController.text,
+                                              emailController.text,
+                                              _phoneNumber.toString(),
+                                              passwordController.text)
+                                          .then(
+                                            (value) => Get.to(
+                                              () => ConfirmCodeView(
+                                                phone: _phoneNumber.toString(),
+                                              ),
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  child: Text(
+                                    "sign up".tr,
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ),
                               ),
-                              backgroundColor: const Color(0xff609FD8),
-                              fixedSize: const Size.fromHeight(60),
                             ),
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                authCubit.register(
-                                    fullNameController.text,
-                                    emailController.text,
-                                    _phoneNumber.toString(),
-                                    passwordController.text);
-                              }
-                            },
-                            child: Text(
-                              "sign_up".tr,
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ));
-        
-
-                      }
+                          ),
+                        ),
+                      );
                     },
                   ),
                   const SizedBox(
@@ -264,7 +320,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "already_have_account".tr,
+                        "already have account".tr,
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -275,7 +331,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Get.off(const LoginScreen());
                         },
                         child: Text(
-                          "sign_in".tr,
+                          "sign in".tr,
                           style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w400,

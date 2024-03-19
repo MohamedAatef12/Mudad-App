@@ -2,10 +2,11 @@ import 'dart:developer';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:mudad_app/view/auth/helper_methods.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
-import '../core/design/app_button.dart';
-import '../core/logic/helper_methods.dart';
 
 class ConfirmCodeView extends StatefulWidget {
   const ConfirmCodeView({
@@ -44,11 +45,11 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             vertical: 70,
           ),
           children: [
-            const Text(
+            Text(
               textAlign: TextAlign.center,
-              "Verification Code",
-              style: TextStyle(
-                fontSize: 18,
+              "Verification Code".tr,
+              style: const TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -57,10 +58,9 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             ),
             Text(
               textAlign: TextAlign.center,
-              textDirection: TextDirection.ltr,
-              'سيتم ارسال كود التحقق الي رقم الهاتف ${widget.phone}',
+              'Verification Description'.tr,
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 18,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -74,9 +74,9 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                 length: 6,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "يرجي ادخال الكود";
-                  } else if (value.length < 5) {
-                    return "يجب ان يكون الكود 6 ارقم";
+                    return "Please enter the code".tr;
+                  } else if (value.length < 6) {
+                    return "the code must be 6 digits".tr;
                   }
                   return null;
                 },
@@ -96,22 +96,57 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             const SizedBox(
               height: 60,
             ),
-            ElevateButton(
-              text: "Verify",
-              onPress: () {
-                if (formKey.currentState!.validate()) {
-                  sentCode();
-                }
-              },
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.07,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: ModalProgressHUD(
+                    inAsyncCall: false,
+                    color: Colors.black,
+                    opacity: 0.6,
+                    progressIndicator:
+                        const SpinKitFadingCircle(color: Colors.blue),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: const Color(0xff609FD8),
+                          splashFactory: NoSplash.splashFactory,
+                          fixedSize: Size(
+                            MediaQuery.of(context).size.width * 0.7,
+                            MediaQuery.of(context).size.height * 0.07,
+                          ),
+                        ),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            sentCode();
+                          }
+                        },
+                        child: Text("Verify".tr,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 57,
             ),
-            const Text(
-              "لم تستلم الكود ؟\nيمكنك إعادة إرسال الكود بعد",
+            Text(
+              "did not receive the code".tr,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
+              style: const TextStyle(
+                fontSize: 20,
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -155,9 +190,9 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                         log('resend code');
                         setState(() {});
                       },
-                      child: const Text(
-                        "إعادة الإرسال",
-                        style: TextStyle(
+                      child: Text(
+                        "send again".tr,
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,

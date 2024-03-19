@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:mudad_app/view/auth/confirm_code/view.dart';
-import 'package:mudad_app/view/auth/forget_password/view.dart';
 import 'package:mudad_app/view/auth/login/view.dart';
 import 'package:mudad_app/view/auth/sign_up/view.dart';
 
@@ -23,7 +22,7 @@ appRoutes() => [
       ),
       GetPage(
         name: '/home',
-        page: () =>  const HomePage(),
+        page: () => const HomePage(),
       ),
       GetPage(
           name: '/vision',
@@ -60,5 +59,4 @@ appRoutes() => [
       GetPage(name: '/login', page: () => const LoginScreen()),
       // GetPage(name: '/forgetPassword', page: () => const ForgetPassword()),
       GetPage(name: '/confirmCode', page: () => const ConfirmCodeView()),
-
     ];

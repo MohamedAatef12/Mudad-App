@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../reusable_widgets/password_textField.dart';
-import '../core/design/app_button.dart';
 
 class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});
@@ -105,11 +104,11 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             const SizedBox(
               height: 44,
             ),
-            ElevateButton(
-              text: "Verify",
-              onPress: () {
+            ElevatedButton(
+              onPressed: () {
                 if (formKey.currentState!.validate()) {}
               },
+              child: const Text("Verify"),
             ),
           ],
         ),

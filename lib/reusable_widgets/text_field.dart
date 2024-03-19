@@ -10,12 +10,7 @@ class DefaultFormField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final void Function()? onEditingComplete;
   final void Function(String)? onChanged;
-
-
-  bool obSecured;
-
-
-
+  final bool obSecured;
   final bool enabled;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -25,8 +20,6 @@ class DefaultFormField extends StatelessWidget {
   final TextStyle? suffixTextStyle;
   final Color? backgroundColor;
   final Color? textColor;
-
-  // final Color? labelColor;
   final Color? cursorColor;
   final double radius;
   final double? height;
@@ -45,7 +38,7 @@ class DefaultFormField extends StatelessWidget {
   final TextInputAction textInputAction;
   final String obscuringChar;
 
-  DefaultFormField({
+  const DefaultFormField({
     Key? key,
     required this.controller,
     this.validator,
@@ -70,8 +63,6 @@ class DefaultFormField extends StatelessWidget {
     this.inputDisabledBorder,
     this.horizontalPadding = 0,
     this.textColor,
-
-    // this.labelColor = ,
     this.contentPadding,
     this.containerAlignment,
     this.suffixText,
@@ -80,7 +71,7 @@ class DefaultFormField extends StatelessWidget {
     this.readOnly = false,
     this.cursorColor,
     this.maxLength,
-    this.textDirection = TextDirection.ltr,
+    this.textDirection,
     this.textAlign = TextAlign.start,
     this.textInputAction = TextInputAction.next,
     this.obscuringChar = "*",
@@ -104,54 +95,42 @@ class DefaultFormField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       onChanged: onChanged,
       onTap: onTap,
-      obscureText: obSecured ,
+      obscureText: obSecured,
       style: TextStyle(
         color: textColor,
       ),
-
-
       decoration: InputDecoration(
-
         helperStyle: const TextStyle(backgroundColor: Colors.transparent),
         filled: true,
         fillColor: Colors.white,
-        // counterText: '',
         suffixStyle: suffixTextStyle,
         suffixText: suffixText,
         contentPadding: contentPadding,
         isDense: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         suffixIconConstraints: suffixIconConstraints,
-        // labelStyle: Theme.of(context).textTheme.caption!.copyWith(
-        //     // color: labelColor,
-        //     ),
         labelText: labelText,
-        focusedErrorBorder:OutlineInputBorder(
-          borderSide: const BorderSide(width: 1, color:Colors.red),
-          borderRadius: BorderRadius.circular(8.0),
-        ) ,
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(width: 1, color:Colors.red),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(width: 1, color: Colors.red),
           borderRadius: BorderRadius.circular(8.0),
         ),
-        enabledBorder:  OutlineInputBorder(
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(width: 1, color: Colors.red),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(width: 1, color: Colors.grey),
           borderRadius: BorderRadius.circular(8.0),
         ),
-        focusedBorder:  OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(width: 1, color: AppColors.buttonColor),
           borderRadius: BorderRadius.circular(8.0),
         ),
-
-        // disabledBorder: inputDisabledBorder,
-        // focusedBorder: inputFocusedBorder,
         hintText: hintText,
         hintStyle: const TextStyle(
           color: Colors.grey,
         ),
-        hintTextDirection: TextDirection.ltr,
         prefixIcon: prefixIcon,
-
         suffixIcon: suffixIcon,
       ),
     );

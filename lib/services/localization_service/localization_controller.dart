@@ -15,23 +15,48 @@ class LocalizationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
-          "sign_in": "Sign In",
-          "welcome_back": "Welcome Back",
-          "sign_in_description": "Please Sign in to access to your account",
-          "phone": "Phone",
-          "phone_required": "Phone number is required",
-          "phone_length": "Phone number must be 11 digits",
-          "forget_password": "Forget Password!",
+          // AUTH
+          "sign in": "Sign In",
+          "welcome back": "Welcome Back 👋",
+          "sign in description": "Please Sign in to access to your account",
+          "email": "Email Address",
+          "email required": "Email Address is required",
+          "email invalid": "Email Address is invalid",
+          "password": "Password",
+          "password required": "Password is required",
+          "password weak": "The password is weak",
+          'password invalid': 'The password is invalid',
           "login": "Login",
-          "no_account": "Don't have account?",
-          "sign_up": "Sign up",
-          'send_again': 'Send Again',
-          'Didn\'t get the code? \n You can resend it':
-              'Didn\'t get the code? \n You can resend it',
-          'the code must be 6 digits': 'the code must be 6 digits',
+          "no account": "Don't have account?",
+          "sign up": "Sign up",
+          'Authentication failed': 'Authentication failed',
+
+          'Create Account': 'Create Account',
+          'Sign up description': 'Please Sign up to access to your account',
+          'name': 'Full Name',
+          "phone": "Phone",
+          "phone required": "Phone number is required",
+          "phone length": "Phone number must be 11 digits",
+          'Confirm Password': 'Confirm Password',
+          'Confirm password required': 'Confirm password required',
+          'Password does not match': 'Password does not match',
+          'sign up failed': 'Sign up failed',
+          'already have account': 'Already have account?',
+
+          'Verification Code': 'Verification Code',
+          'Verification Description':
+              'A verification code will be sent to the phone number',
           'Please enter the code': 'Please enter the code',
+          'the code must be 6 digits': 'the code must be 6 digits',
+          'did not receive the code':
+              'You did not receive the code?\nYou can resend it!',
+          'Verify': 'Verify',
+          'send again': 'Send Again',
+          'The provided phone number is not valid':
+              'The provided phone number is not valid',
           'A verification code will be sent to your phone number':
               'A verification code will be sent to your phone number',
+
           'Apple Pay': 'Apple Pay',
           'Bank transfer': 'Bank transfer',
           'Review your order': 'Review your order',
@@ -42,40 +67,8 @@ class LocalizationService extends Translations {
               'All information about your computer is safe',
           'PayPal': 'PayPal',
           'Visa/MasterCard': 'Visa/MasterCard',
-          'Create a new password': 'Create a new password',
-          'Your new password must be different from previous used passwords':
-              'Your new password must be different from previous used passwords',
-          'Password': 'Password',
-          'Password is required': 'Password is required',
-          'The password is weak': 'The password is weak',
-          'Confirm Password': 'Confirm Password',
-          'Confirm password required': 'Confirm password required',
-          'Password does not match': 'Password does not match',
-          'Verify': 'Verify',
-          'Forgot Password': 'Forgot Password',
-          'Enter the Email Address \nto reset your password':
-              'Enter the Email Address \nto reset your password',
-          'We will send you a code to reset \nyour password':
-              'We will send you a code to reset \nyour password',
-          'Phone': 'Phone',
-          'Phone number required': 'Phone number required',
-          'The phone number must be 11 digits':
-              'The phone number must be 11 digits',
           'Send': 'Send',
-          'Please Sign in to access to your account':
-              'Please Sign in to access to your account',
-          'Forget Password!': 'Forget Password!',
-          'Login': 'Login',
-          'Don\'t have account?': 'Don\'t have account?',
-          'Sign up': 'Sign up',
-          'Create Account': 'Create Account',
-          'Please Sign up to access to your account':
-              'Please Sign up to access to your account',
-          'Full Name': 'Full Name',
-          'Please enter your name': 'Please enter your name',
-          'Please write your name in three letters':
-              'Please write your name in three letters',
-          'Already have account?': 'Already have account?',
+
           'Share the app': 'Share the app',
           'Settings': 'Settings',
           'Privacy policies': 'Privacy policies',
@@ -205,6 +198,47 @@ class LocalizationService extends Translations {
               'Madad seeks to provide a safe and effective experience for users. The user is required to read these terms and conditions carefully and fully understand them before using the application.\n',
         },
         'ar': {
+          // SIGN IN
+          "sign in": "تسجيل الدخول",
+          "welcome back": "مرحبا بك 👋",
+          "sign in description": "الرجاء تسجيل الدخول للوصول إلى حسابك",
+          "email": "البريد الإلكتروني",
+          "email required": "البريد الإلكتروني مطلوب",
+          "email invalid": "البريد الإلكتروني غير صالح",
+          "password": "كلمة المرور",
+          "password required": "كلمة المرور مطلوبة",
+          "password weak": "كلمة المرور ضعيفة",
+          'password invalid': 'كلمة المرور غير صالحة',
+          "login": "تسجيل الدخول",
+          "no account": "ليس لديك حساب؟",
+          'Authentication failed': 'فشل التوثيق',
+          "sign up": "سجل الان",
+
+          // SIGN UP
+          'Create Account': 'إنشاء حساب',
+          'Sign up description': 'الرجاء التسجيل للوصول إلى حسابك',
+          'name': 'الاسم ثلاثي',
+          'name required': 'الاسم مطلوب',
+          "phone": "الهاتف",
+          "phone required": "رقم الهاتف مطلوب",
+          "phone length": "يجب ان يكون رقم الهاتف 11 رقم",
+          'Confirm Password': 'تأكيد كلمة المرور',
+          'Confirm password required': 'تاكيد كلمه المرور مطلوبه',
+          'Password does not match': 'كلمه المرور غير متطابقه',
+          'sign up failed': 'فشل انشاء الحساب',
+          'already have account': 'هل لديك حساب؟',
+
+          'Verification Code': 'كود التحقق',
+          'Verification Description': 'سيتم ارسال كود التحقق الي رقم الهاتف',
+          'Please enter the code': 'الرجاء ادخال الكود',
+          'the code must be 6 digits': 'يجب ان يكون الكود 6 ارقم',
+          'did not receive the code':
+              'لم تستلم الكود؟\n يمكنك اعادة ارسال الكود',
+          'Verify': 'تحقق',
+          'send again': 'إعادة الارسال',
+          'The provided phone number is not valid':
+              'رقم الهاتف المقدم غير صالح',
+
           'Debit cards': 'بطاقات الخصم',
           'Gift cards': 'بطاقات هدايا',
           'Choose the payment method': 'إختر طريقة الدفع',
@@ -212,38 +246,8 @@ class LocalizationService extends Translations {
               'جميع المعلومات الخاصة بحاسبك آمنه',
           'PayPal': 'باي بال',
           'Visa/MasterCard': 'بطاقة فيزا/ماستر كارد',
-          'Create a new password': 'إنشاء كلمة مرور جديدة',
-          'Your new password must be different from previous used passwords':
-              'يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمات المرور السابقة المستخدمة',
-          'Password': 'كلمة المرور',
-          'Password is required': 'كلمه المرور مطلوبه',
-          'The password is weak': 'كلمه المرور ضعيفه',
-          'Confirm Password': 'تأكيد كلمة المرور',
-          'Confirm password required': 'تاكيد كلمه المرور مطلوبه',
-          'Password does not match': 'كلمه المرور غير متطابقه',
-          'Verify': 'تحقق',
-          'Forgot Password': 'نسيت كلمة المرور',
-          'Enter the Email Address \nto reset your password':
-              'أدخل البريد الإلكتروني \n لإعادة تعيين كلمة المرور',
-          'We will send you a code to reset \nyour password':
-              'سنرسل لك كود لإعادة تعيين \nكلمة المرور',
-          'Phone': 'الهاتف',
-          'Phone number required': 'رقم الهاتف مطلوب',
-          'The phone number must be 11 digits': 'يجب ان يكون رقم الهاتف 11 رقم',
+
           'Send': 'إرسال',
-          'Please Sign in to access to your account':
-              'الرجاء تسجيل الدخول للوصول إلى حسابك',
-          'Forget Password!': 'نسيت كلمة المرور!',
-          'Login': 'تسجيل الدخول',
-          'Don\'t have account?': 'ليس لديك حساب؟',
-          'Sign up': 'التسجيل',
-          'Create Account': 'إنشاء حساب',
-          'Please Sign up to access to your account':
-              'الرجاء التسجيل للوصول إلى حسابك',
-          'Full Name': 'الاسم الكامل',
-          'Please enter your name': 'برجاء ادخال اسمك',
-          'Please write your name in three letters': 'يرجي كتابه اسمك ثلاثي',
-          'Already have account?': 'هل لديك حساب؟',
           'Share the app': 'شارك التطبيق',
           'Settings': 'الإعدادات',
           'Privacy policies': 'سياسات الخصوصية',
