@@ -12,11 +12,10 @@ import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
-
-import 'app_constants/app_routes.dart';
+ import 'app_constants/app_routes.dart';
 import 'firebase_options.dart';
 import 'google_maps/home_map/cubit/cubit.dart';
-
+import 'package:mudad_app/google_maps/mosque_map/search_map.dart';
 void main() async {
   GeocodingPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +63,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<LocationCubit>(
       create: (context) => LocationCubit(),
       child: GetMaterialApp(
+        home: SearchMap(),
         translations: LocalizationService(),
         locale: LocalizationService.local,
         fallbackLocale: LocalizationService.fallbackLocale,
@@ -71,8 +71,8 @@ class MyApp extends StatelessWidget {
             ? TextDirection.ltr
             : TextDirection.ltr,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/splash',
-        //initialRoute: '/home',
+        // initialRoute: '/splash',
+        // initialRoute: '/home',
         getPages: appRoutes(),
       ),
     );
