@@ -8,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:mudad_app/BolcOpserver.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
-import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view_model/auth_cubit/auth_cubit.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
@@ -17,6 +16,7 @@ import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 import 'app_constants/app_routes.dart';
 import 'firebase_options.dart';
 import 'google_maps/home_map/cubit/cubit.dart';
+import 'google_maps/mosque_map/search_map.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,7 +74,8 @@ class MyApp extends StatelessWidget {
         ),
         fallbackLocale: LocalizationService.fallbackLocale,
         debugShowCheckedModeBanner: false,
-       initialRoute: storage.read("userToken")== null? '/splash' : '/home',
+        // initialRoute: storage.read("userToken") == null ? '/splash' : '/home',
+        home: const SearchMap(),
         getPages: appRoutes(),
       ),
     );

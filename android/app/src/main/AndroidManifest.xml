@@ -4,15 +4,15 @@
     <!-- For apps with targetSDK=31 (Android 12) -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:label="mudad_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDuV3b8WMIFV26d0FYECVfDSD_jeHi0-Iw"/>
+            android:value="AIzaSyDUZcAN7Q1vKW9eKEKCwNs8Y-HJ4NmVQuQ"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mudad_app/view/auth/login/view.dart';
 import 'package:mudad_app/view/auth/sign_up/view.dart';
-import 'package:mudad_app/view/home_screen/HomeScreen.dart';
 
 import 'confirm_code/view.dart';
 
@@ -21,12 +21,12 @@ void toGetNavigate(Widget page) {
 
 FirebaseAuth auth = FirebaseAuth.instance;
 String? verifyId;
-bool isCodeSent = false;
+bool isCodeTrue = false;
 void otpAuth({required String phone, duration}) async {
   log(phone);
   await FirebaseAuth.instance.verifyPhoneNumber(
     phoneNumber: phone,
-    timeout: duration,
+    timeout: const Duration(seconds: 60),
     verificationCompleted: (PhoneAuthCredential credential) {
       auth.signInWithCredential(credential).then((value) {
         if (value.user != null) {
@@ -55,23 +55,23 @@ void otpAuth({required String phone, duration}) async {
 
 sentCode() async {
   log(codeController.text);
-
   try {
     String smsCode = codeController.text;
-    isCodeSent = true;
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verifyId!, smsCode: smsCode);
     await auth
         .signInWithCredential(credential)
-        .then((value) => Get.to(() => const HomePage()));
-    isCodeSent = false;
+        .then((value) => Get.to(() => const LoginScreen()));
+    isCodeTrue = true;
+    log('isCodeTrue: $isCodeTrue');
   } catch (e) {
     log(e.toString());
     Get.showSnackbar(
       GetSnackBar(
-        message: e.toString(),
+        message: 'The code is not correct'.tr,
         duration: const Duration(seconds: 3),
       ),
     );
+    isCodeTrue = false;
   }
 }

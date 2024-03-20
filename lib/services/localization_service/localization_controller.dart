@@ -15,16 +15,15 @@ class LocalizationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
-
-          "empty_order":"Please select a quantity for your order!",
-          "language":"Language",
-          "sale_value":"Sale value",
-          "what_is_code":"What is Mudad code?",
-          "code_info":"You need to share this code with your friends "
+          "empty_order": "Please select a quantity for your order!",
+          "language": "Language",
+          "sale_value": "Sale value",
+          "what_is_code": "What is Mudad code?",
+          "code_info": "You need to share this code with your friends "
               "and anyone uses this code will get a 10% sale on his donation "
               "\nuse it now!",
-          "Your_code:":"Your code is:",
-          "sign_out":"SignOut",
+          "Your_code:": "Your code is:",
+          "sign_out": "SignOut",
           // AUTH
           "sign in": "Sign In",
           "welcome back": "Welcome Back 👋",
@@ -78,7 +77,7 @@ class LocalizationService extends Translations {
           'PayPal': 'PayPal',
           'Visa/MasterCard': 'Visa/MasterCard',
           'Send': 'Send',
-          'vouchers':"Vouchers",
+          'vouchers': "Vouchers",
           "Enter_Mudad_code": "Enter Mudad code here!",
 
           'Share the app': 'Share the app',
@@ -98,23 +97,23 @@ class LocalizationService extends Translations {
               'The Location has been saved successfully',
           'Find a home': 'Find a home',
           'Choose': 'Choose',
-          'Mecca\nMosques': 'Mecca\nMosques',
-          'AL Madinah\nMosques': 'AL Madinah\nMosques',
-          'Jeddah\nMosques': 'Jeddah\nMosques',
-          'Umrah pilgrims\nMosques': 'Umrah pilgrims\nMosques',
+          'Mecca\nMosques': 'Makkah',
+          'AL Madinah\nMosques': 'AL Madinah',
+          'Jeddah\nMosques': 'Jeddah',
+          'Umrah pilgrims\nMosques': 'Umrah pilgrims',
           'Two-year warranty': 'Two-year warranty',
           '   riyal ': '   riyal ',
           'Show': 'Show',
           'Selected mosques:': 'Selected mosques:',
-          'Search for a place or mosque': 'Search for a place or mosque',
+          'Search for a place or mosque': '  Search for a place or mosque',
           'Selected mosques': 'Selected mosques',
           'Cancel': 'Cancel',
           'Add the mosque to the list': 'Add the mosque to the list',
           'The mosque is already on the list':
               'The mosque is already on the list',
-          'Mecca\nOrphanages': 'Mecca\nOrphanages',
-          'AL Madinah\nOrphanages': 'AL Madinah\nOrphanages',
-          'Jeddah\nOrphanages': 'Jeddah\nOrphanages',
+          'Mecca\nOrphanages': 'Mecca',
+          'AL Madinah\nOrphanages': 'AL Madinah',
+          'Jeddah\nOrphanages': 'Jeddah',
           'Selected orphanages': 'Selected orphanages',
           'Save Location': 'Save Location',
           'Location': 'Location',
@@ -124,6 +123,7 @@ class LocalizationService extends Translations {
               'The orphanage is already on the list',
           'Notifications': 'Notifications',
           'Choose Service': 'Choose Service',
+          'The code is not correct': 'The code is not correct',
           'policy': 'Privacy Policy\n'
               'Privacy policy for "Mudad" application\n'
               'Your use of the “Maddad” application and your provision of your personal information to us is considered your agreement to the terms contained in the privacy policy. “The Company” or “We” is referred to as the company responsible for the “Maddad” application registered in the Kingdom of Saudi Arabia, while “You” or “The User” represents anyone who uses the “Maddad” application. If you do not agree to these terms, you must stop using the application.\n'
@@ -210,15 +210,15 @@ class LocalizationService extends Translations {
               'Madad seeks to provide a safe and effective experience for users. The user is required to read these terms and conditions carefully and fully understand them before using the application.\n',
         },
         'ar': {
-          "empty_order":"يرجى تحديد كميه لطلبك!",
-          "language":"اللغه",
-          "sale_value":"قيمه الخصم",
-          "what_is_code":"ما هو كود مدد؟",
-          "code_info":"انت بحاجه لمشاركه هذا الكود مع اصدقائك "
+          "empty_order": "يرجى تحديد كميه لطلبك!",
+          "language": "اللغه",
+          "sale_value": "قيمه الخصم",
+          "what_is_code": "ما هو كود مدد؟",
+          "code_info": "انت بحاجه لمشاركه هذا الكود مع اصدقائك "
               "وكل من يستخدم هذا الكود سوف يحصل على خصم على قيمه تبرعه"
               "\nاستخدمه الان!",
-          "Your_code:":"الكود الخاص بك هو:",
-          "sign_out":"تسجيل الخروج",
+          "Your_code:": "الكود الخاص بك هو:",
+          "sign_out": "تسجيل الخروج",
           // SIGN IN
           "sign in": "تسجيل الدخول",
           "welcome back": "مرحبا بك 👋",
@@ -267,7 +267,7 @@ class LocalizationService extends Translations {
               'جميع المعلومات الخاصة بحاسبك آمنه',
           'PayPal': 'باي بال',
           'Visa/MasterCard': 'بطاقة فيزا/ماستر كارد',
-          'vouchers':"بطاقات الخصم",
+          'vouchers': "بطاقات الخصم",
           "Enter_Mudad_code": "ادخل كود مدد هنا!",
           'Send': 'إرسال',
           'Share the app': 'شارك التطبيق',
@@ -286,15 +286,15 @@ class LocalizationService extends Translations {
           'The Location has been saved successfully': 'تم حفظ الموقع بنجاح',
           'Find a home': 'ابحث عن منزل',
           'Choose': 'اخـتـيـار',
-          'Mecca\nMosques': 'مساجد\nمــكــة',
-          'AL Madinah\nMosques': ' مساجد\n المدينة',
-          'Jeddah\nMosques': 'مساجد\n  جــدة',
-          'Umrah pilgrims\nMosques': 'مساجد\n  المعتمرين',
+          'Mecca\nMosques': 'مــكــة',
+          'AL Madinah\nMosques': 'المدينة',
+          'Jeddah\nMosques': 'جــدة',
+          'Umrah pilgrims\nMosques': 'المعتمرين',
           'Two-year warranty': 'ضمان لمدة سنتين',
           '   riyal ': '   ريال ',
           'Show': 'عرض',
           'Selected mosques:': 'المساجد المختارة:',
-          'Search for a place or mosque': 'ابحث عن مكان او مسجد',
+          'Search for a place or mosque': '  ابحث عن مكان او مسجد',
           'Selected mosques': 'المساجد المختارة',
           'Cancel': 'إلغاء',
           'Add the mosque to the list': 'اضف المسجد الى القائمة',
@@ -311,6 +311,7 @@ class LocalizationService extends Translations {
               'دار الايتام موجود في القائمة بالفعل',
           'Notifications': 'الإشعارات',
           'Choose Service': 'اختيار الخدمة',
+          'The code is not correct': 'الكود غير صحيح',
           'policy': 'سياسة الخصوصية\n'
               'سياسة الخصوصية لتطبيق "مدد"\n'
               'استخدامك لتطبيق “مدد” وتقديمك لمعلوماتك الشخصية لنا يعتبر موافقة منك على البنود الواردة في سياسة الخصوصية. يُشار إلى “الشركة” أو “نحن” كالشركة المسؤولة عن تطبيق “مدد” المُسجلة في المملكة العربية السعودية، بينما “أنت” أو “المستخدم” يُمثل أي شخص يستخدم تطبيق “مدد”. إذا كنت غير موافق على هذه البنود، فعليك التوقف عن استخدام التطبيق.\n'
