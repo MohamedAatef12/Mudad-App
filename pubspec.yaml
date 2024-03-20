@@ -19,7 +19,7 @@ dependencies:
   flutter_switch: ^0.3.2
   get_storage: ^2.1.1
   google_maps_flutter: ^2.2.0
-  geocoding: ^2.1.1
+  geocoding: ^2.0.1
   flutter_google_places: ^0.3.0
   flutter_polyline_points: ^1.0.0
 #  awesome_snackbar_content: ^0.0.8

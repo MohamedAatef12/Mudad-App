@@ -4,7 +4,7 @@ import 'end_points.dart';
 
 class DioHelper {
   static Dio dio = Dio();
-  static String baseUrl = 'http://10.0.2.2:8080/api/v1/';
+  static String baseUrl = 'https://15da-102-184-171-120.ngrok-free.app/api/v1/';
 
   static void init() {
     dio = Dio(

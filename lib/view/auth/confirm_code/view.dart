@@ -24,7 +24,7 @@ final codeController = TextEditingController();
 class _ConfirmCodeViewState extends State<ConfirmCodeView> {
   final formKey = GlobalKey<FormState>();
   bool isTimerFinished = false;
-  Duration duration = const Duration(seconds: 30);
+  Duration duration = const Duration(seconds: 60);
 
   @override
   void initState() {
@@ -125,6 +125,7 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             sentCode();
+                            Get.back();
                           }
                         },
                         child: Text("Verify".tr,
@@ -185,7 +186,6 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                         isTimerFinished = false;
                         otpAuth(
                           phone: widget.phone!,
-                          duration: duration,
                         );
                         log('resend code');
                         setState(() {});

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,9 @@ class BuildProduct extends StatelessWidget {
     final productCubit = BlocProvider.of<ProductsCubit>(context);
 
     return Positioned(
-      bottom: 80,
+      bottom: MediaQuery.of(context).size.height * 0.1,
+      left: MediaQuery.of(context).size.width * 0.065,
+      right: MediaQuery.of(context).size.width * 0.065,
       child: BlocProvider(
         create: (context) => ProductsCubit()..loadProducts(),
         child: BlocConsumer<ProductsCubit, ProductsState>(
@@ -35,7 +38,11 @@ class BuildProduct extends StatelessWidget {
             return SizedBox(
               height: 200,
               width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                separatorBuilder: (context, index) => const SizedBox(
+                  width: 10,
+                ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   return ProductCard(
@@ -82,9 +89,7 @@ class BuildProduct extends StatelessWidget {
                   );
                 },
                 physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 22),
                 scrollDirection: Axis.horizontal,
-                reverse: true,
               ),
             );
           },

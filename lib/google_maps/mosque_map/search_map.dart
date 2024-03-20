@@ -27,13 +27,13 @@ const CameraPosition initialCameraPosition = CameraPosition(
 );
 late GoogleMapController googleMapController;
 final places =
-    GoogleMapsPlaces(apiKey: 'AIzaSyDuV3b8WMIFV26d0FYECVfDSD_jeHi0-Iw');
+    GoogleMapsPlaces(apiKey: 'AIzaSyCtfitJu0HrEEcaFuaxnfJTjwqvE2tY2dY');
 List<Prediction> _searchResults = [];
 final List<Marker> _markers = [];
 final List<String> selectedMosques = [];
 final List<String> keywords = [
   'mosque',
-  // 'masjid',
+  'masjid',
   // 'مسجد',
   // 'جامع',
   // 'musalla',
@@ -75,33 +75,33 @@ class _SearchMapState extends State<SearchMap> {
           resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
-              // GoogleMap(
-              //   initialCameraPosition: initialCameraPosition,
-              //   onMapCreated: (GoogleMapController controller) {
-              //     googleMapController = controller;
-              //   },
-              //   cameraTargetBounds: CameraTargetBounds(
-              //     LatLngBounds(
-              //       southwest:
-              //           const LatLng(17.607613374386183, 37.98344273015662),
-              //       northeast: const LatLng(32.1048459480552, 51.0802984261652),
-              //     ),
-              //   ),
-              //   zoomControlsEnabled: false, // Disable default zoom controls
-              //   myLocationButtonEnabled:
-              //       false, // Disable default location button
-              //   zoomGesturesEnabled: true,
-              //   onTap: (LatLng latLng) {
-              //     // Dismiss the keyboard and clear search results on map tap
-              //     if (_searchResults.isNotEmpty) {
-              //       clearSearchResults();
-              //       FocusScope.of(context).unfocus();
-              //     } else {
-              //       FocusScope.of(context).unfocus();
-              //     }
-              //   },
-              //   markers: Set<Marker>.of(_markers),
-              // ),
+              GoogleMap(
+                initialCameraPosition: initialCameraPosition,
+                onMapCreated: (GoogleMapController controller) {
+                  googleMapController = controller;
+                },
+                cameraTargetBounds: CameraTargetBounds(
+                  LatLngBounds(
+                    southwest:
+                        const LatLng(17.607613374386183, 37.98344273015662),
+                    northeast: const LatLng(32.1048459480552, 51.0802984261652),
+                  ),
+                ),
+                zoomControlsEnabled: false, // Disable default zoom controls
+                myLocationButtonEnabled:
+                    false, // Disable default location button
+                zoomGesturesEnabled: true,
+                onTap: (LatLng latLng) {
+                  // Dismiss the keyboard and clear search results on map tap
+                  if (_searchResults.isNotEmpty) {
+                    clearSearchResults();
+                    FocusScope.of(context).unfocus();
+                  } else {
+                    FocusScope.of(context).unfocus();
+                  }
+                },
+                markers: Set<Marker>.of(_markers),
+              ),
               Positioned(
                 top: MediaQuery.of(context).size.height / 40,
                 left: 0,
@@ -253,7 +253,7 @@ class _SearchMapState extends State<SearchMap> {
               ),
               const BuildProduct(),
               BuildChooseButton(
-                "location",
+                'location',
                 totalOrder,
                 selectedOrders,
               )
@@ -262,7 +262,7 @@ class _SearchMapState extends State<SearchMap> {
           floatingActionButton: Stack(
             children: [
               Positioned(
-                bottom: 355,
+                bottom: MediaQuery.of(context).size.height / 2.7,
                 right: 0,
                 child: Container(
                   width: 30,
@@ -288,8 +288,11 @@ class _SearchMapState extends State<SearchMap> {
                     backgroundColor: Colors.white,
                     onPressed: () {
                       googleMapController.animateCamera(
-                        CameraUpdate.newLatLng(
-                          const LatLng(25, 45),
+                        CameraUpdate.newCameraPosition(
+                          const CameraPosition(
+                            target: LatLng(25, 45),
+                            zoom: 5,
+                          ),
                         ),
                       );
                     },
@@ -302,7 +305,7 @@ class _SearchMapState extends State<SearchMap> {
                 ),
               ),
               Positioned(
-                bottom: 280,
+                bottom: MediaQuery.of(context).size.height / 3.5,
                 right: 0,
                 child: Container(
                   width: 30,
@@ -507,6 +510,7 @@ class _SearchMapState extends State<SearchMap> {
   }
 
   void _updateMarkers(List<PlacesSearchResult> places) async {
+    log(' _updateMarkers');
     if (places.isNotEmpty) {
       for (var place in places) {
         double lat = place.geometry!.location.lat;
@@ -531,6 +535,7 @@ class _SearchMapState extends State<SearchMap> {
       }
     }
     setState(() {});
+    log(' _updateMarkers setState())))');
   }
 
   void addMarkerToMosque(String mosqueName) async {
@@ -561,11 +566,6 @@ class _SearchMapState extends State<SearchMap> {
   // SEARCH
   Future<void> performAutocompleteSearch(String query) async {
     try {
-      LatLngBounds saudiArabiaBounds = LatLngBounds(
-        southwest: const LatLng(16.456808125987084, 34.92532922317433),
-        northeast: const LatLng(32.1048459480552, 51.0802984261652),
-      );
-
       PlacesAutocompleteResponse response = await places.autocomplete(
         query,
         components: [
@@ -584,14 +584,7 @@ class _SearchMapState extends State<SearchMap> {
               await places.getDetailsByPlaceId(prediction.placeId!);
 
           if (details.isOkay) {
-            Location location = details.result.geometry!.location;
-
-            // Convert Location to LatLng
-            LatLng locationLatLng = LatLng(location.lat, location.lng);
-
-            if (saudiArabiaBounds.contains(locationLatLng)) {
-              filteredResults.add(prediction);
-            }
+            filteredResults.add(prediction);
           }
         }
         setState(() {
@@ -693,7 +686,7 @@ class _SearchMapState extends State<SearchMap> {
           // Perform a new search and cache the results
           PlacesSearchResponse response = await places.searchNearbyWithRadius(
             location,
-            150, // Radius in meters
+            1500, // Radius in meters
             type: keyword,
             keyword: keyword,
           );

@@ -26,16 +26,16 @@ class PlaceButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: SizedBox(
-        width: 100,
+        width: MediaQuery.of(context).size.width * 0.25,
         height: 55,
         child: ElevatedButton.icon(
           style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsets>(
-              const EdgeInsets.all(0),
+              const EdgeInsets.all(5),
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
             minimumSize: MaterialStateProperty.all<Size>(
@@ -51,14 +51,14 @@ class PlaceButton extends StatelessWidget {
             width: iconWidth,
             height: iconHeight,
           ),
-          label: Text(
-            placeName,
-            textDirection: TextDirection.ltr,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: labelFontSize,
-              fontWeight: FontWeight.bold,
+          label: FittedBox(
+            child: Text(
+              placeName,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: labelFontSize,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),

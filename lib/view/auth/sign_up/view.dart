@@ -6,11 +6,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:mudad_app/view/auth/confirm_code/view.dart';
 
 import '../../../app_constants/app_colors.dart';
 import '../../../reusable_widgets/text_field.dart';
 import '../../../view_model/auth_cubit/auth_cubit.dart';
+import '../confirm_code/view.dart';
 import '../login/view.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -250,9 +250,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ));
                       }
-                      if (state is RegisterSuccessState) {
-                        Get.offNamed("login");
-                      }
+                      // if (state is RegisterSuccessState) {
+                      //   Get.offNamed("login");
+                      // }
                     },
                     builder: (context, state) {
                       return Center(
@@ -283,22 +283,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
-                                      print(_phoneNumber.toString());
+                                      // if (isCodeTrue == true) {
                                       authCubit
                                           .register(
                                               fullNameController.text,
                                               emailController.text,
                                               _phoneNumber.toString(),
-                                              passwordController.text);
-                                          // .then(
-                                          //   (value) => Get.to(
-                                          //     () => ConfirmCodeView(
-                                          //       phone: _phoneNumber.toString(),
-                                          //     ),
-                                          //   ),
-                                          // );
+                                              passwordController.text)
+                                          .then((value) {
+                                        Get.off(
+                                          () => ConfirmCodeView(
+                                            phone: _phoneNumber.toString(),
+                                          ),
+                                        );
+                                      });
                                     }
                                   },
+
+                                  // },
                                   child: Text(
                                     "sign up".tr,
                                     style: const TextStyle(

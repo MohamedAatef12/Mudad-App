@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   "Your zakat saves a life".tr,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 40,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     shadows: [
                       Shadow(
