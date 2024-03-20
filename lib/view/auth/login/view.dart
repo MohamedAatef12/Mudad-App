@@ -159,6 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       print(User.name);
                       storage.write("userToken", User.token);
                       storage.write("userName", User.name);
+                      storage.write("userEmail", User.email);
+                      storage.write("userPhone", User.phone);
                       Get.offNamed("home");
                     }
                   }, builder: (context, state) {

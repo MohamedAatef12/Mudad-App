@@ -60,6 +60,8 @@ class HomeDrawer extends StatelessWidget {
                       () {
                     // Get.toNamed("/orders");
                     storage.remove("userName");
+                    storage.remove("userEmail");
+                    storage.remove("userPhone");
                     storage.remove("userToken").then((value) {
                       Get.offAllNamed("login");
                     });
@@ -73,13 +75,13 @@ class HomeDrawer extends StatelessWidget {
                   top: MediaQuery.of(context).size.height * .2,
                   child: Column(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                           radius: 70,
                           backgroundImage: NetworkImage(
                               "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/640px-Flag_of_Palestine.svg.png")),
                       Text(
                         storage.read("userName"),
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       )
                     ],
                   ),

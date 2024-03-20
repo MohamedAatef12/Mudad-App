@@ -25,6 +25,7 @@ class BuildChooseButton extends StatelessWidget {
           // print(state.obs);
           Get.toNamed("payment");
         }
+
       },
       builder: (context, state) {
         if (state is OrdersLoading) {
@@ -52,7 +53,11 @@ class BuildChooseButton extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  orderCubit.submitOrder(location, totalOrder, orders);
+                  if(totalOrder == 0){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("empty_order".tr)));
+                  }else {
+                    orderCubit.submitOrder(location, totalOrder, orders);
+                  }
                 },
                 child: Text(
                   "Choose".tr,

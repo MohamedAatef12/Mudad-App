@@ -16,6 +16,7 @@ class LocalizationService extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
 
+          "empty_order":"Please select a quantity for your order!",
           "language":"Language",
           "sale_value":"Sale value",
           "what_is_code":"What is Mudad code?",
@@ -209,6 +210,7 @@ class LocalizationService extends Translations {
               'Madad seeks to provide a safe and effective experience for users. The user is required to read these terms and conditions carefully and fully understand them before using the application.\n',
         },
         'ar': {
+          "empty_order":"يرجى تحديد كميه لطلبك!",
           "language":"اللغه",
           "sale_value":"قيمه الخصم",
           "what_is_code":"ما هو كود مدد؟",

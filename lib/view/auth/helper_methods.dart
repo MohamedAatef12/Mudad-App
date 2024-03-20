@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mudad_app/view/auth/sign_up/view.dart';
 import 'package:mudad_app/view/home_screen/HomeScreen.dart';
 
 import 'confirm_code/view.dart';
@@ -29,7 +30,7 @@ void otpAuth({required String phone, duration}) async {
     verificationCompleted: (PhoneAuthCredential credential) {
       auth.signInWithCredential(credential).then((value) {
         if (value.user != null) {
-          Get.to(() => const HomePage());
+          Get.to(() => const SignUpScreen());
         }
       });
     },
