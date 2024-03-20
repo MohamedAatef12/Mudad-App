@@ -15,6 +15,16 @@ class LocalizationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+
+          "empty_order":"Please select a quantity for your order!",
+          "language":"Language",
+          "sale_value":"Sale value",
+          "what_is_code":"What is Mudad code?",
+          "code_info":"You need to share this code with your friends "
+              "and anyone uses this code will get a 10% sale on his donation "
+              "\nuse it now!",
+          "Your_code:":"Your code is:",
+          "sign_out":"SignOut",
           // AUTH
           "sign in": "Sign In",
           "welcome back": "Welcome Back 👋",
@@ -62,12 +72,14 @@ class LocalizationService extends Translations {
           'Review your order': 'Review your order',
           'Debit cards': 'Debit cards',
           'Gift cards': 'Gift cards',
-          'Choose the payment method': 'Choose the payment method',
+          'Choose the payment method': 'Choose payment method',
           'All information about your computer is safe':
               'All information about your computer is safe',
           'PayPal': 'PayPal',
           'Visa/MasterCard': 'Visa/MasterCard',
           'Send': 'Send',
+          'vouchers':"Vouchers",
+          "Enter_Mudad_code": "Enter Mudad code here!",
 
           'Share the app': 'Share the app',
           'Settings': 'Settings',
@@ -198,6 +210,15 @@ class LocalizationService extends Translations {
               'Madad seeks to provide a safe and effective experience for users. The user is required to read these terms and conditions carefully and fully understand them before using the application.\n',
         },
         'ar': {
+          "empty_order":"يرجى تحديد كميه لطلبك!",
+          "language":"اللغه",
+          "sale_value":"قيمه الخصم",
+          "what_is_code":"ما هو كود مدد؟",
+          "code_info":"انت بحاجه لمشاركه هذا الكود مع اصدقائك "
+              "وكل من يستخدم هذا الكود سوف يحصل على خصم على قيمه تبرعه"
+              "\nاستخدمه الان!",
+          "Your_code:":"الكود الخاص بك هو:",
+          "sign_out":"تسجيل الخروج",
           // SIGN IN
           "sign in": "تسجيل الدخول",
           "welcome back": "مرحبا بك 👋",
@@ -246,7 +267,8 @@ class LocalizationService extends Translations {
               'جميع المعلومات الخاصة بحاسبك آمنه',
           'PayPal': 'باي بال',
           'Visa/MasterCard': 'بطاقة فيزا/ماستر كارد',
-
+          'vouchers':"بطاقات الخصم",
+          "Enter_Mudad_code": "ادخل كود مدد هنا!",
           'Send': 'إرسال',
           'Share the app': 'شارك التطبيق',
           'Settings': 'الإعدادات',
@@ -392,3 +414,4 @@ class LocalizationService extends Translations {
     return storage.read('language') ?? 'en';
   }
 }
+// 3f522f0c-a476-42f6-98ec-b1d70d687e47

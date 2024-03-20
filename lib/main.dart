@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:mudad_app/BolcOpserver.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
+import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view_model/auth_cubit/auth_cubit.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
@@ -62,7 +63,8 @@ class MyApp extends StatelessWidget {
         color: AppColors.buttonColor,
         translations: LocalizationService(),
         // locale: const Locale('ar', 'EG'),
-        locale: const Locale('en', 'US'),
+        locale: LocalizationService.local,
+        // locale:  Locale("en", "US"),
         theme: ThemeData(
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: AppColors.buttonColor,
@@ -72,7 +74,7 @@ class MyApp extends StatelessWidget {
         ),
         fallbackLocale: LocalizationService.fallbackLocale,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/signUp',
+       initialRoute: storage.read("userToken")== null? '/splash' : '/home',
         getPages: appRoutes(),
       ),
     );

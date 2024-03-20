@@ -7,6 +7,8 @@ class EndPoint {
   static String orders = "${DioHelper.baseUrl}orders";
   static String loginUrl = "${DioHelper.baseUrl}auth/login";
   static String registerUrl = "${DioHelper.baseUrl}auth/register";
+
+
 // static int id = LoginCubit.loginId;
 // static String  name = "";
 //
@@ -14,3 +16,4 @@ class EndPoint {
 // static String editProfile = "user/profile/edit/$id}";
 // static String uploadPortofolio = "user/profile/portofolios/$id";
 }
+

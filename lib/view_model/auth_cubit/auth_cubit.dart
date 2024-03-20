@@ -13,7 +13,6 @@ class AuthCubit extends Cubit<AuthState> {
   static AuthCubit get(context) => BlocProvider.of(context);
   LoginModel loginModel = LoginModel();
   RegisterModel registerModel = RegisterModel();
-
   String? userRegToken;
 
   Future<void> login(String email, String password) async {
@@ -23,9 +22,16 @@ class AuthCubit extends Cubit<AuthState> {
           endPoint: EndPoint.loginUrl,
           data: {"email": email, "password": password}).then((value) {
         loginModel = LoginModel.fromJson(value.data);
-        print(loginModel.body!.token);
+
+        print(loginModel.body!.dDoc!.name);
       });
-      emit(LoginSuccessState());
+      emit(LoginSuccessState(
+        loginModel.body!.dDoc!.sId.toString(),
+        loginModel.body!.dDoc!.name.toString(),
+        loginModel.body!.token.toString(),
+        loginModel.body!.dDoc!.phoneNumber.toString(),
+        loginModel.body!.dDoc!.email.toString(),
+      ));
     } catch (e) {
       print(e.toString());
       emit(LoginErrorState());
@@ -43,10 +49,10 @@ class AuthCubit extends Cubit<AuthState> {
         "phoneNumber": phone
       }).then((value) {
         registerModel = RegisterModel.fromJson(value.data);
-        userRegToken =registerModel.body!.token;
-        print(userRegToken);
+        // userRegToken = registerModel.body!.token;
+        // print(userRegToken);
       });
-      emit(RegisterSuccessState(userRegToken!));
+      emit(RegisterSuccessState());
     } catch (e) {
       print(e.toString());
       emit(RegisterErrorState());

@@ -7,6 +7,7 @@ import 'package:mudad_app/app_constants/app_assets.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
+import 'package:uuid/uuid.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -21,6 +22,8 @@ String generateMudadCode(String token){
 
 
 final storage = GetStorage();
+var uuid = const Uuid();
+String MudadCode = uuid.v4();
 
 class _SettingsPageState extends State<SettingsPage> {
   @override
@@ -151,11 +154,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     IconButton(
                         onPressed: () {
                           showDialog(context: context, builder: (context) {
-                            return const AlertDialog(
-                              title:  Text("What is Mudad code?"),
-                              content:  Text("You need to share this code with your friends "
-                                  "and anyone uses this code will get a 10% sale on his donation "
-                                  "\nuse it now!"),
+                            return  AlertDialog(
+                              title:  Text("what_is_code".tr),
+                              content:  Text("code_info".tr),
                             );
                           },);
                         }, icon: const Icon(Icons.info_outline)),
@@ -199,27 +200,24 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                     onPressed: () {
+                      print(MudadCode);
                       showDialog(context: context, builder: (context) {
                         return  AlertDialog(
-                          title:  const Text("Your code is:"),
-                          content:  Container(
-                            child: Row(
-                              children: [
-                                const Flexible(
-                                  child: Text("You need to share this code with your friends "
-                                      "and anyone uses this code will get a 10% sale on his donation "
-                                      "\nuse it now!"),
-                                ),
-                             IconButton(onPressed: () {
-                               Clipboard.setData(const ClipboardData(text: "generateMudadCode(test)"));
-                               ScaffoldMessenger.of(context).showSnackBar(
-                                 const SnackBar(
-                                   content: Text('Text copied to clipboard'),
-                                 ),
-                               );
-                             }, icon: const Icon(Icons.copy))
-                              ],
-                            ),
+                          title:   Text("Your_code".tr),
+                          content:  Row(
+                            children: [
+                               Flexible(
+                                child: Text(MudadCode),
+                              ),
+                           IconButton(onPressed: () {
+                             Clipboard.setData(ClipboardData(text: MudadCode));
+                             ScaffoldMessenger.of(context).showSnackBar(
+                               const SnackBar(
+                                 content: Text('Text copied to clipboard'),
+                               ),
+                             );
+                           }, icon: const Icon(Icons.copy))
+                            ],
                           ),
                         );
                       },);

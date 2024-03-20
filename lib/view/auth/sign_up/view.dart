@@ -251,7 +251,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ));
                       }
                       if (state is RegisterSuccessState) {
-                        Get.offNamed("home");
+                        Get.offNamed("login");
                       }
                     },
                     builder: (context, state) {
@@ -283,19 +283,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
+                                      print(_phoneNumber.toString());
                                       authCubit
                                           .register(
                                               fullNameController.text,
                                               emailController.text,
                                               _phoneNumber.toString(),
-                                              passwordController.text)
-                                          .then(
-                                            (value) => Get.to(
-                                              () => ConfirmCodeView(
-                                                phone: _phoneNumber.toString(),
-                                              ),
-                                            ),
-                                          );
+                                              passwordController.text);
+                                          // .then(
+                                          //   (value) => Get.to(
+                                          //     () => ConfirmCodeView(
+                                          //       phone: _phoneNumber.toString(),
+                                          //     ),
+                                          //   ),
+                                          // );
                                     }
                                   },
                                   child: Text(
