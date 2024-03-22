@@ -90,6 +90,7 @@ flutter:
     - assets/
     - assets/logo.png
     - assets/drawer_assets/
+    - assets/home_screen/
     - assets/payment_assets/
     - assets/images/
     - assets/locals/

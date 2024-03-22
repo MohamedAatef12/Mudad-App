@@ -47,7 +47,8 @@ void main() async {
       ),
     ],
     child: const MyApp(),
-  ));
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -65,9 +66,10 @@ class MyApp extends StatelessWidget {
               ? TextDirection.ltr
               : TextDirection.ltr,
           debugShowCheckedModeBanner: false,
-          initialRoute: '/login',
+          initialRoute: '/home',
           //initialRoute: '/home',
           getPages: appRoutes(),
-        ));
+        ),
+    );
   }
 }

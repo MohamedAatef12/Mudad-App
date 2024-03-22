@@ -64,7 +64,8 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          body: Column(children: [
+          body: Column(
+              children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: InkWell(
@@ -120,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 70.0,
-                                childAspectRatio: .8),
+                                childAspectRatio: .8,
+                            ),
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
