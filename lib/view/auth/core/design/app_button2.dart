@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../app_constants/app_text_styles.dart';
 
 class AppButton2 extends StatelessWidget {
   const AppButton2({super.key});
@@ -17,13 +18,9 @@ class AppButton2 extends StatelessWidget {
           ),
         ),
         onPressed: (){},
-        child: const Text(
+        child: Text(
           "إختيار",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          ),
+          style: AppTextStyle.mainFont,
         ),
       ),
     );

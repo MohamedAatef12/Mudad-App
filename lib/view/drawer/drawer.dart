@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:share/share.dart';
 import '../../app_constants/app_assets.dart';
 import '../../reusable_widgets/custom_button.dart';
+import '../auth/core/design/custom_container_facebook.dart';
+import '../auth/core/design/custom_container_insta.dart';
+import '../auth/core/design/custom_container_whats.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -58,6 +61,23 @@ class HomeDrawer extends StatelessWidget {
                             subject: 'Check app'.tr);
                       }, AppAssets.share),
                       // const Spacer(),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomContainerInstagram(),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          CustomContainerFaceBook(),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          CustomContainerWhatsApp(),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Text("version".tr),
                       const SizedBox(height: 20)
                     ]),
