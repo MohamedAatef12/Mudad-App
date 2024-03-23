@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'custom_image.dart';
 
-class CustomContainerInstagram extends StatelessWidget {
+class CustomContainerInstagram extends StatefulWidget {
   const CustomContainerInstagram({super.key});
+
+  @override
+  State<CustomContainerInstagram> createState() => _CustomContainerInstagramState();
+}
+
+class _CustomContainerInstagramState extends State<CustomContainerInstagram> {
+
+  final Uri _url = Uri.parse("https://www.instagram.com/mudadapp?igsh=NDNlZm81MGRqajl0");
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+        launchUrl(_url);
       },
       child: Container(
         height: 40,

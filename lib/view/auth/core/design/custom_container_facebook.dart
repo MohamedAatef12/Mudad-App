@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class CustomContainerFaceBook extends StatelessWidget {
+class CustomContainerFaceBook extends StatefulWidget {
   const CustomContainerFaceBook({super.key});
+
+  @override
+  State<CustomContainerFaceBook> createState() => _CustomContainerFaceBookState();
+}
+
+class _CustomContainerFaceBookState extends State<CustomContainerFaceBook> {
+
+  final Uri _url = Uri.parse("https://www.facebook.com/profile.php?id=61557390906975&mibextid=ZbWKwL");
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+        launchUrl(_url);
       },
       child: Container(
         height: 60,

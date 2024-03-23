@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'custom_image.dart';
 
-class CustomContainerWhatsApp extends StatelessWidget {
+class CustomContainerWhatsApp extends StatefulWidget {
   const CustomContainerWhatsApp({super.key});
+
+  @override
+  State<CustomContainerWhatsApp> createState() => _CustomContainerWhatsAppState();
+}
+
+class _CustomContainerWhatsAppState extends State<CustomContainerWhatsApp> {
+  final Uri smsLaunchUri = Uri(
+    scheme: "sms",
+    path: "+966567205516",
+    queryParameters: <String, String>{
+      "body": Uri.encodeComponent("السلام عليكم"),
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+        launchUrl(smsLaunchUri);
       },
       child: Container(
         height: 40,
