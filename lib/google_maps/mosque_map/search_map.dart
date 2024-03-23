@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -9,6 +10,8 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:mudad_app/app_constants/app_text_styles.dart';
+import 'package:mudad_app/services/localization_service/localization_controller.dart';
 
 import 'build_choose_button.dart';
 import 'build_locations_buttons.dart';
@@ -33,7 +36,7 @@ final List<Marker> _markers = [];
 final List<String> selectedMosques = [];
 final List<String> keywords = [
   'mosque',
-  'masjid',
+  // 'masjid',
   // 'مسجد',
   // 'جامع',
   // 'musalla',
@@ -67,12 +70,12 @@ class _SearchMapState extends State<SearchMap> {
       child: ModalProgressHUD(
         inAsyncCall: isLoading,
         opacity: 0.5,
+        color: Colors.black,
         progressIndicator: const SpinKitFadingCircle(
           color: Color(0xFF609FD8),
           size: 50.0,
         ),
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               GoogleMap(
@@ -80,17 +83,11 @@ class _SearchMapState extends State<SearchMap> {
                 onMapCreated: (GoogleMapController controller) {
                   googleMapController = controller;
                 },
-                cameraTargetBounds: CameraTargetBounds(
-                  LatLngBounds(
-                    southwest:
-                        const LatLng(17.607613374386183, 37.98344273015662),
-                    northeast: const LatLng(32.1048459480552, 51.0802984261652),
-                  ),
-                ),
                 zoomControlsEnabled: false, // Disable default zoom controls
                 myLocationButtonEnabled:
                     false, // Disable default location button
                 zoomGesturesEnabled: true,
+                markers: Set<Marker>.of(_markers),
                 onTap: (LatLng latLng) {
                   // Dismiss the keyboard and clear search results on map tap
                   if (_searchResults.isNotEmpty) {
@@ -100,18 +97,15 @@ class _SearchMapState extends State<SearchMap> {
                     FocusScope.of(context).unfocus();
                   }
                 },
-                markers: Set<Marker>.of(_markers),
               ),
               Positioned(
                 top: MediaQuery.of(context).size.height / 40,
-                left: 0,
+                left: 5,
                 child: IconButton(
                   highlightColor: Colors.transparent,
                   onPressed: () => Get.back(),
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new,
-                    color: Color(0xFF609FD8),
-                    size: 40,
+                  icon: LocalizationService.getReversedIconByLanguage(
+                    LocalizationService.storage.read('language'),
                   ),
                 ),
               ),
@@ -119,11 +113,10 @@ class _SearchMapState extends State<SearchMap> {
               if (selectedMosques.isNotEmpty)
                 Positioned(
                   top: MediaQuery.of(context).size.height / 10,
-                  right: MediaQuery.of(context).size.width / 5,
-                  left: MediaQuery.of(context).size.width / 5,
+                  right: MediaQuery.of(context).size.width / 6,
+                  left: MediaQuery.of(context).size.width / 6,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2, horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(8.0),
@@ -138,21 +131,36 @@ class _SearchMapState extends State<SearchMap> {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
+                            backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFF609FD8),
+                            ),
                           ),
                           onPressed: () {
                             showListDialog();
                           },
-                          child: Text('Show'.tr),
+                          child: Text(
+                            'Show'.tr,
+                            style: AppTextStyle.mainFont.copyWith(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
-                        Text('Selected mosques: ${selectedMosques.length}'.tr),
+                        Text(
+                            '${'Selected mosques'.tr} ${selectedMosques.length}',
+                            style: AppTextStyle.mainFont.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 16,
+                            )),
                       ],
                     ),
                   ),
                 ),
               Positioned(
-                top: 15,
-                right: 5,
-                left: 55,
+                top: MediaQuery.of(context).size.height / 60,
+                left: MediaQuery.of(context).size.width / 7.5,
+                right: MediaQuery.of(context).size.width / 60,
                 child: Column(
                   children: [
                     Container(
@@ -200,9 +208,10 @@ class _SearchMapState extends State<SearchMap> {
                             child: TextFormField(
                               controller: _controller,
                               onChanged: (query) {
-                                performAutocompleteSearch(query);
+                                query.length > 2
+                                    ? performAutocompleteSearch(query)
+                                    : clearSearchResults();
                               },
-                              textCapitalization: TextCapitalization.words,
                               decoration: InputDecoration(
                                 hintText: 'Search for a place or mosque'.tr,
                                 border: InputBorder.none,
@@ -256,14 +265,51 @@ class _SearchMapState extends State<SearchMap> {
                 'location',
                 totalOrder,
                 selectedOrders,
+              ),
+              Positioned(
+                bottom: MediaQuery.of(context).size.height * 0.03,
+                right: MediaQuery.of(context).size.width * 0.06,
+                child: Badge(
+                  label: Text(totalOrder.toString()),
+                  largeSize: 20,
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      splashFactory: NoSplash.splashFactory,
+                      backgroundColor: const Color(0xff609FD8),
+                      fixedSize: Size(
+                        MediaQuery.of(context).size.width * 0.2,
+                        MediaQuery.of(context).size.height * 0.06,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.toNamed("payment");
+                    },
+                    child: const Center(
+                      child: Icon(
+                        Icons.add_shopping_cart_rounded,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                ),
               )
             ],
           ),
           floatingActionButton: Stack(
             children: [
               Positioned(
-                bottom: MediaQuery.of(context).size.height / 2.7,
-                right: 0,
+                bottom: MediaQuery.of(context).size.height / 2.4,
+                left: MediaQuery.of(context).size.width / 1.2,
+                right: MediaQuery.of(context).size.width / 12,
                 child: Container(
                   width: 30,
                   height: 30,
@@ -280,10 +326,10 @@ class _SearchMapState extends State<SearchMap> {
                     ],
                   ),
                   child: FloatingActionButton(
+                    heroTag: "btn1",
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    mini: true,
                     elevation: 0,
                     backgroundColor: Colors.white,
                     onPressed: () {
@@ -305,8 +351,9 @@ class _SearchMapState extends State<SearchMap> {
                 ),
               ),
               Positioned(
-                bottom: MediaQuery.of(context).size.height / 3.5,
-                right: 0,
+                bottom: MediaQuery.of(context).size.height / 3,
+                left: MediaQuery.of(context).size.width / 1.2,
+                right: MediaQuery.of(context).size.width / 12,
                 child: Container(
                   width: 30,
                   decoration: BoxDecoration(
@@ -326,12 +373,12 @@ class _SearchMapState extends State<SearchMap> {
                       SizedBox(
                         height: 30,
                         child: FloatingActionButton(
+                          heroTag: "btn2",
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           elevation: 0,
                           backgroundColor: Colors.white,
-                          mini: true,
                           onPressed: () {
                             googleMapController.animateCamera(
                               CameraUpdate.zoomIn(),
@@ -355,11 +402,11 @@ class _SearchMapState extends State<SearchMap> {
                       SizedBox(
                         height: 30,
                         child: FloatingActionButton(
+                          heroTag: "btn3",
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           elevation: 0,
-                          mini: true,
                           backgroundColor: Colors.white,
                           onPressed: () {
                             googleMapController.animateCamera(
@@ -386,96 +433,137 @@ class _SearchMapState extends State<SearchMap> {
 
   // DIALOGS
   showListDialog() {
-    showDialog(
+    AwesomeDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
+      animType: AnimType.topSlide,
+      dialogType: DialogType.noHeader,
+      title: 'Selected mosques'.tr,
+      titleTextStyle: AppTextStyle.mainFont.copyWith(
+        color: const Color(0xFF609FD8),
+        fontSize: 25,
+      ),
+      btnCancel: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+          FocusScope.of(context).unfocus();
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(14),
           ),
-          title: Text(
-            'Selected mosques'.tr,
-            textDirection: TextDirection.rtl,
+        ),
+        child: FittedBox(
+          child: Text(
+            'Cancel'.tr,
+            style: AppTextStyle.mainFont.copyWith(fontSize: 20),
           ),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    for (int index = 0; index < selectedMosques.length; index++)
-                      ListTile(
-                        key: Key(
-                            'mosque_$index'), // Unique key for each ListTile
-                        title: Text(selectedMosques[index],
-                            textDirection: TextDirection.rtl),
-                        leading: IconButton(
-                          highlightColor: Colors.transparent,
-                          icon: const Icon(Icons.delete),
-                          onPressed: () {
-                            setState(() {
-                              removeMarkerOfMosque(selectedMosques[index]);
-                              selectedMosques.removeAt(index);
-                              if (selectedMosques.isEmpty) {
-                                Navigator.of(context).pop();
-                                FocusScope.of(context).unfocus();
-                              }
-                            });
-                          },
-                        ),
+        ),
+      ),
+      body: StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                for (int index = 0; index < selectedMosques.length; index++)
+                  ListTile(
+                    key: Key('mosque_$index'), // Unique key for each ListTile
+                    title: Center(
+                      child: Text(selectedMosques[index],
+                          style: AppTextStyle.mainFont.copyWith(
+                            color: Colors.black,
+                            fontSize: 20,
+                          )),
+                    ),
+                    leading: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent[100],
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                  ],
-                ),
-              );
-            },
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                FocusScope.of(context).unfocus();
-              },
-              child: Text('Cancel'.tr),
+                      child: IconButton(
+                        highlightColor: Colors.transparent,
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.red[900],
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            removeMarkerOfMosque(selectedMosques[index]);
+                            selectedMosques.removeAt(index);
+                            if (selectedMosques.isEmpty) {
+                              Navigator.of(context).pop();
+                              FocusScope.of(context).unfocus();
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+              ],
             ),
-          ],
-        );
-      },
-    );
+          );
+        },
+      ),
+    ).show();
   }
 
-  Future<void> showMosqueDialog(String mosqueName) async {
-    return showDialog<void>(
+  showMosqueDialog(String mosqueName) async {
+    return AwesomeDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
+      customHeader: const Icon(
+        Icons.mosque_rounded,
+        size: 85,
+        color: Color(0xFF609FD8),
+      ),
+      animType: AnimType.topSlide,
+      title: mosqueName,
+      titleTextStyle: AppTextStyle.mainFont
+          .copyWith(fontSize: 25, color: const Color(0xFF609FD8)),
+      desc: 'Do you want to add this mosque to the list?'.tr,
+      descTextStyle: AppTextStyle.mainFont.copyWith(color: Colors.black),
+      btnOk: ElevatedButton(
+        onPressed: () {
+          addMosqueToList(mosqueName);
+          addMarkerToMosque(mosqueName);
+          Navigator.of(context).pop();
+          FocusScope.of(context).unfocus();
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF609FD8),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(10),
           ),
-          content: Text(mosqueName, textDirection: TextDirection.rtl),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Add the mosque to the selectedMosques list
-                addMosqueToList(mosqueName);
-                addMarkerToMosque(mosqueName);
-                FocusScope.of(context).unfocus();
-                Navigator.of(context).pop();
-                FocusScope.of(context).unfocus();
-              },
-              child: Text('Add the mosque to the list'.tr),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                FocusScope.of(context).unfocus();
-              },
-              child: Text('Cancel'.tr),
-            ),
-          ],
-        );
-      },
-    );
+        ),
+        child: FittedBox(
+          child: Text(
+            'Add'.tr,
+            style: AppTextStyle.mainFont.copyWith(fontSize: 22),
+          ),
+        ),
+      ),
+      btnCancel: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+          FocusScope.of(context).unfocus();
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: FittedBox(
+          child: Text(
+            'Cancel'.tr,
+            style: AppTextStyle.mainFont.copyWith(fontSize: 22),
+          ),
+        ),
+      ),
+    )..show();
   }
 
   void addMosqueToList(String mosqueName) {
@@ -667,7 +755,7 @@ class _SearchMapState extends State<SearchMap> {
   // FETCH & CACHE
   Future<void> _fetchMosques() async {
     List<PlacesSearchResult> allResults = [];
-
+    isLoading = true;
     for (var location in locations) {
       for (var keyword in keywords) {
         String cacheKey = '$keyword-${location.lat}-${location.lng}';
@@ -681,6 +769,7 @@ class _SearchMapState extends State<SearchMap> {
           List<PlacesSearchResult> cachedResults =
               await _decodeCachedResults(fileInfo);
           allResults.addAll(cachedResults);
+          isLoading = false;
           log("data from cache");
         } else {
           // Perform a new search and cache the results
@@ -698,6 +787,7 @@ class _SearchMapState extends State<SearchMap> {
             cacheKey,
             response.results,
           );
+          isLoading = false;
           log("data from api");
         }
       }

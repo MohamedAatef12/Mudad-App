@@ -88,7 +88,7 @@ class BuildProduct extends StatelessWidget {
                     price: productPrice[index],
                   );
                 },
-                physics: const BouncingScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.horizontal,
               ),
             );

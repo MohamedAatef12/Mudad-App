@@ -8,7 +8,6 @@ import '../../services/remote_API/dio_helper.dart';
 part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
-
   static ProductsCubit get(context) => BlocProvider.of(context);
 
   ProductsCubit() : super(ProductsInitial());
@@ -16,13 +15,13 @@ class ProductsCubit extends Cubit<ProductsState> {
   List<String> products = [];
   List<int> price = [];
   List<String> images = [];
-  List<int> quantity=[];
-  List<int> quantityCounter=[];
-  List<Map<String,dynamic>> ordersInitialization=[];
+  List<int> quantity = [];
+  List<int> quantityCounter = [];
+  List<Map<String, dynamic>> ordersInitialization = [];
 
   loadProducts() {
     emit(ProductsLoading());
-    DioHelper.getData(endPoint: DioHelper.baseUrl+EndPoint.products)
+    DioHelper.getData(endPoint: DioHelper.baseUrl + EndPoint.products)
         .then((value) {
       if (value.statusCode == 200) {
         productsModel = ProductsModel.fromJson(value.data);
@@ -35,38 +34,35 @@ class ProductsCubit extends Cubit<ProductsState> {
           price.add(element.price!.toInt());
           images.add(element.imageUrl.toString());
           quantity.add(element.qty!.toInt());
-          Map<String,dynamic> orders=
-            {
-              "id": "185",
-              "title":element.title.toString(),
-              "price" :element.price!.toInt(),
-              "qty":element.qty!.toInt()
-            };
+          Map<String, dynamic> orders = {
+            "id": "185",
+            "title": element.title.toString(),
+            "price": element.price!.toInt(),
+            "qty": element.qty!.toInt(),
+          };
           ordersInitialization.add(orders);
         }
 
-        emit(ProductsSuccess(products,images,price,quantity,ordersInitialization));
-        print("-------------------------------------------------------------------------------------------");
+        emit(ProductsSuccess(
+            products, images, price, quantity, ordersInitialization));
+        print(
+            "-------------------------------------------------------------------------------------------");
         print(ordersInitialization);
         print(ordersInitialization[1]["qty"].toString());
-
-      }else {
+      } else {
         emit(ProductsFailure());
       }
     });
-
   }
 
-   int addProducts(int qty){
-     emit(ProductsAdded());
-     return qty + 1;
-   }
+  int addProducts(int qty) {
+    emit(ProductsAdded());
+    return qty + 1;
+  }
 
-  removeProducts(int qty){
+  removeProducts(int qty) {
     emit(ProductsRemoved());
 
-    return qty==0? 0:qty - 1;
+    return qty == 0 ? 0 : qty - 1;
   }
-
-
 }

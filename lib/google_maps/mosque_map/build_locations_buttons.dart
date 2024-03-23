@@ -37,23 +37,23 @@ class BuildLocationsButtons extends StatelessWidget {
             iconWidth: 34.4,
             iconHeight: 34.4,
           ),
-          PlaceButton(
-            onPressed: () {
-              googleMapController.animateCamera(
-                CameraUpdate.newLatLng(const LatLng(
-                  24.467663304009072,
-                  39.61106777648205,
-                )),
-              );
-              moveCameraToPlace("Madinah");
-            },
-            imagePath: "assets/images/5.png",
-            placeName: "AL Madinah\nMosques".tr,
-            coordinates: const LatLng(24.467663304009072, 39.61106777648205),
-            labelFontSize: 20,
-            iconWidth: 33,
-            iconHeight: 33,
-          ),
+          // PlaceButton(
+          //   onPressed: () {
+          //     googleMapController.animateCamera(
+          //       CameraUpdate.newLatLng(const LatLng(
+          //         24.467663304009072,
+          //         39.61106777648205,
+          //       )),
+          //     );
+          //     moveCameraToPlace("Madinah");
+          //   },
+          //   imagePath: "assets/images/5.png",
+          //   placeName: "AL Madinah\nMosques".tr,
+          //   coordinates: const LatLng(24.467663304009072, 39.61106777648205),
+          //   labelFontSize: 20,
+          //   iconWidth: 33,
+          //   iconHeight: 33,
+          // ),
           PlaceButton(
             onPressed: () {
               googleMapController.animateCamera(
@@ -71,23 +71,23 @@ class BuildLocationsButtons extends StatelessWidget {
             iconWidth: 33,
             iconHeight: 33,
           ),
-          PlaceButton(
-            onPressed: () {
-              googleMapController.animateCamera(
-                CameraUpdate.newLatLng(const LatLng(
-                  21.389591400346944,
-                  39.83733700721687,
-                )),
-              );
-              moveCameraToPlace("Mosques of the pilgrims");
-            },
-            imagePath: "assets/images/6.png",
-            placeName: "Umrah pilgrims\nMosques".tr,
-            coordinates: const LatLng(21.389591400346944, 39.83733700721687),
-            labelFontSize: 20,
-            iconWidth: 30,
-            iconHeight: 33,
-          ),
+          // PlaceButton(
+          //   onPressed: () {
+          //     googleMapController.animateCamera(
+          //       CameraUpdate.newLatLng(const LatLng(
+          //         21.389591400346944,
+          //         39.83733700721687,
+          //       )),
+          //     );
+          //     moveCameraToPlace("Mosques of the pilgrims");
+          //   },
+          //   imagePath: "assets/images/6.png",
+          //   placeName: "Umrah pilgrims\nMosques".tr,
+          //   coordinates: const LatLng(21.389591400346944, 39.83733700721687),
+          //   labelFontSize: 20,
+          //   iconWidth: 30,
+          //   iconHeight: 33,
+          // ),
         ],
       ),
     );
@@ -117,23 +117,23 @@ Future<void> moveCameraToPlace(String placeId) async {
       return;
     }
 
-    if (placeId == "Madinah") {
-      const LatLng madinahLocation =
-          LatLng(24.467663304009072, 39.61106777648205);
-      googleMapController.animateCamera(
-        CameraUpdate.newLatLngZoom(madinahLocation, zoomLevel),
-      );
-      return;
-    }
-
-    if (placeId == "Mosques of the pilgrims") {
-      const LatLng mo3tamerinLocation =
-          LatLng(21.389591400346944, 39.83733700721687);
-      googleMapController.animateCamera(
-        CameraUpdate.newLatLngZoom(mo3tamerinLocation, zoomLevel),
-      );
-      return;
-    }
+    // if (placeId == "Madinah") {
+    //   const LatLng madinahLocation =
+    //       LatLng(24.467663304009072, 39.61106777648205);
+    //   googleMapController.animateCamera(
+    //     CameraUpdate.newLatLngZoom(madinahLocation, zoomLevel),
+    //   );
+    //   return;
+    // }
+    //
+    // if (placeId == "Mosques of the pilgrims") {
+    //   const LatLng mo3tamerinLocation =
+    //       LatLng(21.389591400346944, 39.83733700721687);
+    //   googleMapController.animateCamera(
+    //     CameraUpdate.newLatLngZoom(mo3tamerinLocation, zoomLevel),
+    //   );
+    //   return;
+    // }
 
     PlacesDetailsResponse details = await places.getDetailsByPlaceId(placeId);
 

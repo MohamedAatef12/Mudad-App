@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -102,11 +101,11 @@ class LocalizationService extends Translations {
           'Jeddah\nMosques': 'Jeddah',
           'Umrah pilgrims\nMosques': 'Umrah pilgrims',
           'Two-year warranty': 'Two-year warranty',
-          '   riyal ': '   riyal ',
+          '   riyal ': 'riyal',
           'Show': 'Show',
           'Selected mosques:': 'Selected mosques:',
           'Search for a place or mosque': '  Search for a place or mosque',
-          'Selected mosques': 'Selected mosques',
+          'Selected mosques': 'Selected mosques: ',
           'Cancel': 'Cancel',
           'Add the mosque to the list': 'Add the mosque to the list',
           'The mosque is already on the list':
@@ -208,8 +207,13 @@ class LocalizationService extends Translations {
               '16. Cancellation and suspension:\n'
               'Maddad application has the right to cancel or suspend any account in the event that any of the above conditions are violated or the user is involved in activities considered illegal.\n'
               'Madad seeks to provide a safe and effective experience for users. The user is required to read these terms and conditions carefully and fully understand them before using the application.\n',
+          'Services': 'Choose a service to donate',
+          'Add to Cart': 'Add to Cart',
+          'Do you want to add this mosque to the list?':
+              'Do you want to add this mosque to the list?',
         },
         'ar': {
+          'Contact us': 'تواصل معنا',
           "empty_order": "يرجى تحديد كميه لطلبك!",
           "language": "اللغه",
           "sale_value": "قيمه الخصم",
@@ -291,11 +295,11 @@ class LocalizationService extends Translations {
           'Jeddah\nMosques': 'جــدة',
           'Umrah pilgrims\nMosques': 'المعتمرين',
           'Two-year warranty': 'ضمان لمدة سنتين',
-          '   riyal ': '   ريال ',
+          '   riyal ': 'ريال',
           'Show': 'عرض',
           'Selected mosques:': 'المساجد المختارة:',
           'Search for a place or mosque': '  ابحث عن مكان او مسجد',
-          'Selected mosques': 'المساجد المختارة',
+          'Selected mosques': 'المساجد المختارة: ',
           'Cancel': 'إلغاء',
           'Add the mosque to the list': 'اضف المسجد الى القائمة',
           'The mosque is already on the list': 'المسجد موجود في القائمة بالفعل',
@@ -396,6 +400,10 @@ class LocalizationService extends Translations {
               '16. الإلغاء والتعليق:\n'
               'يحق لتطبيق "مدد" إلغاء أو تعليق أي حساب في حالة انتهاك أي من الشروط المذكورة أعلاه أو تورط المستخدم في أنشطة تعتبر غير قانونية.\n'
               'تسعى "مدد" إلى توفير تجربة مأمونة وفعّالة للمستخدمين. يُطلب من المستخدم قراءة هذه الشروط والأحكام بعناية وفهمها بشكل كامل قبل استخدام التطبيق.\n',
+          'Services': 'قم باختيار خدمه للتبرع',
+          'Add to Cart': 'أضف إلى السلة',
+          'Do you want to add this mosque to the list?':
+              'هل تريد إضافة هذا المسجد إلى القائمة؟',
         },
       };
 
@@ -413,6 +421,21 @@ class LocalizationService extends Translations {
 
   String getLanguage() {
     return storage.read('language') ?? 'en';
+  }
+
+  static Icon getReversedIconByLanguage(String code) {
+    Icon icon = code == 'ar'
+        ? const Icon(
+            Icons.arrow_forward_ios,
+            size: 40,
+            color: Color(0xFF609FD8),
+          )
+        : const Icon(
+            Icons.arrow_back_ios,
+            size: 40,
+            color: Color(0xFF609FD8),
+          );
+    return icon;
   }
 }
 // 3f522f0c-a476-42f6-98ec-b1d70d687e47

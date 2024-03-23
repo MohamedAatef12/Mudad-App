@@ -12,22 +12,15 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height / 7,
-        width: MediaQuery.of(context).size.width / 3,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: ModalProgressHUD(
-            opacity: 0.5,
-            color: Colors.black,
-            inAsyncCall: isLoading,
-            progressIndicator: const SpinKitFadingCircle(
-              color: Color(0xFF609FD8),
-              size: 50.0,
-            ),
-            child: const SizedBox.shrink(),
-          ),
+      child: ModalProgressHUD(
+        opacity: 0.5,
+        color: Colors.black,
+        inAsyncCall: isLoading,
+        progressIndicator: const SpinKitFadingCircle(
+          color: Color(0xFF609FD8),
+          size: 50.0,
         ),
+        child: const SizedBox.shrink(),
       ),
     );
   }
