@@ -110,6 +110,7 @@ class LocalizationService extends Translations {
           'Add the mosque to the list': 'Add the mosque to the list',
           'The mosque is already on the list':
               'The mosque is already on the list',
+          'Add The Mosque to Cart first': 'Add The Mosque to Cart first',
           'Mecca\nOrphanages': 'Mecca',
           'AL Madinah\nOrphanages': 'AL Madinah',
           'Jeddah\nOrphanages': 'Jeddah',
@@ -303,6 +304,7 @@ class LocalizationService extends Translations {
           'Cancel': 'إلغاء',
           'Add the mosque to the list': 'اضف المسجد الى القائمة',
           'The mosque is already on the list': 'المسجد موجود في القائمة بالفعل',
+          'Add The Mosque to Cart first': 'أضف المسجد إلى السلة أولاً',
           'Mecca\nOrphanages': 'دور\nمــكــة',
           'AL Madinah\nOrphanages': ' دور\n المدينة',
           'Jeddah\nOrphanages': 'دور\n  جــدة',

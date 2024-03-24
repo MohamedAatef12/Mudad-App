@@ -98,10 +98,10 @@ class _HomePageState extends State<HomePage> {
                 },
                 builder: (context, state) {
                   if (state is ServicesLoading) {
-                    return const Center(
+                    return const Expanded(
                       child: SpinKitFadingCircle(
                         color: AppColors.buttonColor,
-                        size: 50.0,
+                        size: 50,
                       ),
                     );
                   } else {
