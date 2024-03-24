@@ -67,7 +67,6 @@ class LocalizationService extends Translations {
 
           'Apple Pay': 'Apple Pay',
           'Bank transfer': 'Bank transfer',
-          'Review your order': 'Review your order',
           'Debit cards': 'Debit cards',
           'Gift cards': 'Gift cards',
           'Choose the payment method': 'Choose payment method',
@@ -212,6 +211,10 @@ class LocalizationService extends Translations {
           'Add to Cart': 'Add to Cart',
           'Do you want to add this mosque to the list?':
               'Do you want to add this mosque to the list?',
+          'Add product and Complete payment method':
+              'Add product and Complete payment method',
+          'Review your order': 'Review your order',
+          '330ml x 20 Bottles': '330ml x 20 Bottles',
         },
         'ar': {
           'Contact us': 'تواصل معنا',
@@ -406,6 +409,11 @@ class LocalizationService extends Translations {
           'Add to Cart': 'أضف إلى السلة',
           'Do you want to add this mosque to the list?':
               'هل تريد إضافة هذا المسجد إلى القائمة؟',
+          'Add product and Complete payment method':
+              'أضف المنتج واكمل طريقة الدفع',
+          'Review your order': 'مراجعه طلبك',
+          '330ml x 20 Bottles': '330 مل × 20 عبوة',
+          'Two-year warranty': 'ضمان لمدة سنتين',
         },
       };
 

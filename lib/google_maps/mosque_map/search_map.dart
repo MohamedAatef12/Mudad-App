@@ -52,6 +52,7 @@ List<Location> locations = [
   // Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
 ];
 final Map<String, PlacesDetailsResponse> placeDetailsCache = {};
+String location = '';
 
 class _SearchMapState extends State<SearchMap> {
   final TextEditingController _controller = TextEditingController();
@@ -262,7 +263,7 @@ class _SearchMapState extends State<SearchMap> {
               ),
               const BuildProduct(),
               BuildChooseButton(
-                'location',
+                location,
                 totalOrder,
                 selectedOrders,
               ),
@@ -727,7 +728,6 @@ class _SearchMapState extends State<SearchMap> {
         double lat = place.geometry!.location.lat;
         double lng = place.geometry!.location.lng;
         String name = place.name;
-
         _markers.add(
           Marker(
             markerId: MarkerId(name),
@@ -761,7 +761,9 @@ class _SearchMapState extends State<SearchMap> {
         },
       ),
     );
-    setState(() {});
+    setState(() {
+      location = mosqueName;
+    });
   }
 
   LatLng getMosqueLocation(String mosqueName) {

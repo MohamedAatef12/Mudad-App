@@ -15,7 +15,6 @@ import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 
 import 'app_constants/app_routes.dart';
 import 'firebase_options.dart';
-import 'google_maps/mosque_map/search_map.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,8 +70,8 @@ class MyApp extends StatelessWidget {
       ),
       fallbackLocale: LocalizationService.fallbackLocale,
       debugShowCheckedModeBanner: false,
-      // initialRoute: '/home',
-      home: const SearchMap(),
+      initialRoute: '/home',
+      // home: const SearchMap(),
       getPages: appRoutes(),
     );
   }
