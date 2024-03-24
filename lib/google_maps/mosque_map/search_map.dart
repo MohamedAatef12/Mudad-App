@@ -582,48 +582,52 @@ class _SearchMapState extends State<SearchMap> {
       ),
       body: StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
-          return SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                for (int index = 0; index < selectedMosques.length; index++)
-                  ListTile(
-                    key: Key('mosque_$index'), // Unique key for each ListTile
-                    title: Center(
-                      child: Text(selectedMosques[index],
-                          style: AppTextStyle.mainFont.copyWith(
-                            color: Colors.black,
-                            fontSize: 20,
-                          )),
-                    ),
-                    leading: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent[100],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: IconButton(
-                        highlightColor: Colors.transparent,
-                        icon: Icon(
-                          Icons.delete,
-                          color: Colors.red[900],
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.4,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  for (int index = 0; index < selectedMosques.length; index++)
+                    ListTile(
+                      key: Key('mosque_$index'), // Unique key for each ListTile
+                      title: Text(
+                        '${index + 1}- ${selectedMosques[index]}',
+                        style: AppTextStyle.mainFont.copyWith(
+                          color: Colors.black,
+                          fontSize: 20,
                         ),
-                        onPressed: () {
-                          setState(() {
-                            removeMarkerOfMosque(selectedMosques[index]);
-                            selectedMosques.removeAt(index);
-                            if (selectedMosques.isEmpty) {
-                              Navigator.of(context).pop();
-                              FocusScope.of(context).unfocus();
-                            }
-                          });
-                        },
+                      ),
+                      leading: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent[100],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                          highlightColor: Colors.transparent,
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red[900],
+                          ),
+                          onPressed: () {
+                            setState(
+                              () {
+                                removeMarkerOfMosque(selectedMosques[index]);
+                                selectedMosques.removeAt(index);
+                                if (selectedMosques.isEmpty) {
+                                  Navigator.of(context).pop();
+                                  FocusScope.of(context).unfocus();
+                                }
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           );
         },
