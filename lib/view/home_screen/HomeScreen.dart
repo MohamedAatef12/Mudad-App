@@ -18,19 +18,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> images = [
-    'assets/mosques.png',
-    'assets/houses.png',
-    'assets/orphanage.png'
-  ];
-
   final List navigationPages = [
     const SearchMap(),
     const SearchMap(),
     const SearchMap(),
   ];
 
-  var selectedPage;
+  Widget? selectedPage;
   final selectedImage = ''.obs;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<String> returnedServices = [];
@@ -187,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   } else {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => selectedPage));
+                        MaterialPageRoute(builder: (context) => selectedPage!));
                   }
                 },
                 borderRadius: BorderRadius.circular(10),

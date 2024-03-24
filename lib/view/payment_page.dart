@@ -1,16 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mudad_app/app_constants/app_colors.dart';
+import 'package:mudad_app/app_constants/app_text_styles.dart';
 import 'package:mudad_app/google_maps/mosque_map/build_product.dart';
 import 'package:mudad_app/reusable_widgets/custom_paymment_card.dart';
 import 'package:mudad_app/reusable_widgets/text_field.dart';
 import 'package:mudad_app/services/payment_service/payment_controller.dart';
-import '../app_constants/app_colors.dart';
-import '../app_constants/app_text_styles.dart';
 
-TextEditingController MudadCodeController = TextEditingController();
+TextEditingController mudadCodeController = TextEditingController();
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -200,7 +198,7 @@ class PaymentPage extends StatelessWidget {
                     return AlertDialog(
                         title: Text("Enter_Mudad_code".tr),
                         content: DefaultFormField(
-                            controller: MudadCodeController,
+                            controller: mudadCodeController,
                             keyboardType: TextInputType.text,
                             obSecured: false));
                   });
@@ -275,7 +273,8 @@ class PaymentPage extends StatelessWidget {
                                     fontSize: 20,
                                     fontWeight: FontWeight.w100,
                                     color: Colors.black)),
-                            Text("${productPrice.first}X${orderCounter.first}=$p1Total")
+                            Text(
+                                "${productPrice.first}X${orderCounter.first}=$p1Total")
                           ],
                         ),
                       ),
@@ -357,7 +356,8 @@ class PaymentPage extends StatelessWidget {
                                     fontSize: 20,
                                     fontWeight: FontWeight.w100,
                                     color: Colors.black)),
-                            Text("${productPrice.last}X${orderCounter.last}=$p2Total")
+                            Text(
+                                "${productPrice.last}X${orderCounter.last}=$p2Total")
                           ],
                         ),
                       ),
