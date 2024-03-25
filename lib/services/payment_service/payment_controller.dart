@@ -5,15 +5,29 @@ import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkLocale.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
-import 'package:mudad_app/google_maps/mosque_map/build_product.dart';
+import 'package:mudad_app/google_maps/build_product.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 
-class PaymentController{
+class PaymentController {
   PaymentSdkConfigurationDetails generateConfig() {
-    var billingDetails = BillingDetails(storage.read("userName"), storage.read("userEmail"),
-        storage.read("userPhone"), "", "", "", "", "");
-    var shippingDetails = ShippingDetails(storage.read("userName"),storage.read("userEmail"),
-        storage.read("userPhone"), "", "", "", "", "");
+    var billingDetails = BillingDetails(
+        storage.read("userName"),
+        storage.read("userEmail"),
+        storage.read("userPhone"),
+        "",
+        "",
+        "",
+        "",
+        "");
+    var shippingDetails = ShippingDetails(
+        storage.read("userName"),
+        storage.read("userEmail"),
+        storage.read("userPhone"),
+        "",
+        "",
+        "",
+        "",
+        "");
     List<PaymentSdkAPms> apms = [];
     apms.add(PaymentSdkAPms.AMAN);
     final configuration = PaymentSdkConfigurationDetails(
@@ -53,33 +67,32 @@ class PaymentController{
     return configuration;
   }
 
-
   Future<void> payPressed() async {
     FlutterPaytabsBridge.startCardPayment(generateConfig(), (event) {
       print(event.toString());
       // setState(() {
-        if (event["status"] == "success") {
-          // Handle transaction details here.
-          var transactionDetails = event["data"];
-          print(transactionDetails);
-          if (transactionDetails["isSuccess"]) {
-            print("successful transaction");
-            if (transactionDetails["isPending"]) {
-              print("transaction pending");
-            }
-          } else {
-            print("failed transaction");
+      if (event["status"] == "success") {
+        // Handle transaction details here.
+        var transactionDetails = event["data"];
+        print(transactionDetails);
+        if (transactionDetails["isSuccess"]) {
+          print("successful transaction");
+          if (transactionDetails["isPending"]) {
+            print("transaction pending");
           }
-
-          // print(transactionDetails["isSuccess"]);
-        } else if (event["status"] == "error") {
-          print("error");
-          // Handle error here.
-        } else if (event["status"] == "event") {
-          print("event");
-          // Handle events here.
+        } else {
+          print("failed transaction");
         }
-      });
+
+        // print(transactionDetails["isSuccess"]);
+      } else if (event["status"] == "error") {
+        print("error");
+        // Handle error here.
+      } else if (event["status"] == "event") {
+        print("event");
+        // Handle events here.
+      }
+    });
     // });
   }
 //

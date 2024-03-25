@@ -13,9 +13,9 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
 
-import 'build_choose_button.dart';
-import 'build_locations_buttons.dart';
-import 'build_product.dart';
+import '../build_choose_button.dart';
+import '../build_locations_buttons.dart';
+import '../build_product.dart';
 
 class SearchMap extends StatefulWidget {
   const SearchMap({Key? key}) : super(key: key);
@@ -506,89 +506,6 @@ class _SearchMapState extends State<SearchMap> {
   }
 
   // DIALOGS
-  showListDialog() {
-    AwesomeDialog(
-      context: context,
-      animType: AnimType.topSlide,
-      dialogType: DialogType.noHeader,
-      title: 'Selected mosques'.tr,
-      titleTextStyle: AppTextStyle.mainFont.copyWith(
-        color: const Color(0xFF609FD8),
-        fontSize: 25,
-      ),
-      btnCancel: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-          FocusScope.of(context).unfocus();
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
-        ),
-        child: FittedBox(
-          child: Text(
-            'Cancel'.tr,
-            style: AppTextStyle.mainFont.copyWith(fontSize: 20),
-          ),
-        ),
-      ),
-      body: StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  for (int index = 0; index < selectedMosques.length; index++)
-                    ListTile(
-                      key: Key('mosque_$index'), // Unique key for each ListTile
-                      title: Text(
-                        '${index + 1}- ${selectedMosques[index]}',
-                        style: AppTextStyle.mainFont.copyWith(
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                      ),
-                      leading: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.redAccent[100],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: IconButton(
-                          highlightColor: Colors.transparent,
-                          icon: Icon(
-                            Icons.delete,
-                            color: Colors.red[900],
-                          ),
-                          onPressed: () {
-                            setState(
-                              () {
-                                removeMarkerOfMosque(selectedMosques[index]);
-                                selectedMosques.removeAt(index);
-                                if (selectedMosques.isEmpty) {
-                                  Navigator.of(context).pop();
-                                  FocusScope.of(context).unfocus();
-                                }
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    ).show();
-  }
-
   showMosqueDialog(String mosqueName) async {
     return AwesomeDialog(
       context: context,

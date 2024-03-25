@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/app_constants/app_assets.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
+import 'package:mudad_app/google_maps/miqat_maps/miqat_map.dart';
 import 'package:mudad_app/google_maps/mosque_map/search_map.dart';
 import 'package:mudad_app/view/drawer/drawer.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List navigationPages = [
     const SearchMap(),
-    const SearchMap(),
+    const MiqatMap(),
     const SearchMap(),
   ];
 

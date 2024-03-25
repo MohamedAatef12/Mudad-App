@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -9,16 +10,17 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:mudad_app/app_constants/app_text_styles.dart';
+import 'package:mudad_app/google_maps/build_choose_button.dart';
+import 'package:mudad_app/google_maps/build_locations_buttons.dart';
+import 'package:mudad_app/google_maps/build_product.dart';
+import 'package:mudad_app/services/localization_service/localization_controller.dart';
 
-import 'build_choose_button.dart';
-
-import 'build_product.dart';
-
-class SearchMap extends StatefulWidget {
-  const SearchMap({Key? key}) : super(key: key);
+class MiqatMap extends StatefulWidget {
+  const MiqatMap({Key? key}) : super(key: key);
 
   @override
-  State<SearchMap> createState() => _SearchMapState();
+  State<MiqatMap> createState() => _SearchMapState();
 }
 
 const CameraPosition initialCameraPosition = CameraPosition(
@@ -27,30 +29,31 @@ const CameraPosition initialCameraPosition = CameraPosition(
 );
 late GoogleMapController googleMapController;
 final places =
-    GoogleMapsPlaces(apiKey: 'AIzaSyDu184vis9uZwt9OqWD6AosFbBLDnPxsQ0');
+    GoogleMapsPlaces(apiKey: 'AIzaSyCtfitJu0HrEEcaFuaxnfJTjwqvE2tY2dY');
 List<Prediction> _searchResults = [];
 final List<Marker> _markers = [];
 final List<String> selectedMosques = [];
 final List<String> keywords = [
   'mosque',
-  'masjid',
-  'مسجد',
-  'جامع',
-  'musalla',
-  'مصلى',
-  'مساجد',
-  'مساجد المعتمرين',
-  'mosques',
+  // 'masjid',
+  // 'مسجد',
+  // 'جامع',
+  // 'musalla',
+  // 'مصلى',
+  // 'مساجد',
+  // 'مساجد المعتمرين',
+  // 'mosques',
 ];
 List<Location> locations = [
   Location(lat: 21.423888489772935, lng: 39.82624903841808), // Makkah
-  Location(lat: 24.467663304009072, lng: 39.61106777648205), // Madinah
-  Location(lat: 21.389591400346944, lng: 39.83733700721687), // Mo3tamerin
-  Location(lat: 21.52774807596778, lng: 39.16439325129956), // Jeddah
+  // Location(lat: 24.467663304009072, lng: 39.61106777648205),    // Madinah
+  // Location(lat: 21.389591400346944, lng: 39.83733700721687),     // Mo3tamerin
+  // Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
 ];
 final Map<String, PlacesDetailsResponse> placeDetailsCache = {};
+String location = '';
 
-class _SearchMapState extends State<SearchMap> {
+class _SearchMapState extends State<MiqatMap> {
   final TextEditingController _controller = TextEditingController();
   final DefaultCacheManager _cacheManager = DefaultCacheManager();
   bool isLoading = false;
@@ -58,6 +61,7 @@ class _SearchMapState extends State<SearchMap> {
   @override
   void initState() {
     super.initState();
+    log('miqat map');
     _fetchMosques();
   }
 
@@ -67,12 +71,12 @@ class _SearchMapState extends State<SearchMap> {
       child: ModalProgressHUD(
         inAsyncCall: isLoading,
         opacity: 0.5,
+        color: Colors.black,
         progressIndicator: const SpinKitFadingCircle(
           color: Color(0xFF609FD8),
           size: 50.0,
         ),
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               GoogleMap(
@@ -80,17 +84,11 @@ class _SearchMapState extends State<SearchMap> {
                 onMapCreated: (GoogleMapController controller) {
                   googleMapController = controller;
                 },
-                cameraTargetBounds: CameraTargetBounds(
-                  LatLngBounds(
-                    southwest:
-                        const LatLng(17.607613374386183, 37.98344273015662),
-                    northeast: const LatLng(32.1048459480552, 51.0802984261652),
-                  ),
-                ),
                 zoomControlsEnabled: false, // Disable default zoom controls
                 myLocationButtonEnabled:
                     false, // Disable default location button
                 zoomGesturesEnabled: true,
+                markers: Set<Marker>.of(_markers),
                 onTap: (LatLng latLng) {
                   // Dismiss the keyboard and clear search results on map tap
                   if (_searchResults.isNotEmpty) {
@@ -100,59 +98,23 @@ class _SearchMapState extends State<SearchMap> {
                     FocusScope.of(context).unfocus();
                   }
                 },
-                markers: Set<Marker>.of(_markers),
               ),
               Positioned(
                 top: MediaQuery.of(context).size.height / 40,
-                left: 0,
+                left: 5,
                 child: IconButton(
                   highlightColor: Colors.transparent,
                   onPressed: () => Get.back(),
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new,
-                    color: Color(0xFF609FD8),
-                    size: 40,
+                  icon: LocalizationService.getReversedIconByLanguage(
+                    LocalizationService.storage.read('language'),
                   ),
                 ),
               ),
-              // const BuildLocationsButtons(),
-              if (selectedMosques.isNotEmpty)
-                Positioned(
-                  top: MediaQuery.of(context).size.height / 10,
-                  right: MediaQuery.of(context).size.width / 5,
-                  left: MediaQuery.of(context).size.width / 5,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2, horizontal: 16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            showListDialog();
-                          },
-                          child: const Text('عرض'),
-                        ),
-                        Text('المساجد المختارة: ${selectedMosques.length}'),
-                      ],
-                    ),
-                  ),
-                ),
+              const BuildLocationsButtons(),
               Positioned(
-                top: 15,
-                right: 5,
-                left: 55,
+                top: MediaQuery.of(context).size.height / 60,
+                left: MediaQuery.of(context).size.width / 7.5,
+                right: MediaQuery.of(context).size.width / 60,
                 child: Column(
                   children: [
                     Container(
@@ -200,13 +162,12 @@ class _SearchMapState extends State<SearchMap> {
                             child: TextFormField(
                               controller: _controller,
                               onChanged: (query) {
-                                performAutocompleteSearch(query);
+                                query.length > 2
+                                    ? performAutocompleteSearch(query)
+                                    : clearSearchResults();
                               },
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.right,
-                              textCapitalization: TextCapitalization.words,
                               decoration: InputDecoration(
-                                hintText: 'ابحث عن مكان او مسجد',
+                                hintText: 'Search for a place or mosque'.tr,
                                 border: InputBorder.none,
                                 suffixIcon: IconButton(
                                   highlightColor: Colors.transparent,
@@ -254,238 +215,350 @@ class _SearchMapState extends State<SearchMap> {
                 ),
               ),
               const BuildProduct(),
-              const BuildChooseButton()
-            ],
-          ),
-          floatingActionButton: Stack(
-            children: [
+              BuildChooseButton(
+                location,
+                totalOrder,
+                selectedOrders,
+              ),
               Positioned(
-                bottom: 355,
-                right: 0,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
+                bottom: MediaQuery.of(context).size.height * 0.03,
+                right: MediaQuery.of(context).size.width * 0.06,
+                child: Badge(
+                  label: Text(selectedMosques.length.toString()),
+                  largeSize: 20,
+                  textStyle: const TextStyle(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                        offset: Offset(1, 1),
-                      ),
-                    ],
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: FloatingActionButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      splashFactory: NoSplash.splashFactory,
+                      backgroundColor: const Color(0xff609FD8),
+                      fixedSize: Size(
+                        MediaQuery.of(context).size.width * 0.2,
+                        MediaQuery.of(context).size.height * 0.06,
+                      ),
                     ),
-                    mini: true,
-                    elevation: 0,
-                    backgroundColor: Colors.white,
                     onPressed: () {
-                      googleMapController.animateCamera(
-                        CameraUpdate.newLatLng(
-                          const LatLng(25, 45),
-                        ),
-                      );
+                      Get.toNamed("payment");
                     },
-                    child: const Icon(
-                      Icons.gps_fixed,
-                      color: Colors.black,
-                      size: 20,
+                    child: const Center(
+                      child: Icon(
+                        Icons.add_shopping_cart_rounded,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 280,
-                right: 0,
-                child: Container(
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                        offset: Offset(1, 1),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 30,
-                        child: FloatingActionButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          elevation: 0,
-                          backgroundColor: Colors.white,
-                          mini: true,
-                          onPressed: () {
-                            googleMapController.animateCamera(
-                              CameraUpdate.zoomIn(),
-                            );
-                          },
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.black,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                        height: 10,
-                        child: Divider(
-                          color: Colors.black,
-                          height: 0,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                        child: FloatingActionButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          elevation: 0,
-                          mini: true,
-                          backgroundColor: Colors.white,
-                          onPressed: () {
-                            googleMapController.animateCamera(
-                              CameraUpdate.zoomOut(),
-                            );
-                          },
-                          child: const Icon(
-                            Icons.remove,
-                            color: Colors.black,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              )
             ],
           ),
+          floatingActionButton:
+              LocalizationService.storage.read('language') == 'ar'
+                  ? Stack(
+                      children: [
+                        Positioned(
+                          bottom: MediaQuery.of(context).size.height / 2.4,
+                          right: MediaQuery.of(context).size.width / 10,
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: FloatingActionButton(
+                              heroTag: "btn1",
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              elevation: 0,
+                              backgroundColor: Colors.white,
+                              onPressed: () {
+                                googleMapController.animateCamera(
+                                  CameraUpdate.newCameraPosition(
+                                    const CameraPosition(
+                                      target: LatLng(25, 45),
+                                      zoom: 5,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Icon(
+                                Icons.gps_fixed,
+                                color: Colors.black,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: MediaQuery.of(context).size.height / 3,
+                          right: MediaQuery.of(context).size.width / 10,
+                          child: Container(
+                            width: 35,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                  child: FloatingActionButton(
+                                    heroTag: "btn2",
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      googleMapController.animateCamera(
+                                        CameraUpdate.zoomIn(),
+                                      );
+                                    },
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                  height: 10,
+                                  child: Divider(
+                                    color: Colors.black,
+                                    height: 0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                  child: FloatingActionButton(
+                                    heroTag: "btn3",
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      googleMapController.animateCamera(
+                                        CameraUpdate.zoomOut(),
+                                      );
+                                    },
+                                    child: const Icon(
+                                      Icons.remove,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Stack(
+                      children: [
+                        Positioned(
+                          bottom: MediaQuery.of(context).size.height / 2.4,
+                          right: MediaQuery.of(context).size.width / 80,
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: FloatingActionButton(
+                              heroTag: "btn1",
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              elevation: 0,
+                              backgroundColor: Colors.white,
+                              onPressed: () {
+                                googleMapController.animateCamera(
+                                  CameraUpdate.newCameraPosition(
+                                    const CameraPosition(
+                                      target: LatLng(25, 45),
+                                      zoom: 5,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Icon(
+                                Icons.gps_fixed,
+                                color: Colors.black,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: MediaQuery.of(context).size.height / 3,
+                          right: MediaQuery.of(context).size.width / 80,
+                          child: Container(
+                            width: 35,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                  child: FloatingActionButton(
+                                    heroTag: "btn2",
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      googleMapController.animateCamera(
+                                        CameraUpdate.zoomIn(),
+                                      );
+                                    },
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                  height: 10,
+                                  child: Divider(
+                                    color: Colors.black,
+                                    height: 0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                  child: FloatingActionButton(
+                                    heroTag: "btn3",
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    onPressed: () {
+                                      googleMapController.animateCamera(
+                                        CameraUpdate.zoomOut(),
+                                      );
+                                    },
+                                    child: const Icon(
+                                      Icons.remove,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
         ),
       ),
     );
   }
 
-  // DIALOGS
-  showListDialog() {
-    showDialog(
+  showMosqueDialog(String mosqueName) async {
+    return AwesomeDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          title: const Text(
-            'المساجد المختارة',
-            textDirection: TextDirection.rtl,
-          ),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    for (int index = 0; index < selectedMosques.length; index++)
-                      ListTile(
-                        key: Key(
-                            'mosque_$index'), // Unique key for each ListTile
-                        title: Text(selectedMosques[index],
-                            textDirection: TextDirection.rtl),
-                        leading: IconButton(
-                          highlightColor: Colors.transparent,
-                          icon: const Icon(Icons.delete),
-                          onPressed: () {
-                            setState(() {
-                              removeMarkerOfMosque(selectedMosques[index]);
-                              selectedMosques.removeAt(index);
-                              if (selectedMosques.isEmpty) {
-                                Navigator.of(context).pop();
-                                FocusScope.of(context).unfocus();
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                  ],
-                ),
-              );
-            },
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                FocusScope.of(context).unfocus();
-              },
-              child: const Text('إلغاء'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+      customHeader: const Icon(
+        Icons.mosque_rounded,
+        size: 85,
+        color: Color(0xFF609FD8),
+      ),
+      animType: AnimType.topSlide,
+      title: mosqueName,
+      titleTextStyle: AppTextStyle.mainFont
+          .copyWith(fontSize: 25, color: const Color(0xFF609FD8)),
+      desc: 'Do you want to add this mosque to the list?'.tr,
+      descTextStyle: AppTextStyle.mainFont.copyWith(color: Colors.black),
+      btnOk: ElevatedButton(
+        onPressed: () {
+          // addMosqueToList(mosqueName);
+          addMarkerToMosque(mosqueName);
 
-  Future<void> showMosqueDialog(String mosqueName) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
+          Navigator.of(context).pop();
+          FocusScope.of(context).unfocus();
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF609FD8),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(10),
           ),
-          content: Text(mosqueName, textDirection: TextDirection.rtl),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Add the mosque to the selectedMosques list
-                addMosqueToList(mosqueName);
-                addMarkerToMosque(mosqueName);
-                FocusScope.of(context).unfocus();
-                Navigator.of(context).pop();
-                FocusScope.of(context).unfocus();
-              },
-              child: const Text('اضف المسجد الى القائمة'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                FocusScope.of(context).unfocus();
-              },
-              child: const Text('إلغاء'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void addMosqueToList(String mosqueName) {
-    if (!selectedMosques.contains(mosqueName)) {
-      setState(() {
-        selectedMosques.add(mosqueName);
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('المسجد موجود في القائمة بالفعل'),
-          duration: Duration(seconds: 2),
         ),
-      );
-    }
+        child: FittedBox(
+          child: Text(
+            'Add'.tr,
+            style: AppTextStyle.mainFont.copyWith(fontSize: 22),
+          ),
+        ),
+      ),
+      btnCancel: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+          FocusScope.of(context).unfocus();
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: FittedBox(
+          child: Text(
+            'Cancel'.tr,
+            style: AppTextStyle.mainFont.copyWith(fontSize: 22),
+          ),
+        ),
+      ),
+    )..show();
   }
 
   // MARKERS
@@ -510,7 +583,6 @@ class _SearchMapState extends State<SearchMap> {
         double lat = place.geometry!.location.lat;
         double lng = place.geometry!.location.lng;
         String name = place.name;
-
         _markers.add(
           Marker(
             markerId: MarkerId(name),
@@ -531,20 +603,32 @@ class _SearchMapState extends State<SearchMap> {
     setState(() {});
   }
 
+  Marker? _lastAddedMarker;
+
   void addMarkerToMosque(String mosqueName) async {
+    // Remove the last added marker if it exists
+    if (_lastAddedMarker != null) {
+      _markers.remove(_lastAddedMarker);
+    }
+
     LatLng mosqueLocation = getMosqueLocation(mosqueName);
-    _markers.add(
-      Marker(
-        markerId: MarkerId(mosqueName),
-        position: mosqueLocation,
-        icon: await BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(), 'assets/images/9.jpg'),
-        onTap: () {
-          showMosqueDialog(mosqueName);
-        },
-      ),
+    Marker newMarker = Marker(
+      markerId: MarkerId(mosqueName),
+      position: mosqueLocation,
+      icon: await BitmapDescriptor.fromAssetImage(
+          const ImageConfiguration(), 'assets/images/9.jpg'),
+      onTap: () {
+        showMosqueDialog(mosqueName);
+      },
     );
-    setState(() {});
+
+    _markers.add(newMarker);
+    setState(() {
+      location = mosqueName;
+    });
+
+    // Update the last added marker
+    _lastAddedMarker = newMarker;
   }
 
   LatLng getMosqueLocation(String mosqueName) {
@@ -559,11 +643,6 @@ class _SearchMapState extends State<SearchMap> {
   // SEARCH
   Future<void> performAutocompleteSearch(String query) async {
     try {
-      LatLngBounds saudiArabiaBounds = LatLngBounds(
-        southwest: const LatLng(16.456808125987084, 34.92532922317433),
-        northeast: const LatLng(32.1048459480552, 51.0802984261652),
-      );
-
       PlacesAutocompleteResponse response = await places.autocomplete(
         query,
         components: [
@@ -582,14 +661,7 @@ class _SearchMapState extends State<SearchMap> {
               await places.getDetailsByPlaceId(prediction.placeId!);
 
           if (details.isOkay) {
-            Location location = details.result.geometry!.location;
-
-            // Convert Location to LatLng
-            LatLng locationLatLng = LatLng(location.lat, location.lng);
-
-            if (saudiArabiaBounds.contains(locationLatLng)) {
-              filteredResults.add(prediction);
-            }
+            filteredResults.add(prediction);
           }
         }
         setState(() {
@@ -672,7 +744,7 @@ class _SearchMapState extends State<SearchMap> {
   // FETCH & CACHE
   Future<void> _fetchMosques() async {
     List<PlacesSearchResult> allResults = [];
-
+    isLoading = true;
     for (var location in locations) {
       for (var keyword in keywords) {
         String cacheKey = '$keyword-${location.lat}-${location.lng}';
@@ -686,6 +758,7 @@ class _SearchMapState extends State<SearchMap> {
           List<PlacesSearchResult> cachedResults =
               await _decodeCachedResults(fileInfo);
           allResults.addAll(cachedResults);
+          isLoading = false;
           log("data from cache");
         } else {
           // Perform a new search and cache the results
@@ -703,6 +776,7 @@ class _SearchMapState extends State<SearchMap> {
             cacheKey,
             response.results,
           );
+          isLoading = false;
           log("data from api");
         }
       }

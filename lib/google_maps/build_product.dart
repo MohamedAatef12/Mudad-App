@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:mudad_app/google_maps/mosque_map/product.dart';
+import 'package:mudad_app/google_maps/product.dart';
 import 'package:mudad_app/view_model/products_cubit/products_cubit.dart';
 
 List<String> products = [], productImages = [];
