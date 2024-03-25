@@ -10,4 +10,8 @@ class AppTextStyle {
 
   static TextStyle quranFont = GoogleFonts.amiriQuran(
       fontSize: 30, fontWeight: FontWeight.w800, color: Colors.black87);
+  static TextStyle normalFont1 = GoogleFonts.amiriQuran(
+      fontSize: 20, fontWeight: FontWeight.w800, color: Colors.black87);
+  static TextStyle normalFont2 = GoogleFonts.amiriQuran(
+      color: Colors.black87, fontSize: 25, fontWeight: FontWeight.w400);
 }
