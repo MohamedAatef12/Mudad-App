@@ -60,12 +60,14 @@ class ProductCard extends StatelessWidget {
                   icon: const Icon(Icons.add),
                   color: Colors.green,
                 ),
-                Text(quantityCounter.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    )),
+                Text(
+                  quantityCounter.toString(),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 IconButton(
                   onPressed: remove,
                   icon: const Icon(Icons.remove),

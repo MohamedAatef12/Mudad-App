@@ -111,53 +111,6 @@ class _SearchMapState extends State<SearchMap> {
                 ),
               ),
               const BuildLocationsButtons(),
-              if (selectedMosques.isNotEmpty)
-                Positioned(
-                  top: MediaQuery.of(context).size.height / 10,
-                  right: MediaQuery.of(context).size.width / 6,
-                  left: MediaQuery.of(context).size.width / 6,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF609FD8),
-                            ),
-                          ),
-                          onPressed: () {
-                            showListDialog();
-                          },
-                          child: Text(
-                            'Show'.tr,
-                            style: AppTextStyle.mainFont.copyWith(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        Text(
-                            '${'Selected mosques'.tr} ${selectedMosques.length}',
-                            style: AppTextStyle.mainFont.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
               Positioned(
                 top: MediaQuery.of(context).size.height / 60,
                 left: MediaQuery.of(context).size.width / 7.5,
@@ -652,8 +605,9 @@ class _SearchMapState extends State<SearchMap> {
       descTextStyle: AppTextStyle.mainFont.copyWith(color: Colors.black),
       btnOk: ElevatedButton(
         onPressed: () {
-          addMosqueToList(mosqueName);
+          // addMosqueToList(mosqueName);
           addMarkerToMosque(mosqueName);
+
           Navigator.of(context).pop();
           FocusScope.of(context).unfocus();
         },
@@ -689,21 +643,6 @@ class _SearchMapState extends State<SearchMap> {
         ),
       ),
     )..show();
-  }
-
-  void addMosqueToList(String mosqueName) {
-    if (!selectedMosques.contains(mosqueName)) {
-      setState(() {
-        selectedMosques.add(mosqueName);
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('The mosque is already on the list'.tr),
-          duration: const Duration(seconds: 2),
-        ),
-      );
-    }
   }
 
   // MARKERS
@@ -748,22 +687,32 @@ class _SearchMapState extends State<SearchMap> {
     setState(() {});
   }
 
+  Marker? _lastAddedMarker;
+
   void addMarkerToMosque(String mosqueName) async {
+    // Remove the last added marker if it exists
+    if (_lastAddedMarker != null) {
+      _markers.remove(_lastAddedMarker);
+    }
+
     LatLng mosqueLocation = getMosqueLocation(mosqueName);
-    _markers.add(
-      Marker(
-        markerId: MarkerId(mosqueName),
-        position: mosqueLocation,
-        icon: await BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(), 'assets/images/9.jpg'),
-        onTap: () {
-          showMosqueDialog(mosqueName);
-        },
-      ),
+    Marker newMarker = Marker(
+      markerId: MarkerId(mosqueName),
+      position: mosqueLocation,
+      icon: await BitmapDescriptor.fromAssetImage(
+          const ImageConfiguration(), 'assets/images/9.jpg'),
+      onTap: () {
+        showMosqueDialog(mosqueName);
+      },
     );
+
+    _markers.add(newMarker);
     setState(() {
       location = mosqueName;
     });
+
+    // Update the last added marker
+    _lastAddedMarker = newMarker;
   }
 
   LatLng getMosqueLocation(String mosqueName) {
