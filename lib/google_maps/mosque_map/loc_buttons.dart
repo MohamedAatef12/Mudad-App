@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlaceButton extends StatelessWidget {
@@ -26,23 +27,24 @@ class PlaceButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: SizedBox(
-        width: 100,
-        height: 55,
+        width: MediaQuery.of(context).size.width * 0.25,
+        height: MediaQuery.of(context).size.height * 0.06,
         child: ElevatedButton.icon(
           style: ButtonStyle(
+            elevation: MaterialStateProperty.all<double>(3),
             padding: MaterialStateProperty.all<EdgeInsets>(
-              const EdgeInsets.all(0),
+              const EdgeInsets.all(5),
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
             minimumSize: MaterialStateProperty.all<Size>(
               const Size(20, 20),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              const Color(0xFF609FD8),
+              const Color(0xffffffff),
             ),
           ),
           onPressed: onPressed,
@@ -51,14 +53,13 @@ class PlaceButton extends StatelessWidget {
             width: iconWidth,
             height: iconHeight,
           ),
-          label: Text(
-            placeName,
-            textDirection: TextDirection.ltr,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: labelFontSize,
-              fontWeight: FontWeight.bold,
+          label: FittedBox(
+            child: Text(
+              placeName,
+              style: GoogleFonts.lalezar(
+                fontSize: labelFontSize,
+                color: Colors.black,
+              ),
             ),
           ),
         ),

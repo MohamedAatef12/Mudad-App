@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -7,21 +9,25 @@ class ProductCard extends StatelessWidget {
     required this.productName,
     required this.productDetails,
     required this.price,
+    required this.quantityCounter,
+    required this.addition,
+    required this.remove,
   }) : super(key: key);
 
   final String imagePath;
   final String productName;
   final String productDetails;
-  final int price;
+  final int price, quantityCounter;
+  final void Function()? addition, remove;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 175,
+      width: MediaQuery.of(context).size.width * 0.422,
       child: Card(
         elevation: 1,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(14),
         ),
         color: Colors.white,
         margin: const EdgeInsets.all(0),
@@ -32,39 +38,46 @@ class ProductCard extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Image.asset(
+            Image.network(
               imagePath,
               height: 70,
-            ),
-            const SizedBox(
-              height: 5,
             ),
             FittedBox(
               child: Text(
                 productName,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            FittedBox(
-              child: Text(
-                productDetails,
-                style: const TextStyle(
-                  color: Colors.blue,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: addition,
+                  icon: const Icon(Icons.add),
+                  color: Colors.green,
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 13,
+                Text(
+                  quantityCounter.toString(),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(
+                  onPressed: remove,
+                  icon: const Icon(Icons.remove),
+                  color: Colors.red,
+                ),
+              ],
             ),
             SizedBox(
-              height: 37,
-              width: 130,
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.33,
               child: ElevatedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all<EdgeInsets>(
@@ -76,39 +89,30 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                   minimumSize: MaterialStateProperty.all<Size>(
-                    const Size(20, 60),
+                    Size(
+                      MediaQuery.of(context).size.height * 0.04,
+                      MediaQuery.of(context).size.width * 0.33,
+                    ),
                   ),
                   backgroundColor: MaterialStateProperty.all<Color>(
                     const Color(0xFF609FD8),
                   ),
                 ),
                 onPressed: () {},
-                child: Center(
-                  child: Row(
-                    children: [
-                      const Text(
-                        "   ريال ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '$price ',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                child: FittedBox(
+                  child: Text(
+                    '${"   riyal ".tr} $price',
+                    style: GoogleFonts.lalezar(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w200,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
             const SizedBox(
-              height: 8,
+              height: 5,
             ),
           ],
         ),

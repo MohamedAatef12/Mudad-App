@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:mudad_app/google_maps/mosque_map/search_map.dart';
@@ -30,29 +31,29 @@ class BuildLocationsButtons extends StatelessWidget {
               moveCameraToPlace("Makkah");
             },
             imagePath: "assets/images/4.png",
-            placeName: "مساجد\nمــكــة",
+            placeName: "Mecca\nMosques".tr,
             coordinates: const LatLng(21.423888489772935, 39.82624903841808),
-            labelFontSize: 18,
+            labelFontSize: 20,
             iconWidth: 34.4,
             iconHeight: 34.4,
           ),
-          PlaceButton(
-            onPressed: () {
-              googleMapController.animateCamera(
-                CameraUpdate.newLatLng(const LatLng(
-                  24.467663304009072,
-                  39.61106777648205,
-                )),
-              );
-              moveCameraToPlace("Madinah");
-            },
-            imagePath: "assets/images/5.png",
-            placeName: " مساجد\n المدينة",
-            coordinates: const LatLng(24.467663304009072, 39.61106777648205),
-            labelFontSize: 17,
-            iconWidth: 33,
-            iconHeight: 33,
-          ),
+          // PlaceButton(
+          //   onPressed: () {
+          //     googleMapController.animateCamera(
+          //       CameraUpdate.newLatLng(const LatLng(
+          //         24.467663304009072,
+          //         39.61106777648205,
+          //       )),
+          //     );
+          //     moveCameraToPlace("Madinah");
+          //   },
+          //   imagePath: "assets/images/5.png",
+          //   placeName: "AL Madinah\nMosques".tr,
+          //   coordinates: const LatLng(24.467663304009072, 39.61106777648205),
+          //   labelFontSize: 20,
+          //   iconWidth: 33,
+          //   iconHeight: 33,
+          // ),
           PlaceButton(
             onPressed: () {
               googleMapController.animateCamera(
@@ -64,29 +65,29 @@ class BuildLocationsButtons extends StatelessWidget {
               moveCameraToPlace("Jeddah");
             },
             imagePath: "assets/images/7.png",
-            placeName: "مساجد\n  جــدة",
+            placeName: "Jeddah\nMosques".tr,
             coordinates: const LatLng(21.52774807596778, 39.16439325129956),
             labelFontSize: 17,
             iconWidth: 33,
             iconHeight: 33,
           ),
-          PlaceButton(
-            onPressed: () {
-              googleMapController.animateCamera(
-                CameraUpdate.newLatLng(const LatLng(
-                  21.389591400346944,
-                  39.83733700721687,
-                )),
-              );
-              moveCameraToPlace("Mosques of the pilgrims");
-            },
-            imagePath: "assets/images/6.png",
-            placeName: "مساجد\n  المعتمرين",
-            coordinates: const LatLng(21.389591400346944, 39.83733700721687),
-            labelFontSize: 13,
-            iconWidth: 30,
-            iconHeight: 33,
-          ),
+          // PlaceButton(
+          //   onPressed: () {
+          //     googleMapController.animateCamera(
+          //       CameraUpdate.newLatLng(const LatLng(
+          //         21.389591400346944,
+          //         39.83733700721687,
+          //       )),
+          //     );
+          //     moveCameraToPlace("Mosques of the pilgrims");
+          //   },
+          //   imagePath: "assets/images/6.png",
+          //   placeName: "Umrah pilgrims\nMosques".tr,
+          //   coordinates: const LatLng(21.389591400346944, 39.83733700721687),
+          //   labelFontSize: 20,
+          //   iconWidth: 30,
+          //   iconHeight: 33,
+          // ),
         ],
       ),
     );
@@ -116,23 +117,23 @@ Future<void> moveCameraToPlace(String placeId) async {
       return;
     }
 
-    if (placeId == "Madinah") {
-      const LatLng madinahLocation =
-          LatLng(24.467663304009072, 39.61106777648205);
-      googleMapController.animateCamera(
-        CameraUpdate.newLatLngZoom(madinahLocation, zoomLevel),
-      );
-      return;
-    }
-
-    if (placeId == "Mosques of the pilgrims") {
-      const LatLng mo3tamerinLocation =
-          LatLng(21.389591400346944, 39.83733700721687);
-      googleMapController.animateCamera(
-        CameraUpdate.newLatLngZoom(mo3tamerinLocation, zoomLevel),
-      );
-      return;
-    }
+    // if (placeId == "Madinah") {
+    //   const LatLng madinahLocation =
+    //       LatLng(24.467663304009072, 39.61106777648205);
+    //   googleMapController.animateCamera(
+    //     CameraUpdate.newLatLngZoom(madinahLocation, zoomLevel),
+    //   );
+    //   return;
+    // }
+    //
+    // if (placeId == "Mosques of the pilgrims") {
+    //   const LatLng mo3tamerinLocation =
+    //       LatLng(21.389591400346944, 39.83733700721687);
+    //   googleMapController.animateCamera(
+    //     CameraUpdate.newLatLngZoom(mo3tamerinLocation, zoomLevel),
+    //   );
+    //   return;
+    // }
 
     PlacesDetailsResponse details = await places.getDetailsByPlaceId(placeId);
 
