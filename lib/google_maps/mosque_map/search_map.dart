@@ -518,6 +518,7 @@ class _SearchMapState extends State<SearchMap> {
       ),
       btnCancel: ElevatedButton(
         onPressed: () {
+          Navigator.of(context).pop();
           FocusScope.of(context).unfocus();
         },
         style: ElevatedButton.styleFrom(
