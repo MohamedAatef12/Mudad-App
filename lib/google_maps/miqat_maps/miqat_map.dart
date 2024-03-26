@@ -41,11 +41,13 @@ final List<String> keywords = [
   // 'musalla',
   // 'مصلى',
   // 'مساجد',
-  // 'مساجد المعتمرين',
+  ' Miqat',
+  "الميقات"
   // 'mosques',
+
 ];
 List<Location> locations = [
-  Location(lat: 21.423888489772935, lng: 39.82624903841808), // Makkah
+  Location(lat: 22.8044775715752, lng: 39.91121516778221), // Makkah
   // Location(lat: 24.467663304009072, lng: 39.61106777648205),    // Madinah
   // Location(lat: 21.389591400346944, lng: 39.83733700721687),     // Mo3tamerin
   // Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
@@ -110,7 +112,6 @@ class _SearchMapState extends State<MiqatMap> {
                   ),
                 ),
               ),
-              const BuildLocationsButtons(),
               Positioned(
                 top: MediaQuery.of(context).size.height / 60,
                 left: MediaQuery.of(context).size.width / 7.5,
