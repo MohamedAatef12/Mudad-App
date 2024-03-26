@@ -69,10 +69,6 @@ class HomeDrawer extends StatelessWidget {
                             width: 40,
                           ),
                           CustomContainerFaceBook(),
-                          SizedBox(
-                            width: 40,
-                          ),
-                          CustomContainerWhatsApp(),
                         ],
                       ),
                       const SizedBox(
