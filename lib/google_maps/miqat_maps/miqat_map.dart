@@ -110,7 +110,6 @@ class _SearchMapState extends State<MiqatMap> {
                   ),
                 ),
               ),
-              const BuildLocationsButtons(),
               Positioned(
                 top: MediaQuery.of(context).size.height / 60,
                 left: MediaQuery.of(context).size.width / 7.5,

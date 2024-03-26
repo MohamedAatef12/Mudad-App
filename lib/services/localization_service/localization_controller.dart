@@ -3,10 +3,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LocalizationService extends Translations {
+  static initLocale() {
+    if (storage.read('language') == null) {
+      storage.write('language', 'en');
+      storage.write('countryCode', 'US');
+    } else {
+      return local;
+    }
+  }
+
   static final local = Locale(
     storage.read('language') ?? "en",
     storage.read('countryCode') ?? "US",
   );
+
   static const fallbackLocale = Locale("en", "US");
   static final languages = ["English", "العربيه"];
   static final storage = GetStorage();

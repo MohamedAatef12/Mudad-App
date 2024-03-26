@@ -52,13 +52,14 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       color: AppColors.buttonColor,
       translations: LocalizationService(),
       //locale: const Locale('ar', 'EG'),
-      locale: LocalizationService.local,
+      locale: LocalizationService.initLocale(),
       // locale: Locale("en", "US"),
       theme: ThemeData(
         textSelectionTheme: TextSelectionThemeData(
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
       ),
       fallbackLocale: LocalizationService.fallbackLocale,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      initialRoute: '/login',
       // home: const SearchMap(),
       getPages: appRoutes(),
     );
