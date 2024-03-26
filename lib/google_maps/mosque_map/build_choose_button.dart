@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 
@@ -27,7 +28,7 @@ class BuildChooseButton extends StatelessWidget {
       return Positioned(
         bottom: MediaQuery.of(context).size.height * 0.03,
         right: MediaQuery.of(context).size.width * 0.3,
-        left: MediaQuery.of(context).size.width * 0.3,
+        left: MediaQuery.of(context).size.width * 0.07,
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.7,
           height: MediaQuery.of(context).size.height * 0.06,
@@ -68,11 +69,11 @@ class BuildChooseButton extends StatelessWidget {
                   },
                   child: FittedBox(
                     child: Text(
-                      "Choose".tr,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold),
+                      "Add to Cart".tr,
+                      style: GoogleFonts.lalezar(
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
                     ),
                   ),
                 ),

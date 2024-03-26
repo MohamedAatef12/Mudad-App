@@ -124,7 +124,6 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                         ),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            sentCode();
                             Get.back();
                           }
                         },

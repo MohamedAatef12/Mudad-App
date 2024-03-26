@@ -18,7 +18,6 @@ import 'app_constants/app_routes.dart';
 import 'firebase_options.dart';
 import 'google_maps/home_map/cubit/cubit.dart';
 import 'google_maps/mosque_map/search_map.dart';
-import 'view/home_screen/subscriptionScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,29 +58,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LocationCubit>(
-      create: (context) => LocationCubit(),
-      child: GetMaterialApp(
-        color: AppColors.buttonColor,
-        translations: LocalizationService(),
-        // locale: const Locale('ar', 'EG'),
-        locale: LocalizationService.local,
-        // locale:  Locale("en", "US"),
-        theme: ThemeData(
-          textSelectionTheme: TextSelectionThemeData(
-            cursorColor: AppColors.buttonColor,
-            selectionColor: AppColors.buttonColor.withOpacity(0.5),
-            selectionHandleColor: AppColors.buttonColor.withOpacity(0.7),
-          ),
+    return GetMaterialApp(
+      color: AppColors.buttonColor,
+      translations: LocalizationService(),
+      //locale: const Locale('ar', 'EG'),
+      locale: LocalizationService.local,
+      // locale: Locale("en", "US"),
+      theme: ThemeData(
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: AppColors.buttonColor,
+          selectionColor: AppColors.buttonColor.withOpacity(0.5),
+          selectionHandleColor: AppColors.buttonColor.withOpacity(0.7),
         ),
-        fallbackLocale: LocalizationService.fallbackLocale,
-        debugShowCheckedModeBanner: false,
-        // initialRoute: storage.read("userToken") == null ? '/splash' : '/home',
-        // home: const SearchMap(),
-        home: HomePage(),
-        //home: SubscriptionPage(),
-        getPages: appRoutes(),
       ),
+      fallbackLocale: LocalizationService.fallbackLocale,
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/home',
+      // initialRoute: '/subscribtions',
+      // home: const SearchMap(),
+      getPages: appRoutes(),
     );
   }
 }

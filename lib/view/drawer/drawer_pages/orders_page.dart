@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../app_constants/app_assets.dart';
 import '../../../app_constants/app_text_styles.dart';
 
@@ -27,10 +27,10 @@ class OrdersPage extends StatelessWidget {
                   ),
                   FittedBox(
                       child: Text(
-                    "{إِن تُقْرِضُوا اللَّهَ قَرْضًا حَسَنًا يُضَاعِفْه"
-                    "\nُ لَكُمْ وَيَغْفِرْ لَكُمْ ۚ وَاللَّهُ شَكُورٌ حَلِيمٌ}",
+                        "{إِن تُقْرِضُوا اللَّهَ قَرْضًا حَسَنًا يُضَاعِفْه"
+                            "\nُ لَكُمْ وَيَغْفِرْ لَكُمْ ۚ وَاللَّهُ شَكُورٌ حَلِيمٌ}",
                     style: AppTextStyle.quranFont,
-                  )),
+                  ),),
                 ],
               ),
               const SizedBox(
@@ -59,7 +59,7 @@ class OrdersPage extends StatelessWidget {
                               size: 40,
                             ),
                             trailing: Text(
-                              "عشره كراتين",
+                              "text".tr,
                               style: AppTextStyle.mainBlackFont,
                             ),
                             title: const SizedBox(),
@@ -67,9 +67,7 @@ class OrdersPage extends StatelessWidget {
                               FittedBox(
                                 child: Text(
                                   textDirection: TextDirection.rtl,
-                                  "مسجد عمر بن الخطاب             🕌"
-                                  " \n مكه المكرمه"
-                                  "\n التكلفه : 200 ريال سعودي",
+                                  "address_price".tr,
                                   style: GoogleFonts.amiriQuran(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w900,
@@ -98,7 +96,7 @@ class OrdersPage extends StatelessWidget {
                               size: 40,
                             ),
                             trailing: Text(
-                              "عشره كراتين",
+                              "text".tr,
                               style: AppTextStyle.mainBlackFont,
                             ),
                             title: const SizedBox(),
@@ -106,9 +104,7 @@ class OrdersPage extends StatelessWidget {
                               FittedBox(
                                 child: Text(
                                   textDirection: TextDirection.rtl,
-                                  "مسجد عمر بن الخطاب             🕌"
-                                  " \n مكه المكرمه"
-                                  "\n التكلفه : 200 ريال سعودي",
+                                 "address_price".tr,
                                   style: GoogleFonts.amiriQuran(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w900,
@@ -137,7 +133,7 @@ class OrdersPage extends StatelessWidget {
                               size: 40,
                             ),
                             trailing: Text(
-                              "عشره كراتين",
+                              "text".tr,
                               style: AppTextStyle.mainBlackFont,
                             ),
                             title: const SizedBox(),
@@ -145,9 +141,7 @@ class OrdersPage extends StatelessWidget {
                               FittedBox(
                                 child: Text(
                                   textDirection: TextDirection.rtl,
-                                  "مسجد عمر بن الخطاب             🕌"
-                                  " \n مكه المكرمه"
-                                  "\n التكلفه : 200 ريال سعودي",
+                                  "address_price".tr,
                                   style: GoogleFonts.amiriQuran(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w900,
@@ -176,7 +170,7 @@ class OrdersPage extends StatelessWidget {
                               size: 40,
                             ),
                             trailing: Text(
-                              "عشره كراتين",
+                              "text".tr,
                               style: AppTextStyle.mainBlackFont,
                             ),
                             title: const SizedBox(),
@@ -184,9 +178,7 @@ class OrdersPage extends StatelessWidget {
                               FittedBox(
                                 child: Text(
                                   textDirection: TextDirection.rtl,
-                                  "مسجد عمر بن الخطاب             🕌"
-                                  " \n مكه المكرمه"
-                                  "\n التكلفه : 200 ريال سعودي",
+                                  "address_price".tr,
                                   style: GoogleFonts.amiriQuran(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w900,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlaceButton extends StatelessWidget {
@@ -27,9 +28,10 @@ class PlaceButton extends StatelessWidget {
       padding: const EdgeInsets.all(6.0),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.25,
-        height: 55,
+        height: MediaQuery.of(context).size.height * 0.06,
         child: ElevatedButton.icon(
           style: ButtonStyle(
+            elevation: MaterialStateProperty.all<double>(3),
             padding: MaterialStateProperty.all<EdgeInsets>(
               const EdgeInsets.all(5),
             ),
@@ -42,7 +44,7 @@ class PlaceButton extends StatelessWidget {
               const Size(20, 20),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              const Color(0xFF609FD8),
+              const Color(0xffffffff),
             ),
           ),
           onPressed: onPressed,
@@ -54,10 +56,9 @@ class PlaceButton extends StatelessWidget {
           label: FittedBox(
             child: Text(
               placeName,
-              style: TextStyle(
-                color: Colors.white,
+              style: GoogleFonts.lalezar(
                 fontSize: labelFontSize,
-                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
           ),

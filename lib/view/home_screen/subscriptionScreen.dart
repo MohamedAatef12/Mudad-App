@@ -19,9 +19,10 @@ class SubscriptionPage extends StatefulWidget {
 
 class _SubscriptionPageState extends State<SubscriptionPage> {
   int NumberOfMonths = 1;
-  String choosePachage = "bronze";
+  String choosepackage = "Silver package".tr;
+  DateTime? choosedDate = DateTime.now();
   List<DateTime?> _dates = [
-    DateTime(2021, 8, 10),
+    DateTime.now(),
   ];
 
   @override
@@ -81,23 +82,23 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           ),
           SubscriptionButton(
             imageIcon: "assets/subscriptions/bronze.png",
-            title: "Bronze package",
-            subtitle: "Once a month",
+            title: "Bronze package".tr,
+            subtitle: "Once a month".tr,
           ),
           SubscriptionButton(
             imageIcon: "assets/subscriptions/silver.png",
-            title: "Silver package",
-            subtitle: "Once a week",
+            title: "Silver package".tr,
+            subtitle: "Once a week".tr,
           ),
           SubscriptionButton(
             imageIcon: "assets/subscriptions/gold.png",
-            title: "Golden package",
-            subtitle: "twice a week",
+            title: "Golden package".tr,
+            subtitle: "twice a week".tr,
           ),
           SubscriptionButton(
             imageIcon: "assets/subscriptions/award.png",
-            title: "Diamond package",
-            subtitle: "Daily",
+            title: "Diamond package".tr,
+            subtitle: "Daily".tr,
           ),
 
           Container(
@@ -220,8 +221,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 ),
                 InkWell(
                   child: Text(
-                    //"12 / Feb / 2024",
-                    "${_dates.first}",
+                    "${choosedDate!.day} / ${choosedDate!.month} / ${choosedDate!.year}",
                     style: AppTextStyle.mainBlackFont,
                   ),
                 )
@@ -265,7 +265,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }) {
     return InkWell(
       onTap: () {
-        choosePachage = title;
+        choosepackage = title;
 
         setState(() {});
       },
@@ -274,7 +274,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           // height: 70,
           decoration: BoxDecoration(
-              color: choosePachage == title
+              color: choosepackage == title
                   ? AppColors.buttonColor
                   : Colors.grey[300],
               borderRadius: BorderRadius.circular(15),
@@ -284,7 +284,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             title: Center(
               child: Text(
                 title,
-                style: choosePachage == title
+                style: choosepackage == title
                     ? const TextStyle(color: Colors.white, fontSize: 17)
                     : const TextStyle(
                         color: AppColors.buttonColor, fontSize: 17),
@@ -332,6 +332,13 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       // barrierColor: AppColors.buttonColor,
       // dialogBackgroundColor: AppColors.buttonColor,
     );
+    print(results);
+    if (results != null) {
+      setState(() {
+        choosedDate = results.first;
+      });
+    }
+
     return results;
   }
 }
