@@ -251,7 +251,6 @@ class _SearchMapState extends State<SearchMap> {
                   ],
                 ),
               ),
-              const BuildProduct(),
               BuildChooseButton(
                 'location',
                 totalOrder,
