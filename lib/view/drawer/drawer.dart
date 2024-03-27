@@ -58,7 +58,7 @@ class HomeDrawer extends StatelessWidget {
                           // storage.remove("userPhone");
                           storage.remove("userPhoneNumber").then((value) => (value) {
                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-                              return HomePage();
+                              return const HomePage();
                             },), (route) => false);
                           });
                           print(User.token);

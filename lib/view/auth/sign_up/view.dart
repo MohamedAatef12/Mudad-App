@@ -8,7 +8,6 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../../app_constants/app_colors.dart';
-import '../../../reusable_widgets/text_field.dart';
 import '../../../view_model/auth_cubit/auth_cubit.dart';
 import '../confirm_code/view.dart';
 import '../login/view.dart';

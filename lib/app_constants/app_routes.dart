@@ -10,7 +10,6 @@ import '../view/drawer/drawer_pages/policy_page.dart';
 import '../view/drawer/drawer_pages/settings_page.dart';
 import '../view/drawer/drawer_pages/vision_page.dart';
 import '../view/home_screen/HomeScreen.dart';
-import '../view/payment_page.dart';
 
 appRoutes() => [
       //we need to add splashscreen to the app
