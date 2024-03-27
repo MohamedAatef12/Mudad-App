@@ -7,22 +7,30 @@ import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:mudad_app/google_maps/build_product.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
+import 'package:mudad_app/view/payment_page.dart';
+import 'package:mudad_app/view/vertical_broducts.dart';
 
 class PaymentController {
   PaymentSdkConfigurationDetails generateConfig() {
     var billingDetails = BillingDetails(
-        storage.read("userName"),
-        storage.read("userEmail"),
-        storage.read("userPhone"),
+        // storage.read("userName"),
+        // storage.read("userEmail"),
+        // storage.read("userPhone"),
+        "",
+        "",
+        "",
         "",
         "",
         "",
         "",
         "");
     var shippingDetails = ShippingDetails(
-        storage.read("userName"),
-        storage.read("userEmail"),
-        storage.read("userPhone"),
+        // storage.read("userName"),
+        // storage.read("userEmail"),
+        // storage.read("userPhone"),
+        "",
+        "",
+        "",
         "",
         "",
         "",
@@ -39,7 +47,7 @@ class PaymentController {
         cartDescription: "Flowers",
         merchantName: "مؤسسة مدد الفتح التجارية",
         screentTitle: "Pay with Card",
-        amount: totalOrder.toDouble(),
+        amount: paymentMap == true? totalOrder.toDouble() : verticalTotalOrder.toDouble(),
         showBillingInfo: true,
         forceShippingInfo: false,
         currencyCode: "SAR",

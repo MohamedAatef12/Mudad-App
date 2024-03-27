@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mudad_app/services/otp_verfication_service/register.dart';
 import 'package:mudad_app/services/otp_verfication_service/twilio_controller.dart';
+import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view/home_screen/HomeScreen.dart';
 
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -142,7 +143,11 @@ class _VerifyPageState extends State<VerifyPage> {
                   isLoading = false;
                 });
                 if (result == 'Successful'){
-                  TwilioVerification.twilioId = widget.phoneNumber;
+                  storage.write("userPhoneNumber", widget.phoneNumber);
+                  TwilioVerification.twilioId = storage.read("userPhoneNumber");
+
+                  // storage.write("userOtp", codeController.text);
+                  
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
                     return const HomePage();
                   },), (route) => false);

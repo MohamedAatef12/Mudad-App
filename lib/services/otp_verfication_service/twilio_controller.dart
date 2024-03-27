@@ -1,8 +1,9 @@
+import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:twilio_phone_verify/twilio_phone_verify.dart';
 
 class TwilioVerification {
   static final instance = TwilioVerification();
-  static String? twilioId;
+  static String? twilioId = storage.read("userPhoneNumber");
 
 
 

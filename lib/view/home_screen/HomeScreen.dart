@@ -12,6 +12,8 @@ import 'package:mudad_app/view/drawer/drawer.dart';
 import 'package:mudad_app/view/most_wanted_mosques.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 
+import 'complains.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -225,7 +227,9 @@ class _HomePageState extends State<HomePage> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ComplainsView(),));
+            },
             backgroundColor: AppColors.buttonColor,
             child: Image.asset(
               'assets/home_screen/headset.png',

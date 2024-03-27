@@ -65,8 +65,9 @@ class _SearchMapState extends State<MiqatMap> {
     super.initState();
     log('miqat map');
     _fetchMosques();
+    initMarkers();
   }
-
+  Set <Marker> markers ={};
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -90,7 +91,8 @@ class _SearchMapState extends State<MiqatMap> {
                 myLocationButtonEnabled:
                     false, // Disable default location button
                 zoomGesturesEnabled: true,
-                markers: Set<Marker>.of(_markers),
+                markers: markers,
+                //Set<Marker>.of(_markers),
                 onTap: (LatLng latLng) {
                   // Dismiss the keyboard and clear search results on map tap
                   if (_searchResults.isNotEmpty) {
@@ -803,4 +805,18 @@ class _SearchMapState extends State<MiqatMap> {
         .map((result) => PlacesSearchResult.fromJson(result))
         .toList();
   }
+  void initMarkers()async {
+    var myMarker = Marker(
+      markerId: MarkerId("1"),
+      position: LatLng(24.414059562627223, 39.534656004066),
+      icon:  await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(), 'assets/images/9.jpg'),
+
+    );
+    markers.add(myMarker);
+  }
+
+
+
+
 }

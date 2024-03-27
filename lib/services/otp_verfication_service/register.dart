@@ -25,138 +25,127 @@ class _RegisterPageState extends State<RegisterPage> {
   String errorMessage = '';
 
   bool isLoading = false;
+  final phoneFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-        children: [
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding:  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+          child: Form(
+            key: phoneFormKey,
+            child: Column(
+              children: [
 
 
-          const Text(
-            'Register',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                color: Colors.black
-            ),
-          ),
-
-          const SizedBox(height: 20,),
-
-          const Text(
-            'Welcome to our amazing reading community. Please enter your phone number, We will send an OTP for verification.',
-            style: TextStyle(
-                fontSize: 16,
-                color: Colors.black
-            ),
-          ),
-
-          const SizedBox(height: 30,),
-
-          Container(
-            height: 50.0,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(style: BorderStyle.solid, color: Colors.grey, width: 0.5),
-                boxShadow:const [
-                  BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.12),
-                    blurRadius: 1,
-                    offset: Offset(2, 2,),
-                  )
-                ]
-            ),
-
-            child: InternationalPhoneNumberInput(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "phone required".tr;
-                  }
-                  return null;
-                },
-                inputDecoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        width: 1, color: AppColors.buttonColor),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  hintText: "phone".tr,
-                  prefixIcon: Icon(
-                    Icons.phone_outlined,
-                    size: 26,
-                    color: Colors.grey.shade600,
-                  ),
-                  focusColor: AppColors.buttonColor,
-                  fillColor: AppColors.buttonColor,
-                  hoverColor: AppColors.buttonColor,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        width: 1, color: AppColors.buttonColor),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                onInputChanged: (PhoneNumber number) {
-                  log(number.phoneNumber.toString());
-                  _phoneNumber = number.phoneNumber!;
-                  log(_phoneNumber);
-                },
-                selectorConfig: const SelectorConfig(
-                  selectorType: PhoneInputSelectorType.DIALOG,
-                ),
-                textFieldController: phoneController),
-          ),
-
-          const SizedBox(height: 5,),
-
-          Center(
-              child: Text(
-                  errorMessage,
-                  style: const TextStyle(
+                const Text(
+                  'Please enter your personal phone number',
+                  style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.red
-                  )
-              )
+                      fontSize: 30,
+                      color: Colors.black
+                  ),
+                ),
+
+                const SizedBox(height: 50,),
+
+
+
+                InternationalPhoneNumberInput(
+
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "phone required".tr;
+                      }
+                      return null;
+                    },
+                    inputDecoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            width: 1, color: AppColors.buttonColor),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      hintText: "phone".tr,
+                      prefixIcon: Icon(
+                        Icons.phone_outlined,
+                        size: 26,
+                        color: Colors.grey.shade600,
+                      ),
+                      focusColor: AppColors.buttonColor,
+                      fillColor: AppColors.buttonColor,
+                      hoverColor: AppColors.buttonColor,
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            width: 1, color: AppColors.buttonColor),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    onInputChanged: (PhoneNumber number) {
+                      log(number.phoneNumber.toString());
+                      _phoneNumber = number.phoneNumber!;
+                      log(_phoneNumber);
+                    },
+                    // hintText: "eg",
+                    selectorConfig: const SelectorConfig(
+                      selectorType: PhoneInputSelectorType.DIALOG,
+                    ),
+                    textFieldController: phoneController),
+
+                const SizedBox(height: 5,),
+
+                Center(
+                    child: Text(
+                        errorMessage,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red
+                        )
+                    )
+                ),
+
+
+                const SizedBox(height: 30,),
+
+
+                InkWell(
+                    onTap: () async{
+                      if(phoneFormKey.currentState!.validate()){
+                        setState(() {
+                          isLoading = true;
+                        });
+
+                        String result = await TwilioVerification.instance
+                            .sendCode(_phoneNumber);
+
+                        setState(() {
+                          isLoading = true;
+                        });
+
+                        if (result == 'Successful') {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VerifyPage(
+                                        phoneNumber: _phoneNumber,
+                                      )));
+                        } else {
+                          setState(() {
+                            errorMessage = result;
+                            print(result.toString());
+                          });
+                        }
+                      }
+                    },
+                    child: appButton(isLoading ? 'Sending code ...' :'Send code')
+                ),
+              ],
+            ),
           ),
-
-
-          const SizedBox(height: 30,),
-
-          InkWell(
-              onTap: () async{
-
-                setState(() {
-                  isLoading = true;
-                });
-
-                String result = await TwilioVerification.instance.sendCode(_phoneNumber);
-
-                setState(() {
-                  isLoading = true;
-                });
-
-                if (result == 'Successful'){
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => VerifyPage(phoneNumber: _phoneNumber,))
-                  );
-                }
-                else{
-                  setState(() {
-                    errorMessage = result;
-                    print(result.toString());
-                  });
-                }
-              },
-              child: appButton(isLoading ? 'Sending code ...' :'Register')
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -171,7 +160,7 @@ Widget appButton(text){
     width: double.infinity,
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color: const Color(0xFF6C63FF),
+      color: AppColors.buttonColor,
       borderRadius: BorderRadius.circular(10.0),
       border: Border.all(style: BorderStyle.solid, color: Colors.grey, width: 0.5),
 

@@ -10,6 +10,7 @@ import 'package:mudad_app/services/otp_verfication_service/register.dart';
 import 'package:mudad_app/services/otp_verfication_service/twilio_controller.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 
+import '../view/drawer/drawer_pages/settings_page.dart';
 import '../view/payment_page.dart';
 import 'build_product.dart';
 
@@ -58,7 +59,7 @@ class BuildChooseButton extends StatelessWidget {
                     MediaQuery.of(context).size.height * 0.06,
                   ),
                 ),
-                onPressed: TwilioVerification.twilioId == null
+                onPressed: storage.read("userPhoneNumber") == null
                     ? () {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
@@ -85,7 +86,7 @@ class BuildChooseButton extends StatelessWidget {
                       },
                 child: FittedBox(
                   child: Text(
-                    TwilioVerification.twilioId == null
+                    storage.read("userPhoneNumber") == null
                         ? "SignUp"
                         : "Go to Payment Page",
                     style: GoogleFonts.lalezar(
