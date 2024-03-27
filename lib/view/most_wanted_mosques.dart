@@ -1,10 +1,6 @@
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/google_maps/build_product.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
@@ -46,11 +42,11 @@ class StaticMosques extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(child: VerticalBuildProduct()),
+          const Expanded(child: VerticalBuildProduct()),
 
           BlocConsumer<OrdersCubit, OrdersState>(listener: (context, state) {
             if (state is OrdersError){
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please select a location")));
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please select a location")));
             }
             if (state is OrdersSubmitted) {
               // Get.toNamed("payment")
@@ -84,7 +80,7 @@ class StaticMosques extends StatelessWidget {
                           ? () {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return RegisterPage();
+                            return const RegisterPage();
                           },
                         ));
                       }

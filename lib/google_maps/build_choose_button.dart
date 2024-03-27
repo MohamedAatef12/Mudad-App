@@ -2,12 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mudad_app/services/otp_verfication_service/register.dart';
-import 'package:mudad_app/services/otp_verfication_service/twilio_controller.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 
 import '../view/drawer/drawer_pages/settings_page.dart';

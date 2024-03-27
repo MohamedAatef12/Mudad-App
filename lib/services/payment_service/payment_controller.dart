@@ -6,7 +6,6 @@ import 'package:flutter_paytabs_bridge/PaymentSdkLocale.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:mudad_app/google_maps/build_product.dart';
-import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view/payment_page.dart';
 import 'package:mudad_app/view/vertical_broducts.dart';
 

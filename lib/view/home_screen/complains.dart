@@ -18,12 +18,12 @@ class _ComplinState extends State<ComplainsView> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
+          title: const Text(
             "شكوى",
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             color: Colors.black,
             onPressed: () {
               Navigator.pop(context);
@@ -45,13 +45,13 @@ class _ComplinState extends State<ComplainsView> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'email',
                     prefixIcon: Icon(Icons.verified_user_outlined),
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -62,13 +62,13 @@ class _ComplinState extends State<ComplainsView> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Name',
                     prefixIcon: Icon(Icons.verified_user_outlined),
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -81,13 +81,13 @@ class _ComplinState extends State<ComplainsView> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Phone',
                     prefixIcon: Icon(Icons.verified_user_outlined),
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -98,14 +98,14 @@ class _ComplinState extends State<ComplainsView> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'الشكوى',
                     prefixIcon: Icon(Icons.verified_user_outlined),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red)),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 ElevatedButton(
@@ -114,12 +114,12 @@ class _ComplinState extends State<ComplainsView> {
       
                     }
                   },
-                  child: Text('ارسال'),
+                  child: const Text('ارسال'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(onPressed: () {}, child: Text('الغاء')),
+                ElevatedButton(onPressed: () {}, child: const Text('الغاء')),
               ],
             ),
           ),
