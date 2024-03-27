@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
       ),
       fallbackLocale: LocalizationService.fallbackLocale,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      initialRoute: '/splash',
       // home: const MiqatMap(),
       getPages: appRoutes(),
     );

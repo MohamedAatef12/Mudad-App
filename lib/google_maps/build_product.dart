@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -46,10 +48,48 @@ class BuildProduct extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ProductCard(
                     quantityCounter: orderCounter[index],
-                    addition: () {
-                      context.read<ProductsCubit>().addProducts(index);
+                    addition: products[index] == products[0]
+                        ? () {
+                            context
+                                .read<ProductsCubit>()
+                                .addProductsBy10(index);
+                            orderCounter[index] = productCubit
+                                .addProductsBy10(orderCounter[index]);
+                            selectedOrders[index]["qty"] = orderCounter[index];
+                            if (index == 0) {
+                              p1Total = selectedOrders[index]["qty"] *
+                                  selectedOrders[index]["price"];
+                            } else {
+                              p2Total = selectedOrders[index]["qty"] *
+                                  selectedOrders[index]["price"];
+                            }
+                            p1Total = p1Total ~/ 10;
+                            totalOrder = p1Total + p2Total;
+                            print(
+                                "1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
+                          }
+                        : () {
+                            context.read<ProductsCubit>().addProducts(index);
+                            orderCounter[index] =
+                                productCubit.addProducts(orderCounter[index]);
+                            selectedOrders[index]["qty"] = orderCounter[index];
+                            if (index == 0) {
+                              p1Total = selectedOrders[index]["qty"] *
+                                  selectedOrders[index]["price"];
+                            } else {
+                              p2Total = selectedOrders[index]["qty"] *
+                                  selectedOrders[index]["price"];
+                            }
+
+                            totalOrder = p1Total + p2Total;
+                            print(
+                                "1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
+                          },
+                    remove:products[index] == products[0]
+                        ?(){
+                      context.read<ProductsCubit>().removeProductsBy10(index);
                       orderCounter[index] =
-                          productCubit.addProducts(orderCounter[index]);
+                          productCubit.removeProductsBy10(orderCounter[index]);
                       selectedOrders[index]["qty"] = orderCounter[index];
                       if (index == 0) {
                         p1Total = selectedOrders[index]["qty"] *
@@ -58,12 +98,11 @@ class BuildProduct extends StatelessWidget {
                         p2Total = selectedOrders[index]["qty"] *
                             selectedOrders[index]["price"];
                       }
-
+                      p1Total = p1Total ~/ 10;
                       totalOrder = p1Total + p2Total;
                       print(
                           "1:  $p1Total,2:   $p2Total   overAll:   $totalOrder");
-                    },
-                    remove: () {
+                    }: () {
                       context.read<ProductsCubit>().removeProducts(index);
                       orderCounter[index] =
                           productCubit.removeProducts(orderCounter[index]);

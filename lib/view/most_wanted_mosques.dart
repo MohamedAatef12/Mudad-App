@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/google_maps/build_product.dart';
+import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view/payment_page.dart';
 import 'package:mudad_app/view/vertical_broducts.dart';
 import '../app_constants/app_colors.dart';
@@ -107,7 +108,7 @@ class StaticMosques extends StatelessWidget {
                       },
                       child: FittedBox(
                         child: Text(
-                          TwilioVerification.twilioId == null
+                          storage.read("userPhoneNumber") == null
                               ? "SignUp"
                               : "Go to Payment Page",
                           style: GoogleFonts.lalezar(

@@ -36,20 +36,20 @@ final List<Marker> _markers = [];
 final List<String> selectedMosques = [];
 final List<String> keywords = [
   'mosque',
-  // 'masjid',
-  // 'مسجد',
-  // 'جامع',
-  // 'musalla',
-  // 'مصلى',
-  // 'مساجد',
-  // 'مساجد المعتمرين',
-  // 'mosques',
+  'masjid',
+  'مسجد',
+  'جامع',
+  'musalla',
+  'مصلى',
+  'مساجد',
+  'مساجد المعتمرين',
+  'mosques',
 ];
 List<Location> locations = [
   Location(lat: 21.423888489772935, lng: 39.82624903841808), // Makkah
-  // Location(lat: 24.467663304009072, lng: 39.61106777648205),    // Madinah
-  // Location(lat: 21.389591400346944, lng: 39.83733700721687),     // Mo3tamerin
-  // Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
+  Location(lat: 24.467663304009072, lng: 39.61106777648205),    // Madinah
+  Location(lat: 21.389591400346944, lng: 39.83733700721687),     // Mo3tamerin
+  Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
 ];
 final Map<String, PlacesDetailsResponse> placeDetailsCache = {};
 String location = '';

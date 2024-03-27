@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
-import 'package:mudad_app/google_maps/build_choose_button.dart';
-import 'package:mudad_app/google_maps/build_locations_buttons.dart';
-import 'package:mudad_app/google_maps/build_product.dart';
 import 'package:mudad_app/services/localization_service/localization_controller.dart';
+
+import '../build_choose_button.dart';
+import '../build_locations_buttons.dart';
+import '../build_product.dart';
 
 class MiqatMap extends StatefulWidget {
   const MiqatMap({Key? key}) : super(key: key);
@@ -23,34 +25,29 @@ class MiqatMap extends StatefulWidget {
 }
 
 const CameraPosition initialCameraPosition = CameraPosition(
-  target: LatLng(22, 39),
-  zoom: 7,
+  target: LatLng(25, 45),
+  zoom: 5,
 );
 late GoogleMapController googleMapController;
 final places =
-    GoogleMapsPlaces(apiKey: 'AIzaSyDuV3b8WMIFV26d0FYECVfDSD_jeHi0-Iw');
+GoogleMapsPlaces(apiKey: 'AIzaSyCtfitJu0HrEEcaFuaxnfJTjwqvE2tY2dY');
 List<Prediction> _searchResults = [];
 final List<Marker> _markers = [];
 final List<String> selectedMosques = [];
 final List<String> keywords = [
   'mosque',
-   'مسجد مستشفى الميقات',
-   'مسجد محطة الميقات',
-   'Dhul Hulaifah Miqat Mosque',
-   'مسجد الميقات',
-   'مسجد محطة الميقات',
-   'Miqat Taif',
+  'مسجد مستشفى الميقات',
+  'مسجد محطة الميقات',
+  'Dhul Hulaifah Miqat Mosque',
+  'مسجد الميقات',
+  'مسجد محطة الميقات',
+  'Miqat Taif',
   ' Miqat',
-  "الميقات"
-    'mosques',
-
+  "الميقات",
+  'mosques',
 ];
 List<Location> locations = [
   Location(lat: 24.41387998794396, lng: 39.53508778837562), // Miqat
-
-  // Location(lat: 24.467663304009072, lng: 39.61106777648205),    // Madinah
-  // Location(lat: 21.389591400346944, lng: 39.83733700721687),     // Mo3tamerin
-  // Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
 ];
 final Map<String, PlacesDetailsResponse> placeDetailsCache = {};
 String location = '';
@@ -63,11 +60,9 @@ class _SearchMapState extends State<MiqatMap> {
   @override
   void initState() {
     super.initState();
-    log('miqat map');
-    _fetchMosques();
-    initMarkers();
+    _fetchMiqat();
   }
-  Set <Marker> markers ={};
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -89,10 +84,9 @@ class _SearchMapState extends State<MiqatMap> {
                 },
                 zoomControlsEnabled: false, // Disable default zoom controls
                 myLocationButtonEnabled:
-                    false, // Disable default location button
+                false, // Disable default location button
                 zoomGesturesEnabled: true,
-                markers: markers,
-                //Set<Marker>.of(_markers),
+                markers: Set<Marker>.of(_markers),
                 onTap: (LatLng latLng) {
                   // Dismiss the keyboard and clear search results on map tap
                   if (_searchResults.isNotEmpty) {
@@ -114,6 +108,7 @@ class _SearchMapState extends State<MiqatMap> {
                   ),
                 ),
               ),
+              // const BuildLocationsButtons(),
               Positioned(
                 top: MediaQuery.of(context).size.height / 60,
                 left: MediaQuery.of(context).size.width / 7.5,
@@ -202,9 +197,9 @@ class _SearchMapState extends State<MiqatMap> {
                               getPlaceDetails(_searchResults[index].placeId!);
                               moveCameraToPlace(_searchResults[index].placeId!);
                               setState(
-                                () {
+                                    () {
                                   _controller.text =
-                                      _searchResults[index].description!;
+                                  _searchResults[index].description!;
                                   clearSearchResults();
                                   FocusScope.of(context).unfocus();
                                 },
@@ -262,252 +257,253 @@ class _SearchMapState extends State<MiqatMap> {
             ],
           ),
           floatingActionButton:
-              LocalizationService.storage.read('language') == 'ar'
-                  ? Stack(
-                      children: [
-                        Positioned(
-                          bottom: MediaQuery.of(context).size.height / 2.4,
-                          right: MediaQuery.of(context).size.width / 10,
-                          child: Container(
-                            width: 35,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 10,
-                                  spreadRadius: 0,
-                                  offset: Offset(1, 1),
-                                ),
-                              ],
-                            ),
-                            child: FloatingActionButton(
-                              heroTag: "btn1",
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              elevation: 0,
-                              backgroundColor: Colors.white,
-                              onPressed: () {
-                                googleMapController.animateCamera(
-                                  CameraUpdate.newCameraPosition(
-                                    const CameraPosition(
-                                      target: LatLng(22, 39),
-                                      zoom: 5,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: const Icon(
-                                Icons.gps_fixed,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: MediaQuery.of(context).size.height / 3,
-                          right: MediaQuery.of(context).size.width / 10,
-                          child: Container(
-                            width: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 10,
-                                  spreadRadius: 0,
-                                  offset: Offset(1, 1),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 30,
-                                  child: FloatingActionButton(
-                                    heroTag: "btn2",
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    elevation: 0,
-                                    backgroundColor: Colors.white,
-                                    onPressed: () {
-                                      googleMapController.animateCamera(
-                                        CameraUpdate.zoomIn(),
-                                      );
-                                    },
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                  height: 10,
-                                  child: Divider(
-                                    color: Colors.black,
-                                    height: 0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                  child: FloatingActionButton(
-                                    heroTag: "btn3",
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    elevation: 0,
-                                    backgroundColor: Colors.white,
-                                    onPressed: () {
-                                      googleMapController.animateCamera(
-                                        CameraUpdate.zoomOut(),
-                                      );
-                                    },
-                                    child: const Icon(
-                                      Icons.remove,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Stack(
-                      children: [
-                        Positioned(
-                          bottom: MediaQuery.of(context).size.height / 2.4,
-                          right: MediaQuery.of(context).size.width / 80,
-                          child: Container(
-                            width: 35,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 10,
-                                  spreadRadius: 0,
-                                  offset: Offset(1, 1),
-                                ),
-                              ],
-                            ),
-                            child: FloatingActionButton(
-                              heroTag: "btn1",
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              elevation: 0,
-                              backgroundColor: Colors.white,
-                              onPressed: () {
-                                googleMapController.animateCamera(
-                                  CameraUpdate.newCameraPosition(
-                                    const CameraPosition(
-                                      target: LatLng(22, 39),
-                                      zoom: 6,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: const Icon(
-                                Icons.gps_fixed,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: MediaQuery.of(context).size.height / 3,
-                          right: MediaQuery.of(context).size.width / 80,
-                          child: Container(
-                            width: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 10,
-                                  spreadRadius: 0,
-                                  offset: Offset(1, 1),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 30,
-                                  child: FloatingActionButton(
-                                    heroTag: "btn2",
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    elevation: 0,
-                                    backgroundColor: Colors.white,
-                                    onPressed: () {
-                                      googleMapController.animateCamera(
-                                        CameraUpdate.zoomIn(),
-                                      );
-                                    },
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                  height: 10,
-                                  child: Divider(
-                                    color: Colors.black,
-                                    height: 0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                  child: FloatingActionButton(
-                                    heroTag: "btn3",
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    elevation: 0,
-                                    backgroundColor: Colors.white,
-                                    onPressed: () {
-                                      googleMapController.animateCamera(
-                                        CameraUpdate.zoomOut(),
-                                      );
-                                    },
-                                    child: const Icon(
-                                      Icons.remove,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+          LocalizationService.storage.read('language') == 'ar'
+              ? Stack(
+            children: [
+              Positioned(
+                bottom: MediaQuery.of(context).size.height / 2.4,
+                right: MediaQuery.of(context).size.width / 10,
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                        offset: Offset(1, 1),
+                      ),
+                    ],
+                  ),
+                  child: FloatingActionButton(
+                    heroTag: "btn1",
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
+                    elevation: 0,
+                    backgroundColor: Colors.white,
+                    onPressed: () {
+                      googleMapController.animateCamera(
+                        CameraUpdate.newCameraPosition(
+                          const CameraPosition(
+                            target: LatLng(25, 45),
+                            zoom: 5,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.gps_fixed,
+                      color: Colors.black,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: MediaQuery.of(context).size.height / 3,
+                right: MediaQuery.of(context).size.width / 10,
+                child: Container(
+                  width: 35,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                        offset: Offset(1, 1),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                        child: FloatingActionButton(
+                          heroTag: "btn2",
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            googleMapController.animateCamera(
+                              CameraUpdate.zoomIn(),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.add,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                        height: 10,
+                        child: Divider(
+                          color: Colors.black,
+                          height: 0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: FloatingActionButton(
+                          heroTag: "btn3",
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            googleMapController.animateCamera(
+                              CameraUpdate.zoomOut(),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.remove,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
+              : Stack(
+            children: [
+              Positioned(
+                bottom: MediaQuery.of(context).size.height / 2.4,
+                right: MediaQuery.of(context).size.width / 80,
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                        offset: Offset(1, 1),
+                      ),
+                    ],
+                  ),
+                  child: FloatingActionButton(
+                    heroTag: "btn1",
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    elevation: 0,
+                    backgroundColor: Colors.white,
+                    onPressed: () {
+                      googleMapController.animateCamera(
+                        CameraUpdate.newCameraPosition(
+                          const CameraPosition(
+                            target: LatLng(25, 45),
+                            zoom: 5,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.gps_fixed,
+                      color: Colors.black,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: MediaQuery.of(context).size.height / 3,
+                right: MediaQuery.of(context).size.width / 80,
+                child: Container(
+                  width: 35,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                        offset: Offset(1, 1),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                        child: FloatingActionButton(
+                          heroTag: "btn2",
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            googleMapController.animateCamera(
+                              CameraUpdate.zoomIn(),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.add,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                        height: 10,
+                        child: Divider(
+                          color: Colors.black,
+                          height: 0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: FloatingActionButton(
+                          heroTag: "btn3",
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            googleMapController.animateCamera(
+                              CameraUpdate.zoomOut(),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.remove,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
+  // DIALOGS
   showMosqueDialog(String mosqueName) async {
     return AwesomeDialog(
       context: context,
@@ -640,7 +636,7 @@ class _SearchMapState extends State<MiqatMap> {
         return marker.position;
       }
     }
-    return const LatLng(22, 39);
+    return const LatLng(25, 45);
   }
 
   // SEARCH
@@ -661,7 +657,7 @@ class _SearchMapState extends State<MiqatMap> {
 
         for (Prediction prediction in response.predictions) {
           PlacesDetailsResponse details =
-              await places.getDetailsByPlaceId(prediction.placeId!);
+          await places.getDetailsByPlaceId(prediction.placeId!);
 
           if (details.isOkay) {
             filteredResults.add(prediction);
@@ -745,7 +741,7 @@ class _SearchMapState extends State<MiqatMap> {
   }
 
   // FETCH & CACHE
-  Future<void> _fetchMosques() async {
+  Future<void> _fetchMiqat() async {
     List<PlacesSearchResult> allResults = [];
     isLoading = true;
     for (var location in locations) {
@@ -759,7 +755,7 @@ class _SearchMapState extends State<MiqatMap> {
         if (fileInfo != null) {
           // Use cached results if available
           List<PlacesSearchResult> cachedResults =
-              await _decodeCachedResults(fileInfo);
+          await _decodeCachedResults(fileInfo);
           allResults.addAll(cachedResults);
           isLoading = false;
           log("data from cache");
@@ -767,7 +763,7 @@ class _SearchMapState extends State<MiqatMap> {
           // Perform a new search and cache the results
           PlacesSearchResponse response = await places.searchNearbyWithRadius(
             location,
-            2000, // Radius in meters
+            1500, // Radius in meters
             type: keyword,
             keyword: keyword,
           );
@@ -805,18 +801,4 @@ class _SearchMapState extends State<MiqatMap> {
         .map((result) => PlacesSearchResult.fromJson(result))
         .toList();
   }
-  void initMarkers()async {
-    var myMarker = Marker(
-      markerId: MarkerId("1"),
-      position: LatLng(24.414059562627223, 39.534656004066),
-      icon:  await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(), 'assets/images/9.jpg'),
-
-    );
-    markers.add(myMarker);
-  }
-
-
-
-
 }

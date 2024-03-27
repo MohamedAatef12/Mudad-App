@@ -60,9 +60,21 @@ class ProductsCubit extends Cubit<ProductsState> {
     return qty + 1;
   }
 
+int addProductsBy10(int qty) {
+    emit(ProductsAdded());
+    return qty + 10;
+  }
+
+
+
   removeProducts(int qty) {
     emit(ProductsRemoved());
 
     return qty == 0 ? 0 : qty - 1;
+  }
+  removeProductsBy10(int qty) {
+    emit(ProductsRemoved());
+
+    return qty == 10 ? 10 : qty - 10;
   }
 }

@@ -27,7 +27,7 @@ class BuildChooseButton extends StatelessWidget {
     return BlocConsumer<OrdersCubit, OrdersState>(listener: (context, state) {
       if (state is OrdersError) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Please select a location")));
+            .showSnackBar(const SnackBar(content: Text("Please select a location")));
       }
       if (state is OrdersSubmitted) {
         // Get.toNamed("payment");
@@ -38,8 +38,8 @@ class BuildChooseButton extends StatelessWidget {
     }, builder: (context, state) {
       return Positioned(
         bottom: MediaQuery.of(context).size.height * 0.03,
-        right: MediaQuery.of(context).size.width * 0.3,
-        left: MediaQuery.of(context).size.width * 0.07,
+        right: MediaQuery.of(context).size.width * 0.18,
+        left: MediaQuery.of(context).size.width * 0.18,
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.7,
           height: MediaQuery.of(context).size.height * 0.06,
@@ -63,7 +63,7 @@ class BuildChooseButton extends StatelessWidget {
                     ? () {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return RegisterPage();
+                            return const RegisterPage();
                           },
                         ));
                       }

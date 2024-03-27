@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -34,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<String> returnedServices = [];
   List<String> returnedImages = [];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -153,18 +156,26 @@ class _HomePageState extends State<HomePage> {
                                             returnedImages[index];
                                         selectedPage = navigationPages[index];
                                       },
-                                      child: FittedBox(
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15),
+                                        ),
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Image.network(
-                                              returnedImages[index],
-                                              fit: BoxFit.cover,
+                                            Flexible(
+                                              child: Image.network(
+                                                returnedImages[index],
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                             Text(
                                               returnedServices[index],
                                               style: GoogleFonts.lalezar(
                                                 color: Colors.black,
-                                                fontSize: 80,
+                                                fontSize: 20,
                                               ),
                                             ),
                                           ],
@@ -182,6 +193,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+              const SizedBox(height: 30,),
               InkWell(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
@@ -219,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * .015,
+                height: MediaQuery.of(context).size.height * .011,
               ),
             ],
           ),
@@ -228,7 +240,11 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(30),
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ComplainsView(),));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ComplainsView(),
+                  ));
             },
             backgroundColor: AppColors.buttonColor,
             child: Image.asset(

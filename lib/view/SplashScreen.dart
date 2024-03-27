@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(
       const Duration(seconds: 3),
-      () => Get.offNamed("/login"),
+      () => Get.offNamed("/home"),
     );
     super.initState();
   }
