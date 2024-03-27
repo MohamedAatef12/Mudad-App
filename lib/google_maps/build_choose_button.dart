@@ -6,8 +6,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:mudad_app/services/otp_verfication_service/register.dart';
+import 'package:mudad_app/services/otp_verfication_service/twilio_controller.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
 
+import '../view/payment_page.dart';
 import 'build_product.dart';
 
 class BuildChooseButton extends StatelessWidget {
@@ -21,8 +24,15 @@ class BuildChooseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final orderCubit = BlocProvider.of<OrdersCubit>(context);
     return BlocConsumer<OrdersCubit, OrdersState>(listener: (context, state) {
+      if (state is OrdersError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Please select a location")));
+      }
       if (state is OrdersSubmitted) {
-        Get.toNamed("payment");
+        // Get.toNamed("payment");
+        Navigator.push(context,MaterialPageRoute(builder: (context) {
+          return PaymentPage(isMap: true);
+        },));
       }
     }, builder: (context, state) {
       return Positioned(
@@ -34,46 +44,53 @@ class BuildChooseButton extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.06,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: ModalProgressHUD(
-              inAsyncCall: state is OrdersLoading,
-              color: Colors.black,
-              opacity: 0.6,
-              progressIndicator: const SpinKitFadingCircle(color: Colors.blue),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    splashFactory: NoSplash.splashFactory,
-                    backgroundColor: const Color(0xff609FD8),
-                    fixedSize: Size(
-                      MediaQuery.of(context).size.width * 0.7,
-                      MediaQuery.of(context).size.height * 0.06,
-                    ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () {
-                    if (totalOrder == 0) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("empty_order".tr),
-                        ),
-                      );
-                    } else {
-                      orderCubit.submitOrder(location, totalOrder, orders);
-                      log(location);
-                      log(totalOrder.toString());
-                      log(orders.toString());
-                    }
-                  },
-                  child: FittedBox(
-                    child: Text(
-                      "Add to Cart".tr,
-                      style: GoogleFonts.lalezar(
-                        color: Colors.white,
-                        fontSize: 28,
-                      ),
+                  splashFactory: NoSplash.splashFactory,
+                  backgroundColor: const Color(0xff609FD8),
+                  fixedSize: Size(
+                    MediaQuery.of(context).size.width * 0.7,
+                    MediaQuery.of(context).size.height * 0.06,
+                  ),
+                ),
+                onPressed: TwilioVerification.twilioId == null
+                    ? () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return RegisterPage();
+                          },
+                        ));
+                      }
+                    : () {
+                        // if (totalOrder == 0) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     SnackBar(
+                        //       content: Text("empty_order".tr),
+                        //     ),
+                        //   );
+                        // }
+                        // else
+                        // {
+                        orderCubit.submitOrder(location, totalOrder, orders);
+
+                        log(location);
+                        log(totalOrder.toString());
+                        log(orders.toString());
+                        // }
+                      },
+                child: FittedBox(
+                  child: Text(
+                    TwilioVerification.twilioId == null
+                        ? "SignUp"
+                        : "Go to Payment Page",
+                    style: GoogleFonts.lalezar(
+                      color: Colors.white,
+                      fontSize: 28,
                     ),
                   ),
                 ),

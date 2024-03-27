@@ -877,6 +877,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.2"
+  twilio_phone_verify:
+    dependency: "direct main"
+    description:
+      name: twilio_phone_verify
+      sha256: fe42dc394188e707a8b96a8b1970bd2c988c2a80b8022120680397f894f7e02a
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:

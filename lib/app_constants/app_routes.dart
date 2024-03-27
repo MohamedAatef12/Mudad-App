@@ -42,11 +42,11 @@ appRoutes() => [
           page: () => const OrdersPage(),
           transition: Transition.rightToLeft,
           transitionDuration: const Duration(milliseconds: 600)),
-      GetPage(
-          name: '/payment',
-          page: () => const PaymentPage(),
-          transition: Transition.rightToLeft,
-          transitionDuration: const Duration(milliseconds: 600)),
+      // GetPage(
+      //     name: '/payment',
+      //     page: () =>  PaymentPage(),
+      //     transition: Transition.rightToLeft,
+      //     transitionDuration: const Duration(milliseconds: 600)),
       // GetPage(
       //   name: '/home_map',
       //   page: () => const ChooseLocation(),

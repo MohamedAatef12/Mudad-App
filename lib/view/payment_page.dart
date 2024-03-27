@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
+import 'package:mudad_app/google_maps/build_product.dart';
 import 'package:mudad_app/reusable_widgets/custom_paymment_card.dart';
 import 'package:mudad_app/reusable_widgets/text_field.dart';
 import 'package:mudad_app/services/payment_service/payment_controller.dart';
@@ -10,7 +11,8 @@ import 'package:mudad_app/services/payment_service/payment_controller.dart';
 TextEditingController mudadCodeController = TextEditingController();
 
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  bool isMap;
+  PaymentPage({Key? key,required this.isMap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +163,7 @@ class PaymentPage extends StatelessWidget {
                 Expanded(
                   child: ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 1,
+                    itemCount: productImages.length,
                     separatorBuilder: (context, index) => const SizedBox(
                       height: 10,
                     ),

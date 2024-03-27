@@ -82,49 +82,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  DefaultFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "name required".tr;
-                        }
-                        return null;
-                      },
-                      hintText: "name".tr,
-                      prefixIcon: Icon(
-                        Icons.person_outline,
-                        size: 26,
-                        color: Colors.grey.shade600,
-                      ),
-                      textInputAction: TextInputAction.next,
-                      controller: fullNameController,
-                      keyboardType: TextInputType.text,
-                      obSecured: false),
+                  // DefaultFormField(
+                  //     validator: (value) {
+                  //       if (value!.isEmpty) {
+                  //         return "name required".tr;
+                  //       }
+                  //       return null;
+                  //     },
+                  //     hintText: "name".tr,
+                  //     prefixIcon: Icon(
+                  //       Icons.person_outline,
+                  //       size: 26,
+                  //       color: Colors.grey.shade600,
+                  //     ),
+                  //     textInputAction: TextInputAction.next,
+                  //     controller: fullNameController,
+                  //     keyboardType: TextInputType.text,
+                  //     obSecured: false),
                   const SizedBox(
                     height: 13,
                   ),
-                  DefaultFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'email required'.tr;
-                        }
-                        // Regular expression to check if the email format is valid
-                        final RegExp emailRegex =
-                            RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                        if (!emailRegex.hasMatch(value)) {
-                          return 'email invalid'.tr;
-                        }
-                        return null; // Return null if the email is valid
-                      },
-                      hintText: "email".tr,
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                        size: 26,
-                        color: Colors.grey.shade600,
-                      ),
-                      textInputAction: TextInputAction.next,
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      obSecured: false),
+                  // DefaultFormField(
+                  //     validator: (value) {
+                  //       if (value!.isEmpty) {
+                  //         return 'email required'.tr;
+                  //       }
+                  //       // Regular expression to check if the email format is valid
+                  //       final RegExp emailRegex =
+                  //           RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                  //       if (!emailRegex.hasMatch(value)) {
+                  //         return 'email invalid'.tr;
+                  //       }
+                  //       return null; // Return null if the email is valid
+                  //     },
+                  //     hintText: "email".tr,
+                  //     prefixIcon: Icon(
+                  //       Icons.email_outlined,
+                  //       size: 26,
+                  //       color: Colors.grey.shade600,
+                  //     ),
+                  //     textInputAction: TextInputAction.next,
+                  //     controller: emailController,
+                  //     keyboardType: TextInputType.emailAddress,
+                  //     obSecured: false),
                   const SizedBox(
                     height: 13,
                   ),
@@ -168,88 +168,88 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 13,
                   ),
-                  DefaultFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "password required".tr;
-                      } else if (value.length < 8) {
-                        return "password weak".tr;
-                      }
-                      return null;
-                    },
-                    hintText: "password".tr,
-                    prefixIcon: Icon(
-                      Icons.lock_outline,
-                      size: 26,
-                      color: Colors.grey.shade600,
-                    ),
-                    controller: passwordController,
-                    keyboardType: TextInputType.text,
-                    obSecured: passwordHidden,
-                    suffixIcon: IconButton(
-                      highlightColor: Colors.transparent,
-                      icon: passwordHidden == true
-                          ? const Icon(Icons.visibility_off)
-                          : const Icon(Icons.visibility),
-                      onPressed: () {
-                        if (passwordHidden == true) {
-                          passwordHidden = false;
-                        } else {
-                          passwordHidden = true;
-                        }
-                        setState(() {});
-                      },
-                    ),
-                  ),
+                  // DefaultFormField(
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return "password required".tr;
+                  //     } else if (value.length < 8) {
+                  //       return "password weak".tr;
+                  //     }
+                  //     return null;
+                  //   },
+                  //   hintText: "password".tr,
+                  //   prefixIcon: Icon(
+                  //     Icons.lock_outline,
+                  //     size: 26,
+                  //     color: Colors.grey.shade600,
+                  //   ),
+                  //   controller: passwordController,
+                  //   keyboardType: TextInputType.text,
+                  //   obSecured: passwordHidden,
+                  //   suffixIcon: IconButton(
+                  //     highlightColor: Colors.transparent,
+                  //     icon: passwordHidden == true
+                  //         ? const Icon(Icons.visibility_off)
+                  //         : const Icon(Icons.visibility),
+                  //     onPressed: () {
+                  //       if (passwordHidden == true) {
+                  //         passwordHidden = false;
+                  //       } else {
+                  //         passwordHidden = true;
+                  //       }
+                  //       setState(() {});
+                  //     },
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 13,
                   ),
-                  DefaultFormField(
-                    validator: (value) {
-                      if (value.toString().isEmpty) {
-                        return "Confirm password required".tr;
-                      } else if (value != passwordController.text) {
-                        return "Password does not match".tr;
-                      }
-                      return null;
-                    },
-                    hintText: "Confirm Password".tr,
-                    prefixIcon: Icon(
-                      Icons.lock_outline,
-                      size: 26,
-                      color: Colors.grey.shade600,
-                    ),
-                    controller: confirmPasswordController,
-                    keyboardType: TextInputType.text,
-                    obSecured: confirmationHidden,
-                    suffixIcon: IconButton(
-                      highlightColor: Colors.transparent,
-                      icon: confirmationHidden == true
-                          ? const Icon(Icons.visibility_off)
-                          : const Icon(Icons.visibility),
-                      onPressed: () {
-                        if (confirmationHidden == true) {
-                          confirmationHidden = false;
-                        } else {
-                          confirmationHidden = true;
-                        }
-                        setState(() {});
-                      },
-                    ),
-                  ),
+                  // DefaultFormField(
+                  //   validator: (value) {
+                  //     if (value.toString().isEmpty) {
+                  //       return "Confirm password required".tr;
+                  //     } else if (value != passwordController.text) {
+                  //       return "Password does not match".tr;
+                  //     }
+                  //     return null;
+                  //   },
+                  //   hintText: "Confirm Password".tr,
+                  //   prefixIcon: Icon(
+                  //     Icons.lock_outline,
+                  //     size: 26,
+                  //     color: Colors.grey.shade600,
+                  //   ),
+                  //   controller: confirmPasswordController,
+                  //   keyboardType: TextInputType.text,
+                  //   obSecured: confirmationHidden,
+                  //   suffixIcon: IconButton(
+                  //     highlightColor: Colors.transparent,
+                  //     icon: confirmationHidden == true
+                  //         ? const Icon(Icons.visibility_off)
+                  //         : const Icon(Icons.visibility),
+                  //     onPressed: () {
+                  //       if (confirmationHidden == true) {
+                  //         confirmationHidden = false;
+                  //       } else {
+                  //         confirmationHidden = true;
+                  //       }
+                  //       setState(() {});
+                  //     },
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 25,
                   ),
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
-                      if (state is RegisterErrorState) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                            "sign up failed".tr,
-                            textDirection: TextDirection.rtl,
-                          ),
-                        ));
-                      }
+                      // if (state is RegisterErrorState) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      //     content: Text(
+                      //       "sign up failed".tr,
+                      //       textDirection: TextDirection.rtl,
+                      //     ),
+                      //   ));
+                      // }
                       // if (state is RegisterSuccessState) {
                       //   Get.offNamed("login");
                       // }
@@ -284,19 +284,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
                                       // if (isCodeTrue == true) {
-                                      authCubit
-                                          .register(
-                                              fullNameController.text,
-                                              emailController.text,
-                                              _phoneNumber.toString(),
-                                              passwordController.text)
-                                          .then((value) {
+                                      // authCubit.register(
+                                      //         fullNameController.text,
+                                      //         emailController.text,
+                                      //         _phoneNumber.toString(),
+                                      //         passwordController.text)
+                                      //     .then((value) {
                                         Get.off(
-                                          () => ConfirmCodeView(
+                                          () =>
+                                              ConfirmCodeView(
                                             phone: _phoneNumber.toString(),
                                           ),
                                         );
-                                      });
+                                      // });
                                     }
                                   },
 

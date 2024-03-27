@@ -9,6 +9,7 @@ import 'package:mudad_app/app_constants/app_text_styles.dart';
 import 'package:mudad_app/google_maps/miqat_maps/miqat_map.dart';
 import 'package:mudad_app/google_maps/mosque_map/search_map.dart';
 import 'package:mudad_app/view/drawer/drawer.dart';
+import 'package:mudad_app/view/most_wanted_mosques.dart';
 import 'package:mudad_app/view_model/services_cubit/services_cubit.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,8 +22,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List navigationPages = [
     const SearchMap(),
-    const MiqatMap(),
     const SearchMap(),
+    const MiqatMap(),
+    const StaticMosques()
   ];
 
   Widget? selectedPage;
@@ -149,20 +151,22 @@ class _HomePageState extends State<HomePage> {
                                             returnedImages[index];
                                         selectedPage = navigationPages[index];
                                       },
-                                      child: Column(
-                                        children: [
-                                          Image.network(
-                                            returnedImages[index],
-                                            fit: BoxFit.cover,
-                                          ),
-                                          Text(
-                                            returnedServices[index],
-                                            style: GoogleFonts.lalezar(
-                                              color: Colors.black,
-                                              fontSize: 18,
+                                      child: FittedBox(
+                                        child: Column(
+                                          children: [
+                                            Image.network(
+                                              returnedImages[index],
+                                              fit: BoxFit.cover,
                                             ),
-                                          ),
-                                        ],
+                                            Text(
+                                              returnedServices[index],
+                                              style: GoogleFonts.lalezar(
+                                                color: Colors.black,
+                                                fontSize: 80,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

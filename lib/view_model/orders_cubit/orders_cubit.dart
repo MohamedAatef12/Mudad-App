@@ -18,18 +18,23 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   submitOrder(String location, num total, List<Map<String, dynamic>> products)async {
     emit(OrdersLoading());
-   await DioHelper.postData(endPoint: EndPoint.orders, data: {
-      "location": location,
-      "total": total,
-      "products": products,
-      "_id": User.id,
-      "createdAt": DateTime.now().toString(),
-
-    }).then((value) => (value) {print("sadsadsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-          // ordersModel = OrdersModel.fromJson(value.data);
-
-        });
-    emit(OrdersSubmitted());
+    try{
+      await DioHelper.postData(endPoint: EndPoint.orders, data: {
+        "location": location,
+        "total": total,
+        "products": products,
+        "_id": User.id ?? "5555555",
+        "createdAt": DateTime.now().toString(),
+      }).then((value) => (value) {
+            print(
+                "sadsadsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+            // ordersModel = OrdersModel.fromJson(value.data);
+          });
+      emit(OrdersSubmitted());
+    }catch (e){
+      print(e);
+      emit(OrdersError());
+    }
 
 
   }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,30 +23,31 @@ class MiqatMap extends StatefulWidget {
 }
 
 const CameraPosition initialCameraPosition = CameraPosition(
-  target: LatLng(25, 45),
-  zoom: 5,
+  target: LatLng(22, 39),
+  zoom: 7,
 );
 late GoogleMapController googleMapController;
 final places =
-    GoogleMapsPlaces(apiKey: 'AIzaSyCtfitJu0HrEEcaFuaxnfJTjwqvE2tY2dY');
+    GoogleMapsPlaces(apiKey: 'AIzaSyDuV3b8WMIFV26d0FYECVfDSD_jeHi0-Iw');
 List<Prediction> _searchResults = [];
 final List<Marker> _markers = [];
 final List<String> selectedMosques = [];
 final List<String> keywords = [
   'mosque',
-  // 'masjid',
-  // 'مسجد',
-  // 'جامع',
-  // 'musalla',
-  // 'مصلى',
-  // 'مساجد',
+   'مسجد مستشفى الميقات',
+   'مسجد محطة الميقات',
+   'Dhul Hulaifah Miqat Mosque',
+   'مسجد الميقات',
+   'مسجد محطة الميقات',
+   'Miqat Taif',
   ' Miqat',
   "الميقات"
-  // 'mosques',
+    'mosques',
 
 ];
 List<Location> locations = [
-  Location(lat: 22.8044775715752, lng: 39.91121516778221), // Makkah
+  Location(lat: 24.41387998794396, lng: 39.53508778837562), // Miqat
+
   // Location(lat: 24.467663304009072, lng: 39.61106777648205),    // Madinah
   // Location(lat: 21.389591400346944, lng: 39.83733700721687),     // Mo3tamerin
   // Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
@@ -221,42 +221,42 @@ class _SearchMapState extends State<MiqatMap> {
                 totalOrder,
                 selectedOrders,
               ),
-              Positioned(
-                bottom: MediaQuery.of(context).size.height * 0.03,
-                right: MediaQuery.of(context).size.width * 0.06,
-                child: Badge(
-                  label: Text(selectedMosques.length.toString()),
-                  largeSize: 20,
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      splashFactory: NoSplash.splashFactory,
-                      backgroundColor: const Color(0xff609FD8),
-                      fixedSize: Size(
-                        MediaQuery.of(context).size.width * 0.2,
-                        MediaQuery.of(context).size.height * 0.06,
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.toNamed("payment");
-                    },
-                    child: const Center(
-                      child: Icon(
-                        Icons.add_shopping_cart_rounded,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              // Positioned(
+              //   bottom: MediaQuery.of(context).size.height * 0.03,
+              //   right: MediaQuery.of(context).size.width * 0.06,
+              //   child: Badge(
+              //     label: Text(selectedMosques.length.toString()),
+              //     largeSize: 20,
+              //     textStyle: const TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 14,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //     child: ElevatedButton(
+              //       style: ElevatedButton.styleFrom(
+              //         shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(20),
+              //         ),
+              //         splashFactory: NoSplash.splashFactory,
+              //         backgroundColor: const Color(0xff609FD8),
+              //         fixedSize: Size(
+              //           MediaQuery.of(context).size.width * 0.2,
+              //           MediaQuery.of(context).size.height * 0.06,
+              //         ),
+              //       ),
+              //       onPressed: () {
+              //         Get.toNamed("payment");
+              //       },
+              //       child: const Center(
+              //         child: Icon(
+              //           Icons.add_shopping_cart_rounded,
+              //           color: Colors.white,
+              //           size: 30,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // )
             ],
           ),
           floatingActionButton:
@@ -292,7 +292,7 @@ class _SearchMapState extends State<MiqatMap> {
                                 googleMapController.animateCamera(
                                   CameraUpdate.newCameraPosition(
                                     const CameraPosition(
-                                      target: LatLng(25, 45),
+                                      target: LatLng(22, 39),
                                       zoom: 5,
                                     ),
                                   ),
@@ -412,8 +412,8 @@ class _SearchMapState extends State<MiqatMap> {
                                 googleMapController.animateCamera(
                                   CameraUpdate.newCameraPosition(
                                     const CameraPosition(
-                                      target: LatLng(25, 45),
-                                      zoom: 5,
+                                      target: LatLng(22, 39),
+                                      zoom: 6,
                                     ),
                                   ),
                                 );
@@ -638,7 +638,7 @@ class _SearchMapState extends State<MiqatMap> {
         return marker.position;
       }
     }
-    return const LatLng(25, 45);
+    return const LatLng(22, 39);
   }
 
   // SEARCH
@@ -765,7 +765,7 @@ class _SearchMapState extends State<MiqatMap> {
           // Perform a new search and cache the results
           PlacesSearchResponse response = await places.searchNearbyWithRadius(
             location,
-            1500, // Radius in meters
+            2000, // Radius in meters
             type: keyword,
             keyword: keyword,
           );

@@ -220,42 +220,42 @@ class _SearchMapState extends State<SearchMap> {
                 totalOrder,
                 selectedOrders,
               ),
-              Positioned(
-                bottom: MediaQuery.of(context).size.height * 0.03,
-                right: MediaQuery.of(context).size.width * 0.06,
-                child: Badge(
-                  label: Text(selectedMosques.length.toString()),
-                  largeSize: 20,
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      splashFactory: NoSplash.splashFactory,
-                      backgroundColor: const Color(0xff609FD8),
-                      fixedSize: Size(
-                        MediaQuery.of(context).size.width * 0.2,
-                        MediaQuery.of(context).size.height * 0.06,
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.toNamed("payment");
-                    },
-                    child: const Center(
-                      child: Icon(
-                        Icons.add_shopping_cart_rounded,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              // Positioned(
+              //   bottom: MediaQuery.of(context).size.height * 0.03,
+              //   right: MediaQuery.of(context).size.width * 0.06,
+              //   child: Badge(
+              //     label: Text(selectedMosques.length.toString()),
+              //     largeSize: 20,
+              //     textStyle: const TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 14,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //     child: ElevatedButton(
+              //       style: ElevatedButton.styleFrom(
+              //         shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(20),
+              //         ),
+              //         splashFactory: NoSplash.splashFactory,
+              //         backgroundColor: const Color(0xff609FD8),
+              //         fixedSize: Size(
+              //           MediaQuery.of(context).size.width * 0.2,
+              //           MediaQuery.of(context).size.height * 0.06,
+              //         ),
+              //       ),
+              //       onPressed: () {
+              //         Get.toNamed("payment");
+              //       },
+              //       child: const Center(
+              //         child: Icon(
+              //           Icons.add_shopping_cart_rounded,
+              //           color: Colors.white,
+              //           size: 30,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // )
             ],
           ),
           floatingActionButton:
