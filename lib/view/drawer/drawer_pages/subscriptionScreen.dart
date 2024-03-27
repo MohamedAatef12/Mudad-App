@@ -4,11 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../app_constants/app_colors.dart';
-import '../../app_constants/app_text_styles.dart';
-import '../../reusable_widgets/custom_button.dart';
-import '../../services/localization_service/localization_controller.dart';
+import '../../../app_constants/app_colors.dart';
+import '../../../app_constants/app_text_styles.dart';
+import '../../../reusable_widgets/custom_button.dart';
+import '../../../services/localization_service/localization_controller.dart';
 
 class SubscriptionPage extends StatefulWidget {
   const SubscriptionPage({super.key});
@@ -21,9 +22,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   int NumberOfMonths = 1;
   String choosepackage = "Silver package".tr;
   DateTime? choosedDate = DateTime.now();
+  //
   List<DateTime?> _dates = [
     DateTime.now(),
   ];
+  bool isArbic = LocalizationService().getLanguage() == "ar" ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +46,24 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: InkWell(
                     onTap: () => Get.back(),
-                    child: Image.asset("assets/subscriptions/back.png")),
+                    child: isArbic
+                        ? Image.asset("assets/subscriptions/backAR.png")
+                        : Image.asset("assets/subscriptions/back.png")),
               ),
             ]),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                // print('ok');
+                // LocalizationService().changeLocale('');
+                // print(isArbic);
+                // print(Arbic);
+                // print(LocalizationService().getLanguage().toString());
+
+                // setState(() {});
+              },
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 height: MediaQuery.of(context).size.height / 10,
@@ -80,22 +93,22 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               style: AppTextStyle.mainBlackFont,
             ),
           ),
-          SubscriptionButton(
+          subscriptionButton(
             imageIcon: "assets/subscriptions/bronze.png",
             title: "Bronze package".tr,
             subtitle: "Once a month".tr,
           ),
-          SubscriptionButton(
+          subscriptionButton(
             imageIcon: "assets/subscriptions/silver.png",
             title: "Silver package".tr,
             subtitle: "Once a week".tr,
           ),
-          SubscriptionButton(
+          subscriptionButton(
             imageIcon: "assets/subscriptions/gold.png",
             title: "Golden package".tr,
             subtitle: "twice a week".tr,
           ),
-          SubscriptionButton(
+          subscriptionButton(
             imageIcon: "assets/subscriptions/award.png",
             title: "Diamond package".tr,
             subtitle: "Daily".tr,
@@ -132,65 +145,62 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Number of months :".tr,
-                      textAlign: TextAlign.center,
-                      style: AppTextStyle.normalFont2,
+                    Center(
+                      child: Text(
+                        "Number of months :".tr,
+                        textAlign: TextAlign.center,
+                        style: AppTextStyle.mainBlackFont,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            if (NumberOfMonths != 1) {
-                              setState(() {
-                                NumberOfMonths--;
-                              });
-                            }
-                          },
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                                color: AppColors.buttonColor,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: const Icon(
-                              Icons.remove,
-                              color: Colors.white,
+                    Center(
+                      child: Row(
+                        children: [
+                          isArbic
+                              ? incrementButton(
+                                  onTap: () {
+                                    NumberOfMonths++;
+                                    setState(() {});
+                                  },
+                                  icon: Icons.add,
+                                )
+                              : incrementButton(
+                                  onTap: () {
+                                    NumberOfMonths++;
+                                    setState(() {});
+                                  },
+                                  icon: Icons.remove,
+                                ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "$NumberOfMonths",
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "$NumberOfMonths",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            NumberOfMonths++;
-                            setState(() {});
-                          },
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                                color: AppColors.buttonColor,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
+                          isArbic
+                              ? incrementButton(
+                                  onTap: () {
+                                    NumberOfMonths++;
+                                    setState(() {});
+                                  },
+                                  icon: Icons.remove,
+                                )
+                              : incrementButton(
+                                  onTap: () {
+                                    NumberOfMonths++;
+                                    setState(() {});
+                                  },
+                                  icon: Icons.add,
+                                ),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -203,7 +213,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                       foregroundColor:
                           MaterialStatePropertyAll(AppColors.buttonColor)),
                   onPressed: () {
-                    Showpicker();
+                    showpicker();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -220,8 +230,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                   ),
                 ),
                 InkWell(
+                  onTap: () => showpicker(),
                   child: Text(
-                    "${choosedDate!.day} / ${choosedDate!.month} / ${choosedDate!.year}",
+                    isArbic
+                        ? "${choosedDate!.year} / ${choosedDate!.month} / ${choosedDate!.day}"
+                        : "${choosedDate!.day} / ${choosedDate!.month} / ${choosedDate!.year}",
                     style: AppTextStyle.mainBlackFont,
                   ),
                 )
@@ -258,7 +271,23 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
     );
   }
 
-  SubscriptionButton({
+  incrementButton({Function()? onTap, IconData? icon}) {
+    return InkWell(
+      child: Container(
+        height: 30,
+        width: 30,
+        decoration: BoxDecoration(
+            color: AppColors.buttonColor,
+            borderRadius: BorderRadius.circular(8)),
+        child: Icon(
+          icon,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  subscriptionButton({
     required String imageIcon,
     required String title,
     required String subtitle,
@@ -285,38 +314,26 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               child: Text(
                 title,
                 style: choosepackage == title
-                    ? const TextStyle(color: Colors.white, fontSize: 17)
-                    : const TextStyle(
-                        color: AppColors.buttonColor, fontSize: 17),
+                    ? GoogleFonts.lalezar(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w100,
+                        color: Colors.white)
+                    : GoogleFonts.lalezar(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w100,
+                        color: AppColors.buttonColor),
               ),
             ),
-            subtitle: Center(child: Text(subtitle)),
+            subtitle: Center(
+                child: Text(
+              subtitle,
+              style: const TextStyle(fontSize: 15),
+            )),
           )),
     );
   }
 
-  // Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       //  crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Image.asset("assets/subscriptions/bronze.png"),
-  //         Container(
-  //           //   color: Colors.amber,
-  //           width: MediaQuery.of(context).size.width / 1.5,
-  //           alignment: Alignment.centerLeft,
-  //           child: const Column(
-  //             children: [
-  // Text(
-  //   "Bronze package",
-  //   style: TextStyle(color: AppColors.buttonColor, fontSize: 17),
-  // ),
-  //               Text("Once a month"),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  Showpicker() async {
+  Future<List<DateTime?>?>? showpicker() async {
     var results = await showCalendarDatePicker2Dialog(
       context: context,
       config: CalendarDatePicker2WithActionButtonsConfig(

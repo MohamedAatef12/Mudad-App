@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:mudad_app/view/auth/confirm_code/view.dart';
 import 'package:mudad_app/view/auth/login/view.dart';
 import 'package:mudad_app/view/auth/sign_up/view.dart';
-import 'package:mudad_app/view/home_screen/subscriptionScreen.dart';
+import 'package:mudad_app/view/drawer/drawer_pages/subscriptionScreen.dart';
 
 import '../google_maps/mosque_map/search_map.dart';
 import '../view/SplashScreen.dart';
 import '../view/drawer/drawer_pages/orders_page.dart';
 import '../view/drawer/drawer_pages/policy_page.dart';
 import '../view/drawer/drawer_pages/settings_page.dart';
+
 import '../view/drawer/drawer_pages/vision_page.dart';
 import '../view/home_screen/HomeScreen.dart';
 import '../view/payment_page.dart';
@@ -23,6 +24,7 @@ appRoutes() => [
         name: '/subscribtions',
         page: () => const SubscriptionPage(),
       ),
+
       GetPage(
         name: '/home',
         page: () => const HomePage(),
