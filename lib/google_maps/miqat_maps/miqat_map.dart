@@ -26,7 +26,7 @@ class MiqatMap extends StatefulWidget {
 
 const CameraPosition initialCameraPosition = CameraPosition(
   target: LatLng(24.41387998794396, 39.53508778837562),
-  zoom: 14,
+  zoom: 15,
 );
 late GoogleMapController googleMapController;
 final places =
@@ -35,7 +35,6 @@ List<Prediction> _searchResults = [];
 final List<Marker> _markers = [];
 final List<String> selectedMosques = [];
 final List<String> keywords = [
-  'mosque',
   'مسجد مستشفى الميقات',
   'مسجد محطة الميقات',
   'Dhul Hulaifah Miqat Mosque',
@@ -44,7 +43,6 @@ final List<String> keywords = [
   'Miqat Taif',
   ' Miqat',
   "الميقات",
-  'mosques',
 ];
 List<Location> locations = [
   Location(lat: 24.41387998794396, lng: 39.53508778837562), // Miqat

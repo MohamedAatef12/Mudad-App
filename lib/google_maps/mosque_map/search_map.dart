@@ -56,7 +56,7 @@ List<Location> locations = [
 Map<String, CameraPosition> loc = {
   'makkah': const CameraPosition(
     target: LatLng(21.423888489772935, 39.82624903841808),
-    zoom: 8,
+    zoom: 14,
   ),
   'madina': const CameraPosition(
     target: LatLng(24.467663304009072, 39.61106777648205),

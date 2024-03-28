@@ -1,6 +1,6 @@
 class AppAssets {
   static const String appLogo = "assets/logo.png";
-  static const String drawerBackGround = "assets/drawerBackGround.png";
+  static const String drawerBackGround = "assets/drawer_assets/drawerbk.jpg";
   static const String menu = "assets/Menu.png";
   static const String orders = "assets/drawer_assets/ordersIcon.png";
   static const String policy = "assets/drawer_assets/policy.png";
