@@ -48,6 +48,7 @@ class LocalizationService extends Translations {
           "no account": "Don't have account?",
           "sign up": "Sign up",
           'Authentication failed': 'Authentication failed',
+          'Name is required': 'Name is required',
 
           'Create Account': 'Create Account',
           'Sign up description': 'Please Sign up to access to your account',
@@ -133,6 +134,15 @@ class LocalizationService extends Translations {
           'Notifications': 'Notifications',
           'Choose Service': 'Choose Service',
           'The code is not correct': 'The code is not correct',
+          'Go to Payment Page': 'Go to Payment Page',
+          'Send Code': 'Send Code',
+          'Please enter your personal phone number':
+              'Please enter your personal phone number',
+          'OTP VERIFICATION': 'OTP VERIFICATION',
+          "Enter the OTP sent to ": "Enter the OTP sent to ",
+          'Products list': 'Products list',
+          'Search for a country': 'Search for a country',
+          'Subscriptions': 'Subscriptions',
           'policy': 'Privacy Policy\n'
               'Privacy policy for "Mudad" application\n'
               'Your use of the “Maddad” application and your provision of your personal information to us is considered your agreement to the terms contained in the privacy policy. “The Company” or “We” is referred to as the company responsible for the “Maddad” application registered in the Kingdom of Saudi Arabia, while “You” or “The User” represents anyone who uses the “Maddad” application. If you do not agree to these terms, you must stop using the application.\n'
@@ -225,6 +235,8 @@ class LocalizationService extends Translations {
               'Add product and Complete payment method',
           'Review your order': 'Review your order',
           '330ml x 20 Bottles': '330ml x 20 Bottles',
+          'Please write your complaint': 'Please write your complaint',
+          'Complaint': 'Complaint',
         },
         'ar': {
           'Contact us': 'تواصل معنا',
@@ -252,6 +264,7 @@ class LocalizationService extends Translations {
           "no account": "ليس لديك حساب؟",
           'Authentication failed': 'فشل التوثيق',
           "sign up": "سجل الان",
+          'Name is required': 'الاسم مطلوب',
 
           // SIGN UP
           'Create Account': 'إنشاء حساب',
@@ -330,7 +343,16 @@ class LocalizationService extends Translations {
               'دار الايتام موجود في القائمة بالفعل',
           'Notifications': 'الإشعارات',
           'Choose Service': 'اختيار الخدمة',
+          'Subscriptions': 'الاشتراكات',
           'The code is not correct': 'الكود غير صحيح',
+          'Go to Payment Page': 'الذهاب الى صفحة الدفع',
+          'Send Code': 'ارسال الكود',
+          'Please enter your personal phone number':
+              'الرجاء ادخال رقم هاتفك الشخصي',
+          'OTP VERIFICATION': 'تحقق من الرمز',
+          "Enter the OTP sent to ": "ادخل الرمز المرسل الى ",
+          'Products list': 'قائمة المنتجات',
+          'Search for a country': 'ابحث عن دولة',
           'policy': 'سياسة الخصوصية\n'
               'سياسة الخصوصية لتطبيق "مدد"\n'
               'استخدامك لتطبيق “مدد” وتقديمك لمعلوماتك الشخصية لنا يعتبر موافقة منك على البنود الواردة في سياسة الخصوصية. يُشار إلى “الشركة” أو “نحن” كالشركة المسؤولة عن تطبيق “مدد” المُسجلة في المملكة العربية السعودية، بينما “أنت” أو “المستخدم” يُمثل أي شخص يستخدم تطبيق “مدد”. إذا كنت غير موافق على هذه البنود، فعليك التوقف عن استخدام التطبيق.\n'
@@ -424,6 +446,8 @@ class LocalizationService extends Translations {
           'Review your order': 'مراجعه طلبك',
           '330ml x 20 Bottles': '330 مل × 20 عبوة',
           'Two-year warranty': 'ضمان لمدة سنتين',
+          'Please write your complaint': 'برجاء كتابه شكوتك',
+          'Complaint': 'الشكوى',
         },
       };
 

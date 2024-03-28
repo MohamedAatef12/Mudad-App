@@ -18,16 +18,16 @@ import '../build_locations_buttons.dart';
 import '../build_product.dart';
 
 class SearchMap extends StatefulWidget {
-  const SearchMap({Key? key}) : super(key: key);
+  const SearchMap({
+    Key? key,
+    required this.place,
+  }) : super(key: key);
+  final String place;
 
   @override
   State<SearchMap> createState() => _SearchMapState();
 }
 
-const CameraPosition initialCameraPosition = CameraPosition(
-  target: LatLng(25, 45),
-  zoom: 5,
-);
 late GoogleMapController googleMapController;
 final places =
     GoogleMapsPlaces(apiKey: 'AIzaSyCtfitJu0HrEEcaFuaxnfJTjwqvE2tY2dY');
@@ -45,12 +45,25 @@ final List<String> keywords = [
   'مساجد المعتمرين',
   'mosques',
 ];
+
 List<Location> locations = [
   Location(lat: 21.423888489772935, lng: 39.82624903841808), // Makkah
-  Location(lat: 24.467663304009072, lng: 39.61106777648205),    // Madinah
-  Location(lat: 21.389591400346944, lng: 39.83733700721687),     // Mo3tamerin
-  Location(lat: 21.52774807596778, lng: 39.16439325129956),      // Jeddah
+  Location(lat: 21.389591400346944, lng: 39.83733700721687), // Mo3tamerin
+  Location(lat: 21.52774807596778, lng: 39.16439325129956),
+  Location(lat: 24.467663304009072, lng: 39.61106777648205) // Madinah
 ];
+
+Map<String, CameraPosition> loc = {
+  'makkah': const CameraPosition(
+    target: LatLng(21.423888489772935, 39.82624903841808),
+    zoom: 8,
+  ),
+  'madina': const CameraPosition(
+    target: LatLng(24.467663304009072, 39.61106777648205),
+    zoom: 14,
+  ),
+};
+
 final Map<String, PlacesDetailsResponse> placeDetailsCache = {};
 String location = '';
 
@@ -62,7 +75,9 @@ class _SearchMapState extends State<SearchMap> {
   @override
   void initState() {
     super.initState();
-    _fetchMosques();
+    _fetchMosques(
+      widget.place,
+    );
   }
 
   @override
@@ -80,7 +95,7 @@ class _SearchMapState extends State<SearchMap> {
           body: Stack(
             children: [
               GoogleMap(
-                initialCameraPosition: initialCameraPosition,
+                initialCameraPosition: loc[widget.place]!,
                 onMapCreated: (GoogleMapController controller) {
                   googleMapController = controller;
                 },
@@ -110,7 +125,9 @@ class _SearchMapState extends State<SearchMap> {
                   ),
                 ),
               ),
-              const BuildLocationsButtons(),
+              widget.place == 'makkah'
+                  ? const BuildLocationsButtons()
+                  : const SizedBox(),
               Positioned(
                 top: MediaQuery.of(context).size.height / 60,
                 left: MediaQuery.of(context).size.width / 7.5,
@@ -743,9 +760,24 @@ class _SearchMapState extends State<SearchMap> {
   }
 
   // FETCH & CACHE
-  Future<void> _fetchMosques() async {
+  Future<void> _fetchMosques(place) async {
     List<PlacesSearchResult> allResults = [];
     isLoading = true;
+    if (place == 'makkah') {
+      log('Makkah');
+      locations = [
+        Location(lat: 21.423888489772935, lng: 39.82624903841808), // Makkah
+        Location(lat: 21.389591400346944, lng: 39.83733700721687), // Mo3tamerin
+        Location(lat: 21.52774807596778, lng: 39.16439325129956),
+      ];
+      _markers.clear();
+    } else if (place == 'madina') {
+      log('Madinah');
+      locations = [
+        Location(lat: 24.467663304009072, lng: 39.61106777648205) // Madinah
+      ];
+      _markers.clear();
+    }
     for (var location in locations) {
       for (var keyword in keywords) {
         String cacheKey = '$keyword-${location.lat}-${location.lng}';

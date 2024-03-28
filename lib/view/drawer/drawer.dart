@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view/home_screen/HomeScreen.dart';
 import 'package:share/share.dart';
@@ -15,6 +16,7 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       width: MediaQuery.of(context).size.width * .7,
+      backgroundColor: AppColors.bgColor,
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -24,16 +26,20 @@ class HomeDrawer extends StatelessWidget {
               children: [
                 Column(children: [
                   SizedBox(
-                      height: MediaQuery.of(context).size.height * .33,
-                      child: DrawerHeader(
-                          padding: const EdgeInsets.all(0),
-                          child: Image.asset(
-                            AppAssets.drawerBackGround,
-                            width: double.infinity,
-                            fit: BoxFit.fill,
-                          ))),
+                    height: MediaQuery.of(context).size.height * .33,
+                    child: DrawerHeader(
+                      padding: const EdgeInsets.all(0),
+                      child: Image.asset(
+                        AppAssets.drawerBackGround,
+                        width: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: MediaQuery.of(context).size.height * .03),
-
+                  CustomButton("Subscriptions".tr, () {
+                    Get.toNamed("/subscription");
+                  }, AppAssets.subscription),
                   CustomButton("Terms and Conditions".tr, () {
                     Get.toNamed("/vision");
                   }, AppAssets.vision),
@@ -56,11 +62,16 @@ class HomeDrawer extends StatelessWidget {
                           // storage.remove("userName");
                           // storage.remove("userEmail");
                           // storage.remove("userPhone");
-                          storage.remove("userPhoneNumber").then((value) => (value) {
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-                              return const HomePage();
-                            },), (route) => false);
-                          });
+                          storage
+                              .remove("userPhoneNumber")
+                              .then((value) => (value) {
+                                    Navigator.pushAndRemoveUntil(context,
+                                        MaterialPageRoute(
+                                      builder: (context) {
+                                        return const HomePage();
+                                      },
+                                    ), (route) => false);
+                                  });
                           print(User.token);
                         }, AppAssets.orders),
                   // const Spacer(),

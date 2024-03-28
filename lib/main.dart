@@ -67,6 +67,8 @@ class MyApp extends StatelessWidget {
           selectionColor: AppColors.buttonColor.withOpacity(0.5),
           selectionHandleColor: AppColors.buttonColor.withOpacity(0.7),
         ),
+        primaryColor: AppColors.buttonColor,
+        scaffoldBackgroundColor: AppColors.bgColor,
       ),
       fallbackLocale: LocalizationService.fallbackLocale,
       debugShowCheckedModeBanner: false,

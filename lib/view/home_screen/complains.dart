@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ComplainsView extends StatefulWidget {
   const ComplainsView({super.key});
@@ -8,9 +10,7 @@ class ComplainsView extends StatefulWidget {
 }
 
 class _ComplinState extends State<ComplainsView> {
-
   final formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,16 @@ class _ComplinState extends State<ComplainsView> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
-            "شكوى",
-            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+          backgroundColor: Colors.transparent,
+          title: Text(
+            "Complaint".tr,
+            style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(
+              Icons.arrow_back_ios_rounded,
+              size: 30,
+            ),
             color: Colors.black,
             onPressed: () {
               Navigator.pop(context);
@@ -41,14 +45,17 @@ class _ComplinState extends State<ComplainsView> {
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "برجاء ادخال بريدك الالكتروني";
+                      return "email required".tr;
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'email',
-                    prefixIcon: Icon(Icons.verified_user_outlined),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: 'email'.tr,
+                    prefixIcon: const Icon(Icons.verified_user_outlined),
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -58,14 +65,17 @@ class _ComplinState extends State<ComplainsView> {
                   keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "برجاء ادخال اسمك";
+                      return "Name is required".tr;
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                    prefixIcon: Icon(Icons.verified_user_outlined),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: 'name'.tr,
+                    prefixIcon: const Icon(Icons.verified_user_outlined),
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -75,51 +85,71 @@ class _ComplinState extends State<ComplainsView> {
                   keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "رقم الهاتف مطلوب";
+                      return "phone required".tr;
                     } else if (value.length < 11) {
-                      return "يجب ان يكون رقم الهاتف 11 رقم";
+                      return "phone length".tr;
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'Phone',
-                    prefixIcon: Icon(Icons.verified_user_outlined),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: 'phone'.tr,
+                    prefixIcon: const Icon(Icons.verified_user_outlined),
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
+                  maxLines: 5,
                   keyboardType: TextInputType.text,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "برجاء كتابه شكوتك";
+                      return "Please write your complaint".tr;
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'الشكوى',
-                    prefixIcon: Icon(Icons.verified_user_outlined),
+                  decoration: InputDecoration(
+                    labelText: 'Complaint'.tr,
+                    prefixIcon: const Icon(Icons.verified_user_outlined),
                     border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red)),
+                      borderSide: const BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    splashFactory: NoSplash.splashFactory,
+                    backgroundColor: const Color(0xff609FD8),
+                    fixedSize: Size(
+                      MediaQuery.of(context).size.width * 0.7,
+                      MediaQuery.of(context).size.height * 0.06,
+                    ),
+                  ),
                   onPressed: () {
-                    if(formKey.currentState!.validate()){
-      
+                    if (formKey.currentState!.validate()) {
+                      // ignore: avoid_print
+                      print("done");
                     }
                   },
-                  child: const Text('ارسال'),
+                  child: Text(
+                    "Send".tr,
+                    style: GoogleFonts.lalezar(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(onPressed: () {}, child: const Text('الغاء')),
               ],
             ),
           ),

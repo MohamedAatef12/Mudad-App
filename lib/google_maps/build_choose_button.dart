@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/services/otp_verfication_service/register.dart';
 import 'package:mudad_app/view_model/orders_cubit/orders_cubit.dart';
@@ -20,82 +21,87 @@ class BuildChooseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orderCubit = BlocProvider.of<OrdersCubit>(context);
-    return BlocConsumer<OrdersCubit, OrdersState>(listener: (context, state) {
-      if (state is OrdersError) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Please select a location")));
-      }
-      if (state is OrdersSubmitted) {
-        // Get.toNamed("payment");
-        Navigator.push(context,MaterialPageRoute(builder: (context) {
-          return PaymentPage(isMap: true);
-        },));
-      }
-    }, builder: (context, state) {
-      return Positioned(
-        bottom: MediaQuery.of(context).size.height * 0.03,
-        right: MediaQuery.of(context).size.width * 0.18,
-        left: MediaQuery.of(context).size.width * 0.18,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.7,
-          height: MediaQuery.of(context).size.height * 0.06,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+    return BlocConsumer<OrdersCubit, OrdersState>(
+      listener: (context, state) {
+        if (state is OrdersError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Please select a location")));
+        }
+        if (state is OrdersSubmitted) {
+          // Get.toNamed("payment");
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return PaymentPage(isMap: true);
+            },
+          ));
+        }
+      },
+      builder: (context, state) {
+        return Positioned(
+          bottom: MediaQuery.of(context).size.height * 0.03,
+          right: MediaQuery.of(context).size.width * 0.18,
+          left: MediaQuery.of(context).size.width * 0.18,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: MediaQuery.of(context).size.height * 0.06,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    splashFactory: NoSplash.splashFactory,
+                    backgroundColor: const Color(0xff609FD8),
+                    fixedSize: Size(
+                      MediaQuery.of(context).size.width * 0.7,
+                      MediaQuery.of(context).size.height * 0.06,
+                    ),
                   ),
-                  splashFactory: NoSplash.splashFactory,
-                  backgroundColor: const Color(0xff609FD8),
-                  fixedSize: Size(
-                    MediaQuery.of(context).size.width * 0.7,
-                    MediaQuery.of(context).size.height * 0.06,
-                  ),
-                ),
-                onPressed: storage.read("userPhoneNumber") == null
-                    ? () {
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return const RegisterPage();
-                          },
-                        ));
-                      }
-                    : () {
-                        // if (totalOrder == 0) {
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     SnackBar(
-                        //       content: Text("empty_order".tr),
-                        //     ),
-                        //   );
-                        // }
-                        // else
-                        // {
-                        orderCubit.submitOrder(location, totalOrder, orders);
+                  onPressed: storage.read("userPhoneNumber") == null
+                      ? () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const RegisterPage();
+                            },
+                          ));
+                        }
+                      : () {
+                          // if (totalOrder == 0) {
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //     SnackBar(
+                          //       content: Text("empty_order".tr),
+                          //     ),
+                          //   );
+                          // }
+                          // else
+                          // {
+                          orderCubit.submitOrder(location, totalOrder, orders);
 
-                        log(location);
-                        log(totalOrder.toString());
-                        log(orders.toString());
-                        // }
-                      },
-                child: FittedBox(
-                  child: Text(
-                    storage.read("userPhoneNumber") == null
-                        ? "SignUp"
-                        : "Go to Payment Page",
-                    style: GoogleFonts.lalezar(
-                      color: Colors.white,
-                      fontSize: 28,
+                          log(location);
+                          log(totalOrder.toString());
+                          log(orders.toString());
+                          // }
+                        },
+                  child: FittedBox(
+                    child: Text(
+                      storage.read("userPhoneNumber") == null
+                          ? "sign up".tr
+                          : "Go to Payment Page".tr,
+                      style: GoogleFonts.lalezar(
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
