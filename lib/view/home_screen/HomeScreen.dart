@@ -90,8 +90,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20),
                   color: AppColors.buttonColor,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                child: Center(
                   child: Text("Choose Service".tr,
                       style: AppTextStyle.mainFont,
                       textAlign: TextAlign.center),
@@ -231,8 +230,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20),
                   color: AppColors.buttonSecColor,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                child: Center(
                   child: Text("Choose".tr,
                       style: AppTextStyle.mainFont,
                       textAlign: TextAlign.center),

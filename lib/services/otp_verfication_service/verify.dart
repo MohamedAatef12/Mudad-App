@@ -89,7 +89,7 @@ class _VerifyPageState extends State<VerifyPage> {
                 shape: PinCodeFieldShape.box,
                 borderRadius: BorderRadius.circular(10),
                 fieldHeight: 66,
-                fieldWidth: 52,
+                fieldWidth: MediaQuery.of(context).size.width * 0.12,
                 inactiveColor: const Color(0xffF3F3F3),
                 //selectedColor: Colors.blue,
                 activeColor: Colors.blue,

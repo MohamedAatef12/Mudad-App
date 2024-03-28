@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -6,10 +5,9 @@ import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mudad_app/reusable_widgets/text_field.dart';
 import 'package:mudad_app/services/remote_API/user_data.dart';
+import 'package:mudad_app/view/auth/sign_up/view.dart';
 import 'package:mudad_app/view/drawer/drawer_pages/settings_page.dart';
 import 'package:mudad_app/view_model/auth_cubit/auth_cubit.dart';
-
-import '../sign_up/view.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -140,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   BlocConsumer<AuthCubit, AuthState>(
                       listener: (context, state) {
-
                     if (state is LoginErrorState) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

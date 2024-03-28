@@ -34,7 +34,6 @@ class VerticalBuildProduct extends StatelessWidget {
             height: 200,
             width: MediaQuery.of(context).size.width,
             child: ListView.separated(
-
               padding: const EdgeInsets.symmetric(horizontal: 0),
               separatorBuilder: (context, index) => const SizedBox(
                 height: 15,
@@ -45,75 +44,98 @@ class VerticalBuildProduct extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 50.0),
                   child: ProductCard(
                     quantityCounter: verticalOrderCounter[index],
-                    addition: verticalProducts[index] == verticalProducts[0]?() {
-                      context
-                          .read<ProductsCubit>()
-                          .addProductsBy10(index);
-                      verticalOrderCounter[index] = productCubit
-                          .addProductsBy10(verticalOrderCounter[index]);
-                      verticalSelectedOrders[index]["qty"] = verticalOrderCounter[index];
-                      if (index == 0) {
-                        verticalP1Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      } else {
-                        verticalP2Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      }
-                      verticalP1Total = verticalP1Total ~/ 10;
-                      verticalTotalOrder = verticalP1Total + verticalP2Total;
-                      print(
-                          "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
-                    } : () {
-                      context.read<ProductsCubit>().addProducts(index);
-                      verticalOrderCounter[index] =
-                          productCubit.addProducts(verticalOrderCounter[index]);
-                      verticalSelectedOrders[index]["qty"] = verticalOrderCounter[index];
-                      if (index == 0) {
-                        verticalP1Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      } else {
-                        verticalP2Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      }
+                    addition: verticalProducts[index] == verticalProducts[0]
+                        ? () {
+                            context
+                                .read<ProductsCubit>()
+                                .addProductsBy10(index);
+                            verticalOrderCounter[index] = productCubit
+                                .addProductsBy10(verticalOrderCounter[index]);
+                            verticalSelectedOrders[index]["qty"] =
+                                verticalOrderCounter[index];
+                            if (index == 0) {
+                              verticalP1Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            } else {
+                              verticalP2Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            }
+                            verticalP1Total = verticalP1Total ~/ 10;
+                            verticalTotalOrder =
+                                verticalP1Total + verticalP2Total;
+                            print(
+                                "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
+                          }
+                        : () {
+                            context.read<ProductsCubit>().addProducts(index);
+                            verticalOrderCounter[index] = productCubit
+                                .addProducts(verticalOrderCounter[index]);
+                            verticalSelectedOrders[index]["qty"] =
+                                verticalOrderCounter[index];
+                            if (index == 0) {
+                              verticalP1Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            } else {
+                              verticalP2Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            }
 
-                      verticalTotalOrder = verticalP1Total + verticalP2Total;
-                      print(
-                          "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
-                    },
-                    remove:verticalProducts[index] == verticalProducts[0] ?(){
-                      context.read<ProductsCubit>().removeProductsBy10(index);
-                      verticalOrderCounter[index] =
-                          productCubit.removeProductsBy10(verticalOrderCounter[index]);
-                      verticalSelectedOrders[index]["qty"] = verticalOrderCounter[index];
-                      if (index == 0) {
-                        verticalP1Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      } else {
-                        verticalP2Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      }
-                      verticalP1Total = verticalP1Total ~/ 10;
-                      verticalTotalOrder = verticalP1Total + verticalP2Total;
-                      print(
-                          "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
-                    }:() {
-                      context.read<ProductsCubit>().removeProducts(index);
-                      verticalOrderCounter[index] =
-                          productCubit.removeProducts(verticalOrderCounter[index]);
-                      verticalSelectedOrders[index]["qty"] = verticalOrderCounter[index];
-                      if (index == 0) {
-                        verticalP1Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      } else {
-                        verticalP2Total = verticalSelectedOrders[index]["qty"] *
-                            verticalSelectedOrders[index]["price"];
-                      }
+                            verticalTotalOrder =
+                                verticalP1Total + verticalP2Total;
+                            print(
+                                "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
+                          },
+                    remove: verticalProducts[index] == verticalProducts[0]
+                        ? () {
+                            context
+                                .read<ProductsCubit>()
+                                .removeProductsBy10(index);
+                            verticalOrderCounter[index] =
+                                productCubit.removeProductsBy10(
+                                    verticalOrderCounter[index]);
+                            verticalSelectedOrders[index]["qty"] =
+                                verticalOrderCounter[index];
+                            if (index == 0) {
+                              verticalP1Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            } else {
+                              verticalP2Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            }
+                            verticalP1Total = verticalP1Total ~/ 10;
+                            verticalTotalOrder =
+                                verticalP1Total + verticalP2Total;
+                            print(
+                                "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
+                          }
+                        : () {
+                            context.read<ProductsCubit>().removeProducts(index);
+                            verticalOrderCounter[index] = productCubit
+                                .removeProducts(verticalOrderCounter[index]);
+                            verticalSelectedOrders[index]["qty"] =
+                                verticalOrderCounter[index];
+                            if (index == 0) {
+                              verticalP1Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            } else {
+                              verticalP2Total = verticalSelectedOrders[index]
+                                      ["qty"] *
+                                  verticalSelectedOrders[index]["price"];
+                            }
 
-                      verticalTotalOrder = verticalP1Total + verticalP2Total;
-                      print(
-                          "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
-                      // total.add( selectedOrders[index]["qty"]*selectedOrders[index]["price"]);
-                    },
+                            verticalTotalOrder =
+                                verticalP1Total + verticalP2Total;
+                            print(
+                                "1:  $verticalP1Total,2:   $verticalP2Total   overAll:   $verticalTotalOrder");
+                            // total.add( selectedOrders[index]["qty"]*selectedOrders[index]["price"]);
+                          },
                     imagePath: verticalProductImages[index],
                     productName: verticalProducts[index],
                     productDetails: 'Two-year warranty'.tr,
@@ -121,7 +143,7 @@ class VerticalBuildProduct extends StatelessWidget {
                   ),
                 );
               },
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
             ),
           );

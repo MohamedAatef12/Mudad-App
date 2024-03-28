@@ -237,6 +237,26 @@ class LocalizationService extends Translations {
           '330ml x 20 Bottles': '330ml x 20 Bottles',
           'Please write your complaint': 'Please write your complaint',
           'Complaint': 'Complaint',
+          //For subscriptionsPage
+          "Monthly subscriptions": "Monthly subscriptions",
+          "Choose the preferred package": "Choose the preferred package",
+          "Bronze package": "Bronze package",
+          "Once a month": "Once a month",
+          "Silver package": "Silver package",
+          "Once a week": "Once a week",
+          "Golden package": "Golden package",
+          "twice a week": "twice a week",
+          "Diamond package": "Diamond package",
+          "Daily": "Daily",
+          "Choose the subscription period": "Choose the subscription period",
+          "Number of months :": "Number of months :",
+          "Determine the delivery day of the first order ":
+              "Determine the delivery day of the first order ",
+          "Confirm": "Confirm",
+          'No taxes or delivery fees!!': 'No taxes or delivery fees!!',
+          'Dear customer': 'Dear customer',
+          'info':
+              'In order for us to implement your request in the best possible way, in the event that it is not possible to deliver the request to the specified mosque due to its capacity or due to the closure of the roads leading to it. The shade will be automatically transferred to the nearest mosque in need of water',
         },
         'ar': {
           'Contact us': 'تواصل معنا',
@@ -448,6 +468,26 @@ class LocalizationService extends Translations {
           'Two-year warranty': 'ضمان لمدة سنتين',
           'Please write your complaint': 'برجاء كتابه شكوتك',
           'Complaint': 'الشكوى',
+          //For subscriptionsPage
+          "Monthly subscriptions": 'الإشتراكات الشهرية',
+          "Choose the preferred package": 'إختيار الباقة المفضلة',
+          "Bronze package": 'الباقة البرونزية',
+          "Once a month": 'مرة شهريا',
+          "Silver package": 'الباقة الفضية',
+          "Once a week": "مرة اسبوعيا",
+          "Golden package": "الباقة الذهبية",
+          "twice a week": "مرتين في الأسبوع",
+          "Diamond package": "الباقة الماسية",
+          "Daily": "يوميا",
+          "Choose the subscription period": "إختيار مدة اللإشتراك",
+          "Number of months :": "عدد الأشهر :",
+          "Determine the delivery day of the first order ":
+              " تحديد يوم توصيل أول طلب ",
+          "Confirm": "تأكيد",
+          'No taxes or delivery fees!!': 'لا توجد ضرائب أو رسوم توصيل!!',
+          'Dear customer': 'عزيزي العميل/ة',
+          'info':
+              'حرصا منا علي تنفيذ طلبكم بأفضل شكل ممكن، في خاله تعذر توصيل الطلب في للمسجد المحدد بسبب اكتفائه او بسبب اغلاق الطرق المؤديه اليه. سيتم تحويل الظلب تلقائيا الي اقرب مسجدمحتاج للمياه',
         },
       };
 

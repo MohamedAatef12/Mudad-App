@@ -38,9 +38,7 @@ class StaticMosques extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: AppColors.buttonColor,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                //// tr
+              child: Center(
                 child: Text("Products list".tr,
                     style: AppTextStyle.mainFont, textAlign: TextAlign.center),
               ),

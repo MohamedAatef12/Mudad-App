@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mudad_app/app_constants/app_colors.dart';
 import 'package:mudad_app/app_constants/app_text_styles.dart';
@@ -12,14 +13,58 @@ import 'package:mudad_app/view/vertical_broducts.dart';
 bool? paymentMap;
 TextEditingController mudadCodeController = TextEditingController();
 
-class PaymentPage extends StatelessWidget {
-  bool isMap;
+class PaymentPage extends StatefulWidget {
+  final bool isMap;
 
-  PaymentPage({Key? key, required this.isMap}) : super(key: key);
+  const PaymentPage({Key? key, required this.isMap}) : super(key: key);
+
+  @override
+  State<PaymentPage> createState() => _PaymentPageState();
+}
+
+final box = GetStorage();
+bool _showWidget = false;
+
+class _PaymentPageState extends State<PaymentPage> {
+  final box = GetStorage();
+  bool _hasShownSnackBar = false;
+
+  @override
+  void initState() {
+    super.initState();
+    box.remove('alreadyVisited');
+    _showSnackBar();
+  }
+
+  Future<void> _showSnackBar() async {
+    await box.initStorage;
+    bool alreadyVisited = box.read('alreadyVisited') ?? false;
+
+    if (!alreadyVisited && !_hasShownSnackBar) {
+      Get.snackbar(
+        'Dear customer'.tr,
+        'info'.tr,
+        margin: const EdgeInsets.all(20),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+        duration: const Duration(seconds: 5),
+        isDismissible: true,
+        icon: const Icon(Icons.info, color: Colors.yellow, size: 30),
+      );
+
+      setState(() {
+        _hasShownSnackBar = true;
+      });
+
+      // Set the flag to true to indicate the snackbar has been shown
+      box.write('alreadyVisited', true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    paymentMap = isMap;
+    paymentMap = widget.isMap;
     return Scaffold(
       body: ListView(
         children: [
@@ -141,7 +186,7 @@ class PaymentPage extends StatelessWidget {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * .7,
+            height: MediaQuery.of(context).size.height * .8,
             color: AppColors.buttonColor,
             child: Column(
               children: [
@@ -168,7 +213,7 @@ class PaymentPage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: isMap == true
+                  child: widget.isMap == true
                       ? ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: productImages.length,
@@ -312,22 +357,26 @@ class PaymentPage extends StatelessWidget {
                                                 height: 10,
                                               ),
                                               const Spacer(),
-
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 20),
-                                                child:verticalProductPrice[index]==verticalProductPrice[0]?
-                                                Text(
-                                                    "${verticalProductPrice[index]}*${verticalOrderCounter[index]}"
-                                                        "=${verticalProductPrice[index] * verticalOrderCounter[index]~/ 10}",style: GoogleFonts.lalezar(
-                                                    fontSize: 20))
-                                                    :  Text(
-                                                  "${verticalProductPrice[index]}*${verticalOrderCounter[index]}"
-                                                  "=${verticalProductPrice[index] * verticalOrderCounter[index]}",
-                                                  style: GoogleFonts.lalezar(
-                                                      fontSize: 20),
-                                                ),
+                                                child: verticalProductPrice[
+                                                            index] ==
+                                                        verticalProductPrice[0]
+                                                    ? Text(
+                                                        "${verticalProductPrice[index]}*${verticalOrderCounter[index]}"
+                                                        "=${verticalProductPrice[index] * verticalOrderCounter[index] ~/ 10}",
+                                                        style:
+                                                            GoogleFonts.lalezar(
+                                                                fontSize: 20))
+                                                    : Text(
+                                                        "${verticalProductPrice[index]}*${verticalOrderCounter[index]}"
+                                                        "=${verticalProductPrice[index] * verticalOrderCounter[index]}",
+                                                        style:
+                                                            GoogleFonts.lalezar(
+                                                                fontSize: 20),
+                                                      ),
                                               ),
                                             ],
                                           ),
@@ -344,8 +393,7 @@ class PaymentPage extends StatelessWidget {
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          const Text(
-                                              "No taxes or delivery fees!!")
+                                          Text("No taxes or delivery fees!!".tr)
                                         ],
                                       ),
                                     ),

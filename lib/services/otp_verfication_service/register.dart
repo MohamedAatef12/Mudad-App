@@ -326,7 +326,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       return null;
                     },
                     countries: arabCountryISO,
-                    initialValue: PhoneNumber(isoCode: 'SA'),
                     searchBoxDecoration: InputDecoration(
                       hintText: 'Search for a country'.tr,
                       border: OutlineInputBorder(

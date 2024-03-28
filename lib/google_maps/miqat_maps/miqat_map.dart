@@ -153,7 +153,7 @@ class _SearchMapState extends State<MiqatMap> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             margin: const EdgeInsets.all(10),
-                            width: MediaQuery.of(context).size.width / 1.5,
+                            width: MediaQuery.of(context).size.width / 1.6,
                             height: 45,
                             child: TextFormField(
                               controller: _controller,
@@ -259,7 +259,7 @@ class _SearchMapState extends State<MiqatMap> {
                   ? Stack(
                       children: [
                         Positioned(
-                          bottom: MediaQuery.of(context).size.height / 2.4,
+                          bottom: MediaQuery.of(context).size.height / 2.2,
                           right: MediaQuery.of(context).size.width / 10,
                           child: Container(
                             width: 35,
@@ -302,7 +302,7 @@ class _SearchMapState extends State<MiqatMap> {
                           ),
                         ),
                         Positioned(
-                          bottom: MediaQuery.of(context).size.height / 3,
+                          bottom: MediaQuery.of(context).size.height / 2.8,
                           right: MediaQuery.of(context).size.width / 10,
                           child: Container(
                             width: 35,
@@ -379,7 +379,7 @@ class _SearchMapState extends State<MiqatMap> {
                   : Stack(
                       children: [
                         Positioned(
-                          bottom: MediaQuery.of(context).size.height / 2.4,
+                          bottom: MediaQuery.of(context).size.height / 2.2,
                           right: MediaQuery.of(context).size.width / 80,
                           child: Container(
                             width: 35,
@@ -422,7 +422,7 @@ class _SearchMapState extends State<MiqatMap> {
                           ),
                         ),
                         Positioned(
-                          bottom: MediaQuery.of(context).size.height / 3,
+                          bottom: MediaQuery.of(context).size.height / 2.8,
                           right: MediaQuery.of(context).size.width / 80,
                           child: Container(
                             width: 35,
